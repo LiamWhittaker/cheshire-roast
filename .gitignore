@@ -1,0 +1,8 @@
+node_modules/
+design/
+.DS_Store
+*.log
+.idea
+haters/
+variables.env
+variables.env.now
