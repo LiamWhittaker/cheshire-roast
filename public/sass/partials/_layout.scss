@@ -1,3 +1,13 @@
-body {
-  background-color: red;
+.maincontent {
+  display: flex;
+
+  // Set the container and .sidebar height to 100% and the .content div to overflow:auto 
+  // to give the impression of a fixed sidebar.
+  height: 100vh;
+}
+
+.content {
+  background-color: yellowgreen;
+  flex: 1 1 auto;
+  overflow: auto;
 }

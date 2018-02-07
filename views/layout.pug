@@ -1,28 +1,30 @@
 doctype html
-html
+html(lang="en")
   head
     title= `${title} | ${h.siteName}`
     link(rel='stylesheet', href='/dist/style.css')
     meta(name="viewport" content="width=device-width, initial-scale=1")
   body
-    block header
-      h2 Cheshire Roast!
-      
+    .maincontent
 
-    //- block messages
-    //-   if locals.flashes
-    //-     .inner
-    //-       .flash-messages
-    //-         - const categories = Object.keys(locals.flashes)
-    //-         each category in categories
-    //-           each message in flashes[category]
-    //-             .flash(class=`flash--${category}`)
-    //-               p.flash__text!= message
-    //-               button.flash__remove(onClick="this.parentElement.remove()") &times;
+      .sidebar
+        include sidebar
 
-    .content
-      block content
+      //- block messages
+      //-   if locals.flashes
+      //-     .inner
+      //-       .flash-messages
+      //-         - const categories = Object.keys(locals.flashes)
+      //-         each category in categories
+      //-           each message in flashes[category]
+      //-             .flash(class=`flash--${category}`)
+      //-               p.flash__text!= message
+      //-               button.flash__remove(onClick="this.parentElement.remove()") &times;
 
-    block scripts
-      //- script(src=`https://maps.googleapis.com/maps/api/js?key=${process.env.MAP_KEY}&libraries=places`)
-      script(src="/dist/App.bundle.js")
+      .content
+        block content
+         p content from the layout file
+
+      block scripts
+        //- script(src=`https://maps.googleapis.com/maps/api/js?key=${process.env.MAP_KEY}&libraries=places`)
+        script(src="/dist/App.bundle.js")
