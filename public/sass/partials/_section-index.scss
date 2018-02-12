@@ -1,0 +1,27 @@
+// Section styles for INDEX.PUG
+
+.section {
+
+  &-hero {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 45rem;
+    // BG images are relative to the compiled css location, NOT THIS SASS FILE'S LOCATION
+    background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(38, 51, 54, 0.6)),
+                      url('/images/hero.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+    margin-bottom: 3rem;
+    box-shadow: 0 2rem 5rem rgba($color-blue-light, .2);
+  }
+
+  &-best-sellers {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh; //test
+
+  }
+}

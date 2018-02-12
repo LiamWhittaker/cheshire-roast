@@ -1,3 +1,15 @@
+// Global Styles & Mixins and stuff
+@import 'partials/variables';
+@import 'partials/typography';
 @import 'partials/globals';
+
+// Layouts
 @import 'partials/layout';
+@import 'partials/product-grid';
 @import 'partials/sidebar';
+
+// Sections
+@import 'partials/section-index';
+
+// Components
+@import 'partials/btn';

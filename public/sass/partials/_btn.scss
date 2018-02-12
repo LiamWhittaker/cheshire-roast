@@ -1,0 +1,32 @@
+.btn:link,
+.btn:visited {
+  // Font
+  font-family: 'Roboto Condensed', sans-serif;
+  font-size: 1.6rem;
+  font-weight: normal;
+  text-decoration: none;
+  text-transform: uppercase;
+  text-align: center;
+  color: $color-text-white;
+
+
+  // Buttonify
+  display: inline-block;
+  padding: .8rem 1.1rem .3rem 1.1rem;
+  border-bottom: 5px solid $color-text-white;
+  box-shadow: 0 2rem 5rem rgba(0, 0, 0, 0.2);
+}
+
+.btn__storecard {
+  border-bottom: none;
+  
+  &--info {
+    background-color: $color-blue-light;
+    flex: 60%;
+  }
+
+  &--buy {
+    background-color: $color-gold;
+    flex: 40%;
+  }
+}
