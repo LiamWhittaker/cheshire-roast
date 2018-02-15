@@ -43,6 +43,75 @@
 }
 
 // =========================
+// Sidebar
+// =========================
+
+.sidebar__link {
+  font-family: 'Roboto Condensed', sans-serif;
+  font-weight: 400;
+  font-size: 1.6rem;
+  color: $color-bg;
+  text-decoration: none;
+  outline: none;
+  text-transform: uppercase;
+  transition: all .3s;
+
+  &:hover {
+    color: $color-gold;
+  }
+
+  &:active {
+    text-shadow: 0 1rem 3rem rgba($color-gold, .3);
+    transform: translate(1px, 2px);
+  }
+
+  &--inverted {
+    color: $color-gold;
+
+    &:hover {
+      color: $color-bg;
+    }
+
+    &:active {
+      text-shadow: 0 1rem 3rem rgba($color-bg, .3);
+      transform: translate(1px, 2px);
+    }
+  }
+}
+
+.fa-shopping-cart {
+  display: none; // Hide unless logged in
+  margin-top: 1.3rem;
+  color: $color-bg;
+}
+
+
+.sidebar__brand {
+  font-family: 'Roboto Condensed', sans-serif;
+  font-weight: 800;
+  font-size: 1.4rem;
+  text-transform: uppercase;
+  color: $color-gold;
+}
+
+.paragraph {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 300;
+  font-size: 1.1rem;
+  color: $color-bg;
+}
+
+.liam {
+  font-family: 'Roboto Condensed', sans-serif;
+  font-weight: 800;
+  font-size: 1.2rem;
+  letter-spacing: -1px;
+  color: $color-gold;
+}
+
+
+
+// =========================
 // Product grid
 // =========================
 .product {

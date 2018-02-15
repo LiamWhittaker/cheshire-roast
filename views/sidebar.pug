@@ -1,31 +1,32 @@
 .sidebar__top
   .sidebar__logobox
-    img(src="/img/logo.png", alt="Logo" class="sidebar__logo")
+    img(src="/images/logo-no-bg.png", alt="Logo" class="sidebar__logo")
 
-.sidebar__mid
+nav.sidebar__mid
   ul.sidebar__list
     li.sidebar__list-item
-      a(href="#" class="sidebar__link") Link 1
+      a(href="#" class="sidebar__link") Menu
     li.sidebar__list-item
-      a(href="#" class="sidebar__link") Link 2
+      a(href="#" class="sidebar__link") Subscribe
     li.sidebar__list-item
-      a(href="#" class="sidebar__link") Link 3
+      a(href="#" class="sidebar__link") About Us
     li.sidebar__list-item
-      a(href="#" class="sidebar__link") Link 4
+      a(href="#" class="sidebar__link") Help
     li.sidebar__list-item
-      a(href="#" class="sidebar__link") Link 5
+      a(href="#" class="sidebar__link sidebar__link--inverted") Log In
 
   .sidebar__cartbox
-    img(src="/img/cart.png", alt="Shopping cart" class="sidebar__cart")
+    i.fas.fa-shopping-cart.fa-2x
+    //- img(src="/img/cart.png", alt="Shopping cart" class="sidebar__cart")
 
 .sidebar__bottom
   .sidebar__info
     p
-      span.strong #{h.siteName}
-    p Knutsford, Cheshire 
-    p info@cheshireroast.co.uk
+      span.sidebar__brand #{h.siteName}
+    p.paragraph Knutsford, Cheshire 
+    p.paragraph info@cheshireroast.co.uk
 
   .madeby
-    p Site created by
+    p.paragraph Site created by
     p
-      a(href="http://liamwhittaker.co.uk") Liam Whittaker
+      a.liam(href="http://liamwhittaker.co.uk") Liam Whittaker
