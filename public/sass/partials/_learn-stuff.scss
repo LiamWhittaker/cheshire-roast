@@ -1,0 +1,13 @@
+// Fontawesome styling
+.fa-5x {
+  fill: $color-gold;
+  color: $color-gold;
+}
+
+.learn-stuff {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 0 0 25%;
+  margin: 0 $gutter 0 $gutter;
+}

@@ -97,6 +97,16 @@
 .paragraph {
   font-family: 'Roboto', sans-serif;
   font-weight: 300;
+  font-size: 1.4rem;
+  color: $color-bg;
+
+  &--inverted {
+    color: $color-blue-light;
+  }
+}
+.sidebar-paragraph {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 300;
   font-size: 1.1rem;
   color: $color-bg;
 }

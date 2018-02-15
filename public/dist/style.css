@@ -72,6 +72,14 @@
 .paragraph {
   font-family: 'Roboto', sans-serif;
   font-weight: 300;
+  font-size: 1.4rem;
+  color: #f2e3cf; }
+  .paragraph--inverted {
+    color: #17283b; }
+
+.sidebar-paragraph {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 300;
   font-size: 1.1rem;
   color: #f2e3cf; }
 
@@ -125,6 +133,38 @@ body {
   box-sizing: border-box;
   min-height: 100vh; }
 
+.u-mart-sm {
+  margin-top: 2rem; }
+
+.u-mart-md {
+  margin-top: 4rem; }
+
+.u-mart-lg {
+  margin-top: 6rem; }
+
+.u-marbo-sm {
+  margin-bottom: 2rem; }
+
+.u-marbo-md {
+  margin-bottom: 4rem; }
+
+.u-marbo-lg {
+  margin-bottom: 6rem; }
+
+.container {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex: 0 0 100%;
+      flex: 0 0 100%;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  max-width: 120rem;
+  -ms-flex-pack: center;
+      justify-content: center; }
+
+.inner {
+  margin: 1rem; }
+
 .maincontent {
   display: -ms-flexbox;
   display: flex;
@@ -135,54 +175,6 @@ body {
   -ms-flex: 1 1 auto;
       flex: 1 1 auto;
   overflow: auto; }
-
-.product-grid {
-  display: -ms-flexbox;
-  display: flex;
-  -ms-flex: 0 0 100%;
-      flex: 0 0 100%;
-  -ms-flex-wrap: wrap;
-      flex-wrap: wrap;
-  min-height: 100vh;
-  max-width: 120rem;
-  -ms-flex-pack: center;
-      justify-content: center; }
-
-.inner {
-  margin: 1rem; }
-
-.product {
-  margin: 5rem 3.5rem 0 3.5rem;
-  height: 40rem;
-  width: 30rem;
-  border-radius: 3px;
-  background-color: #FFFAF4;
-  box-shadow: 0 2rem 3rem rgba(22, 25, 33, 0.3); }
-  .product__photo {
-    height: 23rem;
-    width: 100%;
-    background-image: url("/images/beans-placeholder.jpg");
-    background-size: cover;
-    background-position: 50% 50%;
-    box-shadow: 0 1rem 2rem rgba(22, 25, 33, 0.3); }
-  .product__info {
-    display: -ms-flexbox;
-    display: flex;
-    -ms-flex-wrap: wrap;
-        flex-wrap: wrap;
-    padding: 1rem;
-    height: 17rem; }
-  .product__reviews {
-    -ms-flex: 0 0 70%;
-        flex: 0 0 70%; }
-    .product__reviews__stars {
-      font-size: 1.6rem;
-      letter-spacing: -2px;
-      color: #b38e57;
-      margin-right: .5rem; }
-    .product__reviews__number {
-      font-size: 1rem;
-      color: gray; }
 
 .sidebar {
   display: -ms-flexbox;
@@ -257,10 +249,67 @@ body {
       flex-direction: column;
   -ms-flex-align: center;
       align-items: center;
-  min-height: 100vh; }
+  min-height: 100vh;
+  margin-bottom: 10rem; }
 
-.btn:link,
-.btn:visited {
+.section-learn-more {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-direction: column;
+      flex-direction: column;
+  -ms-flex-align: center;
+      align-items: center;
+  margin-bottom: 3rem; }
+
+.product {
+  margin: 5rem 3.5rem 0 3.5rem;
+  height: 40rem;
+  width: 30rem;
+  border-radius: 3px;
+  background-color: #FFFAF4;
+  box-shadow: 0 2rem 3rem rgba(22, 25, 33, 0.3); }
+  .product__photo {
+    height: 23rem;
+    width: 100%;
+    background-image: url("/images/beans-placeholder.jpg");
+    background-size: cover;
+    background-position: 50% 50%;
+    box-shadow: 0 1rem 2rem rgba(22, 25, 33, 0.3); }
+  .product__info {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+    padding: 1rem;
+    height: 17rem; }
+  .product__reviews {
+    -ms-flex: 0 0 70%;
+        flex: 0 0 70%; }
+    .product__reviews__stars {
+      font-size: 1.6rem;
+      letter-spacing: -2px;
+      color: #b38e57;
+      margin-right: .5rem; }
+    .product__reviews__number {
+      font-size: 1rem;
+      color: gray; }
+
+.fa-5x {
+  fill: #b38e57;
+  color: #b38e57; }
+
+.learn-stuff {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-direction: column;
+      flex-direction: column;
+  -ms-flex-align: center;
+      align-items: center;
+  -ms-flex: 0 0 25%;
+      flex: 0 0 25%;
+  margin: 0 3.5rem 0 3.5rem; }
+
+.btn {
   font-family: 'Roboto Condensed', sans-serif;
   font-size: 1.6rem;
   font-weight: normal;
@@ -268,10 +317,13 @@ body {
   text-transform: uppercase;
   text-align: center;
   color: #f3efef;
+  background-color: transparent;
   display: inline-block;
   padding: .8rem 1.1rem .3rem 1.1rem;
-  border-bottom: 5px solid #f3efef;
-  box-shadow: 0 2rem 5rem rgba(0, 0, 0, 0.2); }
+  border-bottom: 5px solid #f3efef; }
+  .btn--inverted {
+    color: #0e1e33;
+    border-bottom: 5px solid #0e1e33; }
 
 .btn__storecard {
   border-bottom: none; }
