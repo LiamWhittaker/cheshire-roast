@@ -1,5 +1,5 @@
 // =========================
-// Headings
+// Headings and general styles
 // =========================
 
 .heading-primary {
@@ -40,6 +40,52 @@
   font-size: 2rem;
   color: $color-blue-dark;
   text-align: center;
+}
+
+.paragraph {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 300;
+  font-size: 1.4rem;
+  color: $color-bg;
+
+  &--inverted {
+    color: $color-blue-light;
+  }
+}
+
+.testimonial {
+  &__title {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 100;
+    font-size: 2rem;
+    color: $color-blue-dark;
+  }
+
+  &__rating {
+    color: $color-gold;
+  }
+
+  &__review {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 100;
+    font-size: 1.8rem;
+    color: $color-blue-light;
+  }
+
+  &__name {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 100;
+    font-size: 1.4rem;
+    text-transform: uppercase;
+    color: $color-blue-light;
+  }
+
+  &__date {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 100;
+    font-size: 1.2rem;
+    color: gray;
+  }
 }
 
 // =========================
@@ -94,16 +140,6 @@
   color: $color-gold;
 }
 
-.paragraph {
-  font-family: 'Roboto', sans-serif;
-  font-weight: 300;
-  font-size: 1.4rem;
-  color: $color-bg;
-
-  &--inverted {
-    color: $color-blue-light;
-  }
-}
 .sidebar-paragraph {
   font-family: 'Roboto', sans-serif;
   font-weight: 300;
