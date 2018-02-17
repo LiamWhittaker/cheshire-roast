@@ -1,0 +1,40 @@
+.newsletter {
+  &__cta {
+    display: flex;
+    justify-content: center;
+    flex: 0 0 40%;
+    flex-direction: column;
+    margin-right: auto;
+  }
+
+  &__form {
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    flex: 0 0 60%;
+    flex-direction: column;
+  }
+
+  &__label {
+
+  }
+
+  &__email {
+    width: 50%;
+    background-color: transparent;
+    border: 2px solid $color-gold;
+    border-radius: 5px;
+    padding: 1rem 2rem;
+    font-family: inherit;
+    color: $color-gold;
+    font-size: 2rem;
+    transition: all .2s;
+    margin-bottom: 1rem;
+
+    &:focus {
+      background-color:rgba($color-blue-dark, .4);
+      box-shadow: 0 2rem 3rem rgba($color-gold, .2);
+    }
+  }
+
+}

@@ -38,4 +38,15 @@
     align-items: center;
     margin-bottom: 10rem;
   }
+
+  &-newsletter {
+    display: flex;
+    justify-content: center;
+    height: 25rem;
+    width: 100%;
+    background-image: linear-gradient(rgba($color-blue-light, 0.6), rgba($color-blue-dark, 0.8)),
+                      url('/images/newsletter.jpg');
+    background-size: 100%;
+    background-position: 50% 50%;
+  }
 }

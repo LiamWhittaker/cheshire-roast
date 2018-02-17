@@ -1,3 +1,7 @@
+* {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 100; }
+
 .heading-primary {
   font-family: 'Dancing Script', serif;
   font-weight: 700;
@@ -68,6 +72,21 @@
   font-weight: 100;
   font-size: 1.2rem;
   color: gray; }
+
+.newsletter__heading {
+  font-family: 'Roboto Condensed', sans-serif;
+  font-weight: 800;
+  font-size: 5rem;
+  text-transform: uppercase;
+  letter-spacing: -1px;
+  color: #b38e57; }
+
+.newsletter__subheading {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 200;
+  font-size: 2.3rem;
+  color: #f2e3cf;
+  margin-bottom: 1rem; }
 
 .sidebar__link {
   font-family: 'Roboto Condensed', sans-serif;
@@ -298,6 +317,17 @@ body {
       align-items: center;
   margin-bottom: 10rem; }
 
+.section-newsletter {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: center;
+      justify-content: center;
+  height: 25rem;
+  width: 100%;
+  background-image: linear-gradient(rgba(23, 40, 59, 0.6), rgba(14, 30, 51, 0.8)), url("/images/newsletter.jpg");
+  background-size: 100%;
+  background-position: 50% 50%; }
+
 .product {
   margin: 5rem 3.5rem 0 3.5rem;
   height: 40rem;
@@ -395,6 +425,44 @@ body {
     margin-left: 5px;
     margin-right: auto; }
 
+.newsletter__cta {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: center;
+      justify-content: center;
+  -ms-flex: 0 0 40%;
+      flex: 0 0 40%;
+  -ms-flex-direction: column;
+      flex-direction: column;
+  margin-right: auto; }
+
+.newsletter__form {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-align: end;
+      align-items: flex-end;
+  -ms-flex-pack: center;
+      justify-content: center;
+  -ms-flex: 0 0 60%;
+      flex: 0 0 60%;
+  -ms-flex-direction: column;
+      flex-direction: column; }
+
+.newsletter__email {
+  width: 50%;
+  background-color: transparent;
+  border: 2px solid #b38e57;
+  border-radius: 5px;
+  padding: 1rem 2rem;
+  font-family: inherit;
+  color: #b38e57;
+  font-size: 2rem;
+  transition: all .2s;
+  margin-bottom: 1rem; }
+  .newsletter__email:focus {
+    background-color: rgba(14, 30, 51, 0.4);
+    box-shadow: 0 2rem 3rem rgba(179, 142, 87, 0.2); }
+
 .btn {
   font-family: 'Roboto Condensed', sans-serif;
   font-size: 1.6rem;
@@ -421,5 +489,20 @@ body {
     background-color: #b38e57;
     -ms-flex: 40%;
         flex: 40%; }
+
+.btn__submit {
+  background-color: rgba(14, 30, 51, 0.8);
+  color: #b38e57;
+  border: 2px solid #0e1e33;
+  border-radius: 10px;
+  width: 50%;
+  outline: none;
+  text-decoration: none;
+  transition: all .2s; }
+  .btn__submit:hover {
+    background-color: #0e1e33; }
+  .btn__submit:active {
+    -ms-transform: translate(1px, 1px);
+        transform: translate(1px, 1px); }
 
 /*# sourceMappingURL=style.css.map*/
