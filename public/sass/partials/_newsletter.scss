@@ -15,11 +15,9 @@
     flex-direction: column;
   }
 
-  &__label {
 
-  }
-
-  &__email {
+  &__email,
+  &__name {
     width: 50%;
     background-color: transparent;
     border: 2px solid $color-gold;
@@ -30,6 +28,7 @@
     font-size: 2rem;
     transition: all .2s;
     margin-bottom: 1rem;
+    
 
     &:focus {
       background-color:rgba($color-blue-dark, .4);

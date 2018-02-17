@@ -324,9 +324,17 @@ body {
       justify-content: center;
   height: 25rem;
   width: 100%;
-  background-image: linear-gradient(rgba(23, 40, 59, 0.6), rgba(14, 30, 51, 0.8)), url("/images/newsletter.jpg");
+  background-image: linear-gradient(rgba(23, 40, 59, 0.6) 0%, rgba(14, 30, 51, 0.8) 80%, #0e1e33 90%), url("/images/newsletter.jpg");
   background-size: 100%;
   background-position: 50% 50%; }
+
+.section-footer {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: center;
+      justify-content: center;
+  width: 100%;
+  background-color: #0e1e33; }
 
 .product {
   margin: 5rem 3.5rem 0 3.5rem;
@@ -448,7 +456,7 @@ body {
   -ms-flex-direction: column;
       flex-direction: column; }
 
-.newsletter__email {
+.newsletter__email, .newsletter__name {
   width: 50%;
   background-color: transparent;
   border: 2px solid #b38e57;
@@ -459,9 +467,14 @@ body {
   font-size: 2rem;
   transition: all .2s;
   margin-bottom: 1rem; }
-  .newsletter__email:focus {
+  .newsletter__email:focus, .newsletter__name:focus {
     background-color: rgba(14, 30, 51, 0.4);
     box-shadow: 0 2rem 3rem rgba(179, 142, 87, 0.2); }
+
+.fa-instagram,
+.fa-twitter,
+.fa-facebook {
+  margin: 2.5rem 1.5rem 4rem 1.5rem; }
 
 .btn {
   font-family: 'Roboto Condensed', sans-serif;
