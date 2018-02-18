@@ -1,0 +1,9 @@
+extends layout
+
+block content
+
+  h1 There are #{count} products in the db
+
+  .products
+    each product in products
+      h3 #{product.name}

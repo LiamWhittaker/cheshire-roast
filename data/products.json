@@ -1,0 +1,31 @@
+[
+  {
+    "name": "Jamaican Blue Mountain",
+    "slug": "jamaican-blue-mountain",
+    "shortDescription": "One of the most exclusive and most sought-after coffees in the world",
+    "longDescription": "lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem ",
+    "location": {
+      "coordinates": [
+        -77.096733,
+        18.405682
+      ],
+      "country": "Jamaica",
+      "region": "Carribbean",
+      "altitude": 2200,
+      "type": "Point"
+    },
+    "coffeeType": "Microlot",
+    "flavourTags": [
+      "Smooth",
+      "Herbs",
+      "Spices"
+    ],
+    "roastLevel": "Medium",
+    "varietal": "Arabica",
+    "washingProcess": "Natural",
+    "photos": [
+      "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a8/Jamaica_Blue_Mountain_Coffee_9494.JPG/1024px-Jamaica_Blue_Mountain_Coffee_9494.JPG"
+    ],
+    "price": 21.00
+  }
+]
