@@ -16,12 +16,14 @@ router.get('/menu', catchErrors(productController.showMenu));
 // Add new product page
 router.get('/menu/add', productController.addNewProductForm);
 
+// Responsible for sanitizing new product data and storing it in the database
 router.post(
-'/menu/add',
+  '/menu/add',
   productController.sanitizeNewProduct,
   catchErrors(productController.addNewProduct)
 );
 
+// Individual coffee info page
 router.get('/menu/:slug', catchErrors(productController.showProduct));
 
 
