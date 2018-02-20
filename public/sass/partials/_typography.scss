@@ -216,3 +216,22 @@
     color: $color-blue-dark;
   }
 }
+
+// ==========================
+// Forms
+// ==========================
+
+.form {
+  &__label {
+    font-family: inherit;
+    color: $color-blue-dark;
+    font-size: 1.8rem;
+  }
+
+  &__input,
+  &__textarea,
+  &__dropdown {
+    color: $color-blue-dark;
+    font-size: 1.8rem;    
+  }
+}

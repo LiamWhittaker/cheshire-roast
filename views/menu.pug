@@ -2,8 +2,18 @@ extends layout
 
 block content
 
-  h1 There are #{count} products in the db
+  .container
 
-  .products
     each product in products
-      h3 #{product.name}
+      .product
+        .inner
+          .product__photo
+          .product__info
+            h3.product__title #{product.name}
+            h4.product__description--short #{product.shortDescription}
+            .product__reviews 
+              span.product__reviews__stars &#9733; &#9733; &#9733; &#9733; &#9733;
+              span.product__reviews__number (17 reviews)
+            h3.product__price £#{product.price}
+            a.btn.btn__storecard--info(href=`/menu/${product.slug}`) Learn More
+            a.btn.btn__storecard--buy(href=`/menu/${product.slug}`) Buy Now

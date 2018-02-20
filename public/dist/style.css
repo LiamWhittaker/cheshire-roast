@@ -166,6 +166,15 @@
   text-align: right;
   color: #0e1e33; }
 
+.form__label {
+  font-family: inherit;
+  color: #0e1e33;
+  font-size: 1.8rem; }
+
+.form__input, .form__textarea, .form__dropdown {
+  color: #0e1e33;
+  font-size: 1.8rem; }
+
 *,
 *::after,
 *::before {
@@ -273,6 +282,23 @@ body {
     margin-bottom: 3rem; }
   .sidebar__info {
     margin-bottom: 1rem; }
+
+.form {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-direction: column;
+      flex-direction: column;
+  max-width: 110rem; }
+  .form__label {
+    margin-top: 2rem; }
+  .form__input, .form__textarea, .form__dropdown {
+    background-color: #f2e3cf;
+    border: 2px solid #0e1e33;
+    padding: 1rem 2rem;
+    border-radius: 5px;
+    transition: all .3s; }
+    .form__input:focus, .form__textarea:focus, .form__dropdown:focus {
+      border: 2px solid #b38e57; }
 
 .section-hero {
   display: -ms-flexbox;
