@@ -2,4 +2,23 @@ extends layout
 
 block content
 
-  h1=product.name
+  .coffee-header
+    h1.heading-section-title=product.name
+    h3.heading-section--subtitle #{product.location.country}, #{product.location.region}
+  
+  .container
+    .coffee__photos
+      .main-img
+        img#current(src="/images/img1.jpg", alt="Images of coffee")
+
+      .imgs
+        img(src="/images/img1.jpg", alt="Image of coffee")
+        img(src="/images/img2.jpeg", alt="Image of coffee")
+        img(src="/images/img3.jpeg", alt="Image of coffee")
+        img(src="/images/img4.jpeg", alt="Image of coffee")
+
+
+
+    .coffee__options
+
+  pre=h.dump(product)

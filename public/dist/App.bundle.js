@@ -63,24 +63,68 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 1);
+/******/ 	return __webpack_require__(__webpack_require__.s = 3);
 /******/ })
 /************************************************************************/
-/******/ ([
-/* 0 */
+/******/ ({
+
+/***/ 1:
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
 
 /***/ }),
-/* 1 */
+
+/***/ 10:
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-__webpack_require__(0);
+var _ref = [document.querySelector('#current'), document.querySelectorAll('.imgs img')],
+    current = _ref[0],
+    imgs = _ref[1];
+
+var opacity = 0.6;
+
+imgs[0].style.opacity = opacity;
+
+function imgClick(e) {
+  imgs.forEach(function (img) {
+    return img.style.opacity = 1;
+  });
+
+  current.src = e.target.src;
+
+  current.classList.add('fade-in');
+  setTimeout(function () {
+    current.classList.remove('fade-in');
+  }, 500);
+
+  e.target.style.opacity = opacity;
+}
+
+imgs.forEach(function (img) {
+  return img.addEventListener('click', imgClick);
+});
+
+/***/ }),
+
+/***/ 3:
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+__webpack_require__(1);
+
+var _imageGallery = __webpack_require__(10);
+
+var _imageGallery2 = _interopRequireDefault(_imageGallery);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /***/ })
-/******/ ]);
+
+/******/ });
 //# sourceMappingURL=App.bundle.js.map

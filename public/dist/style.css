@@ -216,7 +216,8 @@ body {
       flex-wrap: wrap;
   max-width: 120rem;
   -ms-flex-pack: center;
-      justify-content: center; }
+      justify-content: center;
+  margin: 0 auto; }
 
 .inner {
   margin: 1rem; }
@@ -502,6 +503,19 @@ body {
 .fa-facebook {
   margin: 2.5rem 1.5rem 4rem 1.5rem; }
 
+.coffee__header {
+  height: 20rem; }
+
+.coffee__photos {
+  -ms-flex: 50%;
+      flex: 50%; }
+
+.coffee__options {
+  -ms-flex: 50%;
+      flex: 50%;
+  height: 400px;
+  background-color: yellowgreen; }
+
 .btn {
   font-family: 'Roboto Condensed', sans-serif;
   font-size: 1.6rem;
@@ -543,5 +557,35 @@ body {
   .btn__submit:active {
     -ms-transform: translate(1px, 1px);
         transform: translate(1px, 1px); }
+
+.main-img {
+  padding: 4rem;
+  height: 40rem;
+  overflow: hidden; }
+
+.main-img img,
+.imgs img {
+  width: 100%; }
+
+.imgs {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: (1fr)[4];
+      grid-template-columns: repeat(4, 1fr);
+  grid-gap: 1rem;
+  width: 80%;
+  margin: 1rem auto; }
+  .imgs > * {
+    -ms-flex-item-align: center;
+        -ms-grid-row-align: center;
+        align-self: center; }
+
+@keyframes fadeIn {
+  to {
+    opacity: 1; } }
+
+.fade-in {
+  opacity: 0;
+  animation: fadeIn 0.5s ease-in 1 forwards; }
 
 /*# sourceMappingURL=style.css.map*/

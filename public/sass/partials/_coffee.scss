@@ -1,0 +1,15 @@
+.coffee {
+  &__header {
+    height: 20rem;
+  }
+
+  &__photos {
+    flex: 50%;
+  }
+
+  &__options {
+    flex: 50%;
+    height: 400px;
+    background-color: yellowgreen;
+  }
+}
