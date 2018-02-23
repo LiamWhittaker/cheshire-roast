@@ -25,6 +25,7 @@ module.exports = {
 		"no-underscore-dangle": 0,
 		"no-return-assign": 0,
 		"no-undef": 0,
+		"no-plusplus": 0,
 		"no-param-reassign": 0,
 		"consistent-return": 0,
 		"quotes": [

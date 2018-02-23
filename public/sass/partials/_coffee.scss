@@ -9,7 +9,11 @@
 
   &__options {
     flex: 50%;
-    height: 400px;
-    background-color: yellowgreen;
+    // height: 400px;
+  }
+
+  &__price {
+    display: inline;
+    margin: 1rem 0 0 1.5rem;
   }
 }

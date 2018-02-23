@@ -63,54 +63,55 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 3);
+/******/ 	return __webpack_require__(__webpack_require__.s = 2);
 /******/ })
 /************************************************************************/
-/******/ ({
-
-/***/ 1:
-/***/ (function(module, exports) {
-
-// removed by extract-text-webpack-plugin
-
-/***/ }),
-
-/***/ 10:
+/******/ ([
+/* 0 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var _ref = [document.querySelector('#current'), document.querySelectorAll('.imgs img')],
-    current = _ref[0],
-    imgs = _ref[1];
+var gallery = document.querySelector('#current');
 
-var opacity = 0.6;
+if (gallery) {
+  var imgClick = function imgClick(e) {
+    imgs.forEach(function (img) {
+      return img.style.opacity = 1;
+    });
 
-imgs[0].style.opacity = opacity;
+    current.src = e.target.src;
 
-function imgClick(e) {
+    current.classList.add('fade-in');
+    setTimeout(function () {
+      current.classList.remove('fade-in');
+    }, 500);
+
+    e.target.style.opacity = opacity;
+  };
+
+  var _ref = [document.querySelector('#current'), document.querySelectorAll('.imgs img')],
+      current = _ref[0],
+      imgs = _ref[1];
+
+  var opacity = 0.6;
+
+  imgs[0].style.opacity = opacity;
+
   imgs.forEach(function (img) {
-    return img.style.opacity = 1;
+    return img.addEventListener('click', imgClick);
   });
-
-  current.src = e.target.src;
-
-  current.classList.add('fade-in');
-  setTimeout(function () {
-    current.classList.remove('fade-in');
-  }, 500);
-
-  e.target.style.opacity = opacity;
 }
 
-imgs.forEach(function (img) {
-  return img.addEventListener('click', imgClick);
-});
+/***/ }),
+/* 1 */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
 
 /***/ }),
-
-/***/ 3:
+/* 2 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -118,13 +119,47 @@ imgs.forEach(function (img) {
 
 __webpack_require__(1);
 
-var _imageGallery = __webpack_require__(10);
+var _imageGallery = __webpack_require__(0);
 
 var _imageGallery2 = _interopRequireDefault(_imageGallery);
 
+var _quantity = __webpack_require__(9);
+
+var _quantity2 = _interopRequireDefault(_quantity);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-/***/ })
+/***/ }),
+/* 3 */,
+/* 4 */,
+/* 5 */,
+/* 6 */,
+/* 7 */,
+/* 8 */,
+/* 9 */
+/***/ (function(module, exports, __webpack_require__) {
 
-/******/ });
+"use strict";
+
+
+var dec = document.querySelector('#quantity--dec');
+var inc = document.querySelector('#quantity--inc');
+var quantity = document.querySelector('#quantity');
+
+if (dec) {
+  dec.addEventListener('click', function () {
+    if (quantity.value > 1) {
+      quantity.value--;
+    }
+  });
+
+  inc.addEventListener('click', function () {
+    if (quantity.value < 10) {
+      quantity.value++;
+    }
+  });
+}
+
+/***/ })
+/******/ ]);
 //# sourceMappingURL=App.bundle.js.map

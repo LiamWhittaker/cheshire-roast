@@ -1,24 +1,28 @@
-const [current, imgs] = [
-  document.querySelector('#current'),
-  document.querySelectorAll('.imgs img')
-];
-const opacity = 0.6;
+const gallery = document.querySelector('#current');
 
-imgs[0].style.opacity = opacity;
+if (gallery) {
+  const [current, imgs] = [
+    document.querySelector('#current'),
+    document.querySelectorAll('.imgs img')
+  ];
+  const opacity = 0.6;
 
-function imgClick(e) {
-  imgs.forEach(img => (img.style.opacity = 1));
+  imgs[0].style.opacity = opacity;
 
-  current.src = e.target.src;
+  function imgClick(e) {
+    imgs.forEach(img => (img.style.opacity = 1));
 
-  current.classList.add('fade-in');
-  setTimeout(() => {
-    current.classList.remove('fade-in');
-  }, 500);
+    current.src = e.target.src;
 
-  e.target.style.opacity = opacity;
+    current.classList.add('fade-in');
+    setTimeout(() => {
+      current.classList.remove('fade-in');
+    }, 500);
+
+    e.target.style.opacity = opacity;
+  }
+
+  imgs.forEach(img =>
+    img.addEventListener('click', imgClick)
+  );
 }
-
-imgs.forEach(img =>
-  img.addEventListener('click', imgClick)
-);

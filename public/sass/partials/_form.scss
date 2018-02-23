@@ -3,11 +3,10 @@
   flex-direction: column;
   max-width: 110rem;
 
-  
   &__label {
     margin-top: 2rem;
   }
-  
+
   &__input,
   &__textarea,
   &__dropdown {
@@ -15,12 +14,105 @@
     border: 2px solid $color-blue-dark;
     padding: 1rem 2rem;
     border-radius: 5px;
-    transition: all .3s;
+    transition: all 0.3s;
 
     &:focus {
       border: 2px solid $color-gold;
     }
+
+    &--quantity {
+      border: 1px solid $color-blue-dark;
+      width: 10rem;
+      margin: 0 1rem;
+    }
   }
 
+  &__fieldset {
+    display: block;
+    margin: 0 0.5rem 1rem 0.5rem;
+    padding: 1rem;
+    border: none;
+  }
 
+  &__legend {
+    display: block;
+    padding-left: 2px;
+    padding-right: 2px;
+    border: none;
+  }
+
+  &__answer {
+    display: inline-block;
+    box-sizing: border-box;
+    width: 15%;
+    margin: -20px 1rem 1rem 0;
+    text-align: center;
+  }
+
+  &__checkbox-label {
+    border: 1px solid rgba($color-blue-dark, 0.15);
+    border-radius: 5px;
+    box-sizing: border-box;
+    display: block;
+    width: 100%;
+    padding: 1rem 0;
+    cursor: pointer;
+    opacity: 0.5;
+    transition: all 0.5s ease-in-out;
+
+    &:hover,
+    &:focus,
+    &:active {
+      border: 1px solid rgba($color-blue-dark, 0.5);
+    }
+  }
+
+  &__radio {
+    &--hidden {
+      transform: translateY(4rem);
+    }
+  }
+
+  &__quantity {
+    display: inline-block;
+    font-size: 1.8rem;
+    font-weight: 900;
+    padding: 1rem 1.5rem;
+    cursor: pointer;
+    border: 1px solid $color-blue-dark;
+    border-radius: 4px;
+
+    &--dec {
+      padding: 1rem 1.8rem;
+    }
+
+    &::selection {
+      background: transparent;
+    }
+
+    &::-moz-selection {
+      background: transparent;
+    }
+  }
+}
+
+input[type="radio"] {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+input[type="radio"]:active ~ label {
+  opacity: 1;
+}
+
+input[type="radio"]:checked ~ label {
+  opacity: 1;
+  border: 1px solid $color-blue-dark;
+}
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }
