@@ -2,7 +2,7 @@ const express = require('express');
 
 const router = express.Router();
 const productController = require('../controllers/productController');
-// const userController = require("../controllers/userController");
+const userController = require('../controllers/userController');
 // const authController = require("../controllers/authController");
 // const reviewController = require("../controllers/reviewController");
 const { catchErrors } = require('../handlers/errorHandlers');
@@ -25,6 +25,17 @@ router.post(
 
 // Individual coffee info page
 router.get('/menu/:slug', catchErrors(productController.showProduct));
+
+
+// ==================================================
+// User accounts and authentication stuff
+// ==================================================
+
+// Show the registration form
+router.get('/register', userController.registerForm);
+
+// Sanitize user data and register the account in the database
+router.post('/register', catchErrors(userController.register));
 
 
 // Export Router
