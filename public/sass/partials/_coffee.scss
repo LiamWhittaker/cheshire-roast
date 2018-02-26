@@ -1,10 +1,11 @@
 .coffee {
   &__header {
-    height: 20rem;
+    height: 15rem;
   }
 
   &__photos {
     flex: 50%;
+    margin-top: 1rem;
   }
 
   &__options {
@@ -15,5 +16,30 @@
   &__price {
     display: inline;
     margin: 1rem 0 0 1.5rem;
+  }
+
+  &__stripe {
+    display: flex;
+    width: 100%;
+    background-color: $color-gold;
+
+    &--bean {
+      // margin-right: auto;
+      display: flex;
+      flex-direction: column;
+      flex-wrap: wrap;
+      flex-basis: 50rem;
+      max-height: 15rem;
+    }
+
+    &--location {
+      display: flex;
+      flex-direction: column;
+    }
+  }
+
+  &__info {
+    display: block;
+    margin: 1rem 0;
   }
 }

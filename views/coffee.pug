@@ -2,9 +2,12 @@ extends layout
 
 block content
 
-  .coffee-header
+  .coffee__header.u-mart-lg
     h1.heading-section-title=product.name
     h3.heading-section--subtitle.u-marbo-lg #{product.location.country}, #{product.location.region}
+
+    each tag in product.flavourTags
+      span.coffee__flavour-tag #{tag}
   
   .container
     .coffee__photos
@@ -155,7 +158,47 @@ block content
 
         span.coffee__price #{product.price.toLocaleString('en-GB', { style: 'currency', currency: 'GBP' })}
 
-        a.btn.btn__storecard--buy.u-mart-sm(href="#") Add to cart
-        
+        button.btn.btn__submit.u-mart-sm(type="submit") Add to cart
 
-  pre=h.dump(product)
+  section.coffee__stripe.u-mart-lg
+    .container.u-mart-md
+      .coffee__stripe--bean
+        p.coffee__info 
+          span.coffee__info--key Name: 
+          | #{product.name}
+        p.coffee__info
+          span.coffee__info--key Flavours: 
+          each tag in product.flavourTags
+            | #{tag} 
+        p.coffee__info
+          span.coffee__info--key Roast: 
+          | #{product.roastLevel}
+
+        p.coffee__info
+          span.coffee__info--key Type: 
+          | #{product.coffeeType}
+        p.coffee__info
+          span.coffee__info--key Varietal: 
+          | #{product.varietal}
+        p.coffee__info
+          span.coffee__info--key Washing Process: 
+          | #{product.washingProcess}
+
+      .coffee__stripe--location
+        p.coffee__info
+          span.coffee__info--key Country: 
+          | #{product.location.country}
+        p.coffee__info
+          span.coffee__info--key Region: 
+          | #{product.location.region}
+        p.coffee__info
+          span.coffee__info--key Altitude: 
+          | #{product.location.altitude.toLocaleString()}MASL
+
+  section.coffee__description
+    .container
+      .inner
+        h3.heading-section-title.u-mart-md.u-marbo-md More about this coffee...
+        p.paragraph.paragraph--inverted.paragraph--large=product.longDescription
+
+  //- pre=h.dump(product)

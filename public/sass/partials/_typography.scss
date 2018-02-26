@@ -56,6 +56,10 @@
   &--inverted {
     color: $color-blue-light;
   }
+
+  &--large {
+    font-size: 1.6rem;
+  }
 }
 
 .testimonial {
@@ -117,6 +121,24 @@
   font-weight: 800;
   font-size: 2.2rem;
   color: $color-blue-dark;
+}
+
+.coffee__info {
+  font-weight: 100;
+  font-size: 1.8rem;
+  color: $color-bg;
+
+  &--key {
+    color: $color-blue-light;
+  }
+}
+
+.coffee__flavour-tag {
+  text-align: center;
+
+  font-weight: 100;
+  font-size: 1.8rem;
+  color: $color-bg;
 }
 
 // =========================
