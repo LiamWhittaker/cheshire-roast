@@ -35,7 +35,10 @@ router.get('/menu/:slug', catchErrors(productController.showProduct));
 router.get('/register', userController.registerForm);
 
 // Sanitize user data and register the account in the database
-router.post('/register', catchErrors(userController.register));
+router.post('/register',
+  userController.sanitizeRegistration,
+  userController.validateRegistration,
+  catchErrors(userController.register));
 
 
 // Export Router
