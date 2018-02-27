@@ -3,6 +3,10 @@ const promisify = require('es6-promisify');
 
 const User = mongoose.model('User');
 
+// ==========================================
+// Registration stuff
+// ==========================================
+
 // Render the registration form
 exports.registerForm = (req, res) => {
   res.render('register', { title: 'Register' });
@@ -91,3 +95,13 @@ exports.register = async (req, res) => {
   await register(user, req.body.password);
   res.redirect('/');
 };
+
+// ==========================================
+// Login stuff
+// ==========================================
+
+// Render the login form
+exports.loginForm = (req, res) => {
+  res.render('login', { title: 'Log in' });
+};
+

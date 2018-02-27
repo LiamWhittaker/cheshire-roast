@@ -3,7 +3,7 @@ const express = require('express');
 const router = express.Router();
 const productController = require('../controllers/productController');
 const userController = require('../controllers/userController');
-// const authController = require("../controllers/authController");
+const authController = require('../controllers/authController');
 // const reviewController = require("../controllers/reviewController");
 const { catchErrors } = require('../handlers/errorHandlers');
 
@@ -40,6 +40,11 @@ router.post('/register',
   userController.validateRegistration,
   catchErrors(userController.register));
 
+// Render the login form
+router.get('/login', userController.loginForm);
+
+// Log the user in
+router.post('/login', authController.login);
 
 // Export Router
 module.exports = router;
