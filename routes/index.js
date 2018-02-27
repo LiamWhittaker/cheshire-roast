@@ -17,8 +17,7 @@ router.get('/menu', catchErrors(productController.showMenu));
 router.get('/menu/add', productController.addNewProductForm);
 
 // Responsible for sanitizing new product data and storing it in the database
-router.post(
-  '/menu/add',
+router.post('/menu/add',
   productController.sanitizeNewProduct,
   catchErrors(productController.addNewProduct)
 );
@@ -46,6 +45,9 @@ router.get('/login', userController.loginForm);
 // Log the user in
 router.post('/login', authController.login);
 
+// Log the user out
+router.get('/logout', authController.logout);
+
+
 // Export Router
 module.exports = router;
-

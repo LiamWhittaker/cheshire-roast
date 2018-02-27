@@ -1,6 +1,7 @@
 .sidebar__top
   .sidebar__logobox
-    img(src="/images/logo-no-bg.png", alt="Logo" class="sidebar__logo")
+    a(href="/")
+      img(src="/images/logo-no-bg.png", alt="Logo" class="sidebar__logo")
 
 nav.sidebar__mid
   ul.sidebar__list
@@ -12,12 +13,18 @@ nav.sidebar__mid
       a(href="#" class="sidebar__link") About Us
     li.sidebar__list-item
       a(href="#" class="sidebar__link") Help
-    li.sidebar__list-item
-      a(href="#" class="sidebar__link sidebar__link--inverted") Log In
+    if !user
+      li.sidebar__list-item
+        a(href="/login" class="sidebar__link sidebar__link--inverted") Log In
+    else 
+      li.sidebar__list-item
+        a(href="#" class="sidebar__link sidebar__link--inverted") My Account
+      li.sidebar__list-item
+        a(href="/logout" class="sidebar__link sidebar__link--inverted") Log Out
 
-  .sidebar__cartbox
-    i.fas.fa-shopping-cart.fa-2x
-    //- img(src="/img/cart.png", alt="Shopping cart" class="sidebar__cart")
+  if user
+    .sidebar__cartbox
+      i.fas.fa-shopping-cart.fa-2x
 
 .sidebar__bottom
   .sidebar__info
