@@ -1,0 +1,15 @@
+extends layout
+
+block content
+
+  h1.heading-section-title Log In
+
+  .container
+    form.form(action="/login", method="POST")
+      label.form__label(for="email") Email Address
+      input.form__input(type="email" name="email")
+
+      label.form__label(for="password") Password
+      input.form__input(type="password" name="password")
+
+      button.btn.btn__submit(type="submit") Log in

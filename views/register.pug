@@ -1,0 +1,37 @@
+extends layout
+
+block content
+
+  h1.heading-section-title.u-mart-lg Register a new account
+
+  .container
+
+    form.form(action="/register" method="POST")
+      label.form__label(for="firstName") First Name
+      input.form__input(type="text" name="firstName")
+
+      label.form__label(for="secondName") Surname
+      input.form__input(type="text" name="secondName")
+
+      label.form__label(for="email") Email
+      input.form__input(type="email" name="email")
+
+      label.form__label(for="address[lineOne]") Address
+      input.form__input(type="text" name="address[lineOne]")
+
+      label.form__label(for="address[townCity]") Town / City
+      input.form__input(type="text" name="address[townCity]")
+
+      label.form__label(for="address[county]") County
+      input.form__input(type="text" name="address[county]")
+
+      label.form__label(for="address[postcode]") Postcode
+      input.form__input(type="text" name="address[postcode]")
+
+      label.form__label(for="password") Password
+      input.form__input(type="password" name="password")
+      
+      label.form__label(for="confirmPassword") Confirm Password
+      input.form__input(type="password" name="confirmPassword")
+
+      button(type="submit" class="btn btn__submit") Register my account!
