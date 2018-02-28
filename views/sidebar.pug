@@ -21,10 +21,9 @@ nav.sidebar__mid
         a(href="#" class="sidebar__link sidebar__link--inverted") My Account
       li.sidebar__list-item
         a(href="/logout" class="sidebar__link sidebar__link--inverted") Log Out
-
-  if user
-    .sidebar__cartbox
-      i.fas.fa-shopping-cart.fa-2x
+      li.sidebar__list-item
+        a(href="/basket" class="sidebar__link sidebar__link--inverted")      
+          i.fas.fa-shopping-basket.fa-2x
 
 .sidebar__bottom
   .sidebar__info

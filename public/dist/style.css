@@ -399,6 +399,14 @@ input[type="number"]::-webkit-outer-spin-button {
   -webkit-appearance: none;
   margin: 0; }
 
+.fa-5x {
+  fill: #b38e57;
+  color: #b38e57; }
+
+.fa-shopping-basket {
+  fill: #b38e57;
+  color: #b38e57; }
+
 .section-hero {
   display: -ms-flexbox;
   display: flex;
@@ -493,10 +501,6 @@ input[type="number"]::-webkit-outer-spin-button {
     .product__reviews__number {
       font-size: 1rem;
       color: gray; }
-
-.fa-5x {
-  fill: #b38e57;
-  color: #b38e57; }
 
 .learn-stuff {
   display: -ms-flexbox;

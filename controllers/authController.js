@@ -18,3 +18,12 @@ exports.logout = (req, res) => {
   req.flash('success', 'You are now logged out');
   res.redirect('/');
 };
+
+// Middleware to check if the user is logged in
+exports.isLoggedIn = (req, res, next) => {
+  // Check if user is authenticated
+  if (req.isAuthenticated()) return next();
+
+  req.flash('error', 'You have to be logged in to do that!');
+  res.redirect('/login');
+};

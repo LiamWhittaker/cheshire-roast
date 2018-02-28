@@ -4,6 +4,7 @@ const router = express.Router();
 const productController = require('../controllers/productController');
 const userController = require('../controllers/userController');
 const authController = require('../controllers/authController');
+const shopController = require('../controllers/shopController');
 // const reviewController = require("../controllers/reviewController");
 const { catchErrors } = require('../handlers/errorHandlers');
 
@@ -48,6 +49,15 @@ router.post('/login', authController.login);
 // Log the user out
 router.get('/logout', authController.logout);
 
+
+// ==================================================
+// Checkout and basket stuff
+// ==================================================
+
+// Render the basket
+router.get('/basket',
+  authController.isLoggedIn,
+  shopController.showBasket);
 
 // Export Router
 module.exports = router;
