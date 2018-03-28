@@ -16,14 +16,13 @@ html(lang="en")
 
         block messages
           if locals.flashes
-            .inner
-              .flash-messages
-                - const categories = Object.keys(locals.flashes)
-                each category in categories
-                  each message in flashes[category]
-                    .flash(class=`flash--${category}`)
-                      p.flash__text!= message
-                      button.flash__remove(onClick="this.parentElement.remove()") &times;
+            .flash-messages
+              - const categories = Object.keys(locals.flashes)
+              each category in categories
+                each message in flashes[category]
+                  .flash(class=`flash--${category}`)
+                    p.flash__text!= message
+                    button.flash__remove(onClick="this.parentElement.remove()") &times;
 
         block content
          p content from the layout file

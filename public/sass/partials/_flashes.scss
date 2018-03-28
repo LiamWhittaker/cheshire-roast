@@ -1,0 +1,38 @@
+// Container for flash messages
+.flash-messages {
+  position: absolute;
+  top: 1rem;
+  right: 2rem;
+}
+
+.flash {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 7px;
+  padding: 1rem;
+
+  &__text {
+    font-size: 1.5rem;
+    color: $color-blue-dark;
+    text-shadow: 0 0.5rem 3rem rgba(255, 255, 255, 0.7);
+  }
+
+  &__remove {
+    display: block;
+    background-color: transparent;
+    color: $color-blue-dark;
+    font-size: 2rem;
+    outline: none;
+    border: none;
+    margin-left: 1rem;
+  }
+
+  &--success {
+    background-color: rgba(green, 0.5);
+  }
+
+  &--error {
+    background-color: rgba(red, 0.5);
+  }
+}

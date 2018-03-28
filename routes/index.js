@@ -59,5 +59,11 @@ router.get('/basket',
   authController.isLoggedIn,
   shopController.showBasket);
 
+// Individual coffee info page
+router.post('/menu/:slug',
+  authController.isLoggedIn,
+  shopController.addToBasket
+);
+
 // Export Router
 module.exports = router;

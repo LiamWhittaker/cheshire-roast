@@ -49,9 +49,17 @@ const userSchema = new mongoose.Schema({
     type: Number,
     required: 'You need an access level..',
     default: 10 // Regular users have access level 10, site owners will have level 20 to allow for future addition of intermediate access levels (15) like moderators etc
-  }
+  },
+  basket: [
+    {
+      item: {
+        type: mongoose.Schema.ObjectId,
+        ref: 'Product'
+      },
+      qty: Number
+    }
+  ]
 });
-
 
 // Add all pasportLocalMongoose methods to user schema and set
 // email to be the account username

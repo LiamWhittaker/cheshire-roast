@@ -237,6 +237,37 @@ body {
 .u-marbo-lg {
   margin-bottom: 6rem; }
 
+.flash-messages {
+  position: absolute;
+  top: 1rem;
+  right: 2rem; }
+
+.flash {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-align: center;
+      align-items: center;
+  -ms-flex-pack: center;
+      justify-content: center;
+  border-radius: 7px;
+  padding: 1rem; }
+  .flash__text {
+    font-size: 1.5rem;
+    color: #0e1e33;
+    text-shadow: 0 0.5rem 3rem rgba(255, 255, 255, 0.7); }
+  .flash__remove {
+    display: block;
+    background-color: transparent;
+    color: #0e1e33;
+    font-size: 2rem;
+    outline: none;
+    border: none;
+    margin-left: 1rem; }
+  .flash--success {
+    background-color: rgba(0, 128, 0, 0.5); }
+  .flash--error {
+    background-color: rgba(255, 0, 0, 0.5); }
+
 .container {
   display: -ms-flexbox;
   display: flex;
