@@ -270,3 +270,21 @@
     color: $color-blue-dark;
   }
 }
+
+// ==========================
+// Coffee info table
+// ==========================
+.coffee__key {
+  font-family: "Roboto", sans-serif;
+  font-weight: 600;
+  font-size: 1.4rem;
+  text-transform: uppercase;
+  color: $color-blue-dark;
+}
+
+.coffee__value {
+  font-family: "Roboto", sans-serif;
+  font-weight: normal;
+  font-size: 1.4rem;
+  color: $color-blue-lighter;
+}

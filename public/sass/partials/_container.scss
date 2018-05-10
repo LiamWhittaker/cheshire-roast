@@ -5,6 +5,11 @@
   max-width: 120rem;
   justify-content: center;
   margin: 0 auto;
+
+  &--columns {
+    flex: auto;
+    flex-wrap: nowrap;
+  }
 }
 
 .inner {

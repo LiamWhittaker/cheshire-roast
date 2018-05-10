@@ -158,47 +158,47 @@ block content
 
         span.coffee__price #{product.price.toLocaleString('en-GB', { style: 'currency', currency: 'GBP' })}
 
-        button.btn.btn__submit.u-mart-sm(type="submit") Add to cart
-
-  section.coffee__stripe.u-mart-lg
-    .container.u-mart-md
-      .coffee__stripe--bean
-        p.coffee__info 
-          span.coffee__info--key Name: 
-          | #{product.name}
-        p.coffee__info
-          span.coffee__info--key Flavours: 
-          each tag in product.flavourTags
-            | #{tag} 
-        p.coffee__info
-          span.coffee__info--key Roast: 
-          | #{product.roastLevel}
-
-        p.coffee__info
-          span.coffee__info--key Type: 
-          | #{product.coffeeType}
-        p.coffee__info
-          span.coffee__info--key Varietal: 
-          | #{product.varietal}
-        p.coffee__info
-          span.coffee__info--key Washing Process: 
-          | #{product.washingProcess}
-
-      .coffee__stripe--location
-        p.coffee__info
-          span.coffee__info--key Country: 
-          | #{product.location.country}
-        p.coffee__info
-          span.coffee__info--key Region: 
-          | #{product.location.region}
-        p.coffee__info
-          span.coffee__info--key Altitude: 
-          | #{product.location.altitude.toLocaleString()}MASL
+        .coffee__addtocart
+          button.btn.btn__submit.u-mart-sm(type="submit") Add to cart
 
   section.coffee__description
-    .container
-      .inner
-        h3.heading-section-title.u-mart-md.u-marbo-md More about this coffee...
+    h3.heading-section-title.u-mart-md.u-marbo-md More about this coffee...
+
+    .container.container--columns
+      .coffee__long-description
         p.paragraph.paragraph--inverted.paragraph--large=product.longDescription
+
+      .coffee__bulletpoints
+
+        table.coffee__table
+          tr.coffee__row
+            td.coffee__key Name
+            td.coffee__value #{product.name}
+          tr.coffee__row
+            td.coffee__key Flavours
+            td.coffee__value
+              each tag in product.flavourTags
+                | #{tag}, 
+          tr.coffee__row
+            td.coffee__key Roast
+            td.coffee__value #{product.roastLevel}
+          tr.coffee__row
+            td.coffee__key Type
+            td.coffee__value #{product.coffeeType}
+          tr.coffee__row
+            td.coffee__key Varietal
+            td.coffee__value #{product.varietal}
+          tr.coffee__row
+            td.coffee__key Washing Process
+            td.coffee__value #{product.washingProcess}
+          tr.coffee__row
+            td.coffee__key Country
+            td.coffee__value #{product.location.country}
+          tr.coffee__row
+            td.coffee__key Region
+            td.coffee__value #{product.location.region}
+          tr.coffee__row
+            td.coffee__key Altitude
+            td.coffee__value #{product.location.altitude}
 
   //- pre=h.dump(product)

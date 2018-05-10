@@ -2,38 +2,36 @@
   &__cta {
     display: flex;
     justify-content: center;
-    flex: 0 0 40%;
+    flex-basis: 45rem;
     flex-direction: column;
     margin-right: auto;
   }
 
   &__form {
     display: flex;
+    flex-basis: 35rem;
     align-items: flex-end;
     justify-content: center;
-    flex: 0 0 60%;
+    margin-left: auto;
     flex-direction: column;
   }
 
-
   &__email,
   &__name {
-    width: 50%;
-    background-color: transparent;
+    width: 100%;
+    background-color: rgba($color-blue-dark, 0.4);
     border: 2px solid $color-gold;
     border-radius: 5px;
     padding: 1rem 2rem;
     font-family: inherit;
     color: $color-gold;
     font-size: 2rem;
-    transition: all .2s;
+    transition: all 0.2s;
     margin-bottom: 1rem;
-    
 
     &:focus {
-      background-color:rgba($color-blue-dark, .4);
-      box-shadow: 0 2rem 3rem rgba($color-gold, .2);
+      background-color: rgba($color-blue-dark, 0.4);
+      box-shadow: 0 2rem 3rem rgba($color-gold, 0.2);
     }
   }
-
 }

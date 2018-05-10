@@ -18,28 +18,35 @@
     margin: 1rem 0 0 1.5rem;
   }
 
-  &__stripe {
-    display: flex;
-    width: 100%;
-    background-color: $color-gold;
-
-    &--bean {
-      // margin-right: auto;
-      display: flex;
-      flex-direction: column;
-      flex-wrap: wrap;
-      flex-basis: 50rem;
-      max-height: 15rem;
-    }
-
-    &--location {
-      display: flex;
-      flex-direction: column;
-    }
+  &__addtocart {
+    width: 13rem;
+    margin-left: 1.5rem;
   }
 
-  &__info {
-    display: block;
-    margin: 1rem 0;
+  &__long-description {
+    flex-basis: 60%;
+    margin-right: auto;
+  }
+
+  &__bulletpoints {
+    flex-basis: 28%;
+  }
+
+  // Table stuff below
+
+  &__table {
+    border-collapse: collapse;
+    margin-bottom: 1rem;
+  }
+
+  &__key,
+  &__value {
+    padding: 1rem 0 0.8rem 0;
+    border-bottom: 1px solid $color-gold;
+  }
+
+  &__key {
+    width: 30%;
+    margin-right: 1rem;
   }
 }

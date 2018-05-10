@@ -1,6 +1,6 @@
 .product {
   margin: 5rem $gutter 0 $gutter;
-  height: 40rem;
+  height: 41rem;
   width: 30rem;
   border-radius: 3px;
   background-color: $color-bg-light;
@@ -9,7 +9,7 @@
   &__photo {
     height: 23rem;
     width: 100%;
-    background-image: url('/images/beans-placeholder.jpg');
+    background-image: url("/images/beans-placeholder.jpg");
     background-size: cover;
     background-position: 50% 50%;
     box-shadow: 0 1rem 2rem rgba($color-black, 0.3);
@@ -29,7 +29,7 @@
       font-size: 1.6rem;
       letter-spacing: -2px;
       color: $color-gold;
-      margin-right: .5rem;
+      margin-right: 0.5rem;
     }
 
     &__number {

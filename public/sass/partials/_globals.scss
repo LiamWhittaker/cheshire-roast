@@ -1,5 +1,5 @@
 *,
-*::after, 
+*::after,
 *::before {
   margin: 0;
   padding: 0;
@@ -13,4 +13,8 @@ html {
 body {
   box-sizing: border-box;
   min-height: 100vh; //testing
+}
+
+a {
+  outline: none;
 }

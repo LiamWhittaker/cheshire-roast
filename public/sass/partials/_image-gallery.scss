@@ -15,7 +15,10 @@
   margin: 1rem auto;
 
   & > * {
-    align-self: center;
+    // align-self: center;
+    height: 100px;
+    width: 100px;
+    object-fit: cover;
   }
 }
 
