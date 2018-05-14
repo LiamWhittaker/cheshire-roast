@@ -14,6 +14,6 @@ block content
             .product__reviews 
               span.product__reviews__stars &#9733; &#9733; &#9733; &#9733; &#9733;
               span.product__reviews__number (17 reviews)
-            h3.product__price #{product.price.toLocaleString('en-GB', { style: 'currency', currency: 'GBP' })}
+            h3.product__price #{product.price.smallBag.toLocaleString('en-GB', { style: 'currency', currency: 'GBP' })}
             a.btn.btn__storecard.btn__storecard--info(href=`/menu/${product.slug}`) Learn More
             a.btn.btn__storecard.btn__storecard--buy(href=`/menu/${product.slug}`) Buy Now

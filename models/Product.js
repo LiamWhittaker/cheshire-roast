@@ -62,9 +62,16 @@ const productSchema = new mongoose.Schema({
   },
   photos: [String],
   price: {
-    type: Number,
-    required: 'You must provide a price!',
+    smallBag: {
+      type: Number,
+      required: 'You must provide a price!',
+    },
+    largeBag: {
+      type: Number,
+      required: 'You must provide a price!',
+    },
   },
+  stockInGrams: Number
 });
 
 module.exports = mongoose.model('Product', productSchema);

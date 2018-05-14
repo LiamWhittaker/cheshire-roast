@@ -63,7 +63,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 3);
+/******/ 	return __webpack_require__(__webpack_require__.s = 4);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -131,18 +131,51 @@ if (dec) {
 
 /***/ }),
 /* 2 */
-/***/ (function(module, exports) {
-
-// removed by extract-text-webpack-plugin
-
-/***/ }),
-/* 3 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-__webpack_require__(2);
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+function updatePrice(event) {
+  var regularPrice = document.getElementsByClassName('coffee__price--regular')[0];
+  var largePrice = document.getElementsByClassName('coffee__price--large')[0];
+  var bagsize = event.target.value;
+
+  if (bagsize === 'regular') {
+    regularPrice.classList.remove('hidden');
+    largePrice.classList.add('hidden');
+  } else {
+    regularPrice.classList.add('hidden');
+    largePrice.classList.remove('hidden');
+  }
+}
+
+document.getElementById('buyform').reset();
+
+document.addEventListener('DOMContentLoaded', function () {
+  document.getElementById('size_1').onchange = updatePrice;
+  document.getElementById('size_2').onchange = updatePrice;
+}, false);
+
+exports.default = updatePrice;
+
+/***/ }),
+/* 3 */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 4 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+__webpack_require__(3);
 
 var _imageGallery = __webpack_require__(0);
 
@@ -151,6 +184,10 @@ var _imageGallery2 = _interopRequireDefault(_imageGallery);
 var _quantity = __webpack_require__(1);
 
 var _quantity2 = _interopRequireDefault(_quantity);
+
+var _updatePrice = __webpack_require__(2);
+
+var _updatePrice2 = _interopRequireDefault(_updatePrice);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
