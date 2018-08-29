@@ -21,7 +21,7 @@ block content
         img(src="/images/img4.jpeg", alt="Image of coffee")
 
     .coffee__options
-      form.form(action="" id="buyform")
+      form.form(action="/basket" method="post" id="buyform")
         fieldset.form__fieldset
           legend.form__legend Choose Grind
 
@@ -161,6 +161,9 @@ block content
         span.coffee__price.coffee__price--large.hidden #{product.price.largeBag.toLocaleString('en-GB', { style: 'currency', currency: 'GBP' })} 
           span.product__reviews__number / 1kg bag
 
+        input(type="hidden" name="coffeeId" id="coffeeId" value=product._id)
+        input(type="hidden" name="userId" id="userId" value=user._id)
+        
         .coffee__addtocart
           button.btn.btn__submit.u-mart-sm(type="submit") Add to cart
 

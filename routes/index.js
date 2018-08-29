@@ -57,12 +57,22 @@ router.get('/logout', authController.logout);
 // Render the basket
 router.get('/basket',
   authController.isLoggedIn,
-  shopController.showBasket);
+  catchErrors(shopController.showBasket));
+
+router.post('/basket',
+  authController.isLoggedIn,
+  catchErrors(shopController.addToBasket));
 
 // Individual coffee info page
 router.post('/menu/:slug',
   authController.isLoggedIn,
   shopController.addToBasket
+);
+
+// Individual coffee info page
+router.get('/addtestorder',
+  authController.isLoggedIn,
+  catchErrors(shopController.addToBasket)
 );
 
 // Export Router
