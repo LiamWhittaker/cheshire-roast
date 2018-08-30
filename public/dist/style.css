@@ -339,8 +339,6 @@ a {
     height: 15rem;
     width: 15rem;
     border-radius: 50%;
-    -ms-transform: translateX(66%);
-        transform: translateX(66%);
     margin-bottom: 2rem; }
   .sidebar__logo {
     height: 15rem;

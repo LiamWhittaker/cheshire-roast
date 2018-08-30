@@ -4,8 +4,26 @@ block content
 
   h1.heading-section-title #{user.firstName}'s Basket
 
-  each order in orders
-    p Hi I'm an order!!!!!!!!
+  //- coffee name, grind type, bag size, quantity, price, remove
+  table
+    thead
+      tr
+        th Item
+        th Grind
+        th Size
+        th Quantity
+        th Price
+        th Remove
+    tbody
+      each order in orders
+        tr
+          td #{order.item.itemName}
+          td #{order.item.grindType}
+          td #{order.item.bagSize}
+          td #{order.item.qty}
+          td TBA
+          td X
+          
 
 
 //-   extends layout

@@ -8,18 +8,17 @@ const orderSchema = new mongoose.Schema({
     ref: 'User',
     required: 'You must supply a user ID.',
   },
-  itemsOrdered: [
-    {
-      itemID: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Product',
-      },
-      grindType: String,
-      bagSize: String,
-      qty: Number
-    } 
-  ],
-  orderFinalized: Boolean,
+  item: {
+    itemID: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Product',
+    },
+    itemName: String,
+    grindType: String,
+    bagSize: String,
+    qty: Number
+  },
+  orderFinalized: Boolean
 });
 
 module.exports = mongoose.model('Order', orderSchema);
