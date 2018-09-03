@@ -1,0 +1,21 @@
+.basket {
+  &__options {
+    display: flex;
+    width: 70%;
+  }
+
+  &__total {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-right: auto;
+  }
+
+  &__basket-total {
+    font-size: 1.2rem;
+  }
+
+  &__price {
+    font-size: 2rem;
+  }
+}

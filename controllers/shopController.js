@@ -3,22 +3,25 @@ const mongoose = require('mongoose');
 const Order = mongoose.model('Order');
 const User = mongoose.model("User");
 const Product = mongoose.model("Product");
+const promisify = require('es6-promisify');
 
 
 // Render the basket page
 exports.showBasket = async (req, res) => { 
   // Get the current user's non-finalized (in basket) orders
-  const ordersPromise = Order
-    .find({ userID: req.user._id, orderFinalized: false });
+  const ordersPromise = Order.find({ userID: req.user._id, orderFinalized: false });
+  const orders = await ordersPromise;
 
-  // Count the number of items in the basket
-  const countPromise = Order.count({ userID: req.user._id, orderFinalized: false });
+  // Extract the item ids so that we can grab the product information (link, price, in stock) from the database
+  const result = orders.map(a => a.item.itemID);
 
-  const [orders, count] = await Promise.all([ordersPromise, countPromise]);
+  // Get the product info from the database
+  const productInfoPromise = Product.find({
+    '_id' : { $in: result }
+  });
+  const productInfo = await productInfoPromise;
 
-  // console.log(orders[0].item[0].itemID);
-
-  res.render('basket', { title: 'Basket', orders, count });
+  res.render('basket', { title: 'Basket', orders, productInfo });
 };
 
 // Add coffee to the basket

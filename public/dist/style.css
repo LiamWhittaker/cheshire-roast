@@ -460,6 +460,24 @@ input[type="number"]::-webkit-outer-spin-button {
   fill: #b38e57;
   color: #b38e57; }
 
+.table {
+  width: 70%;
+  margin-top: 2rem;
+  border-collapse: collapse; }
+  .table__row:nth-of-type(even) {
+    background-color: #edd7bb; }
+  .table__heading {
+    font-size: 1.6rem;
+    text-align: left;
+    color: #0e1e33;
+    text-transform: uppercase;
+    border-bottom: 2px solid #0e1e33;
+    padding-bottom: .3rem; }
+  .table__item {
+    font-size: 1.4rem;
+    color: #0e1e33;
+    padding: .6rem 0; }
+
 .section-hero {
   display: -ms-flexbox;
   display: flex;
@@ -681,6 +699,26 @@ input[type="number"]::-webkit-outer-spin-button {
     transform: rotate(3deg) translate(0, -6px); }
   100% {
     transform: rotate(0deg) translate(0, 0); } }
+
+.basket__options {
+  display: -ms-flexbox;
+  display: flex;
+  width: 70%; }
+
+.basket__total {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-direction: column;
+      flex-direction: column;
+  -ms-flex-align: center;
+      align-items: center;
+  margin-right: auto; }
+
+.basket__basket-total {
+  font-size: 1.2rem; }
+
+.basket__price {
+  font-size: 2rem; }
 
 .coffee__header {
   height: 15rem; }

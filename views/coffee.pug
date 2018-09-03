@@ -27,7 +27,7 @@ block content
 
           //- Wholebean SVG stuff
           p.form__answer
-            input(type="radio" name="grind" id="grind_1" class="form__radio--hidden" value="wholebean" checked)
+            input(type="radio" name="grind" id="grind_1" class="form__radio--hidden" value="Wholebean" checked)
             label(for="grind_1" class="form__checkbox-label")
               svg(xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" class="svg--grind")
                 title Wholebean Icon
@@ -37,7 +37,7 @@ block content
 
           //- Espresso SVG stuff
           p.form__answer
-            input(type="radio" name="grind" id="grind_2" class="form__radio--hidden" value="espresso")
+            input(type="radio" name="grind" id="grind_2" class="form__radio--hidden" value="Espresso")
             label(for="grind_2" class="form__checkbox-label")
               svg(xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" class="svg--grind")
                 title Espresso Icon
@@ -57,7 +57,7 @@ block content
 
           //- Filter SVG stuff
           p.form__answer
-            input(type="radio" name="grind" id="grind_3" class="form__radio--hidden" value="filter")
+            input(type="radio" name="grind" id="grind_3" class="form__radio--hidden" value="Filter")
             label(for="grind_3" class="form__checkbox-label")
               svg(xmlns='http://www.w3.org/2000/svg' viewbox='0 0 256 256' class="svg--grind")
                 title Filter Icon
@@ -102,7 +102,7 @@ block content
           
           //- Caffetiere SVG stuff
           p.form__answer
-            input(type="radio" name="grind" id="grind_4" class="form__radio--hidden" value="caffetiere")
+            input(type="radio" name="grind" id="grind_4" class="form__radio--hidden" value="Caffetiere")
             label(for="grind_4" class="form__checkbox-label")
               svg(xmlns='http://www.w3.org/2000/svg' viewbox='0 0 256 256' class="svg--grind")
                 title Caffetiere Icon
@@ -116,7 +116,7 @@ block content
           legend.form__legend Choose a size
 
           p.form__answer
-            input(type="radio" name="size" id="size_1" class="form__radio--hidden" value="regular" checked)
+            input(type="radio" name="size" id="size_1" class="form__radio--hidden" value="Regular" checked)
             label(for="size_1" class="form__checkbox-label")
               svg(viewbox='-55 1.4 336.8 449.8' xmlns='http://www.w3.org/2000/svg' class="svg--grind")
                 title Small bag icon                  
@@ -133,7 +133,7 @@ block content
               span.form__span 250g
 
           p.form__answer
-            input(type="radio" name="size" id="size_2" class="form__radio--hidden" value="large")
+            input(type="radio" name="size" id="size_2" class="form__radio--hidden" value="Large")
             label(for="size_2" class="form__checkbox-label")
               svg(viewbox='-55 1.4 336.8 449.8' xmlns='http://www.w3.org/2000/svg' class="svg--grind")
                 title Large bag icon
@@ -163,10 +163,17 @@ block content
 
         input(type="hidden" name="coffeeId" id="coffeeId" value=product._id)
         input(type="hidden" name="coffeeName" id="coffeeName" value=product.name)
-        input(type="hidden" name="userId" id="userId" value=user._id)
+
+        //- If the user is logged in, show the add to cart button and pass the uid.
+        //- If not, show the login/registration page
+        if user
+          input(type="hidden" name="userId" id="userId" value=user._id)
         
-        .coffee__addtocart
-          button.btn.btn__submit.u-mart-sm(type="submit") Add to cart
+          .coffee__addtocart
+            button.btn.btn__submit.u-mart-sm(type="submit") Add to cart
+        else
+          .coffee__addtocart
+            a.btn.btn__submit.u-mart-sm(href="/login") Log in
 
   section.coffee__description
     h3.heading-section-title.u-mart-md.u-marbo-md More about this coffee...

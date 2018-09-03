@@ -5,43 +5,33 @@ block content
   h1.heading-section-title #{user.firstName}'s Basket
 
   //- coffee name, grind type, bag size, quantity, price, remove
-  table
-    thead
-      tr
-        th Item
-        th Grind
-        th Size
-        th Quantity
-        th Price
-        th Remove
-    tbody
-      each order in orders
-        tr
-          td #{order.item.itemName}
-          td #{order.item.grindType}
-          td #{order.item.bagSize}
-          td #{order.item.qty}
-          td TBA
-          td X
-          
+  .container
+    table.table.u-marbo-sm
+      thead
+        tr.table__row
+          th.table__heading Item
+          th.table__heading Grind
+          th.table__heading Size
+          th.table__heading Quantity
+          th.table__heading Price
+          th.table__heading Remove
+      tbody
+        each order in orders
+          tr.table__row
+            td.table__item #{order.item.itemName}
+            td.table__item #{order.item.grindType}
+            td.table__item #{order.item.bagSize}
+            td.table__item #{order.item.qty}
+            td.table__item TBA
+            td.table__item X
 
+  .container
+    .basket__options.u-marbo-lg
+      .basket__total
+        p.basket__basket-total Basket Total:
+        p.basket__price £31.80
+      .basket__checkout
+        a.btn.btn--inverted(href="#") Check out now
 
-//-   extends layout
-
-//- block content
-
-//-   .container
-
-//-     each product in products
-//-       .product
-//-         .inner
-//-           .product__photo
-//-           .product__info
-//-             h3.product__title #{product.name}
-//-             h4.product__description--short #{product.shortDescription}
-//-             .product__reviews 
-//-               span.product__reviews__stars &#9733; &#9733; &#9733; &#9733; &#9733;
-//-               span.product__reviews__number (17 reviews)
-//-             h3.product__price #{product.price.smallBag.toLocaleString('en-GB', { style: 'currency', currency: 'GBP' })}
-//-             a.btn.btn__storecard.btn__storecard--info(href=`/menu/${product.slug}`) Learn More
-//-             a.btn.btn__storecard.btn__storecard--buy(href=`/menu/${product.slug}`) Buy Now
+  .container
+    #{productInfo}

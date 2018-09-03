@@ -1,0 +1,27 @@
+.table {
+  width: 70%;
+  margin-top: 2rem;
+  border-collapse: collapse;
+
+  &__row {
+    &:nth-of-type(even) {
+      background-color: darken($color-bg, 5%);
+    }
+  }
+
+  &__heading {
+    font-size: 1.6rem;
+    text-align: left;
+    color: $color-blue-dark;
+    text-transform: uppercase;
+    border-bottom: 2px solid $color-blue-dark;
+    padding-bottom: .3rem;
+  }
+
+  &__item {
+    font-size: 1.4rem;
+    color: $color-blue-dark;
+    padding: .6rem 0;
+  }
+}
+
