@@ -16,6 +16,9 @@ block content
           th.table__heading Price
           th.table__heading Remove
       tbody
+        //- Initialize the basket total variable
+        - let basketTotal = 0;
+
         each order in orders
           //- Get the product info for each order
           - let id = order.item.itemID
@@ -30,15 +33,20 @@ block content
             td.table__item #{order.item.qty}
             td.table__item 
               //- Generate the item price
-              - let generatedPrice = (order.item.bagSize == 'regular') ? (product.price.smallBag * order.item.qty) : (product.price.largeBag * order.item.qty)
+              - let generatedPrice = (order.item.bagSize == 'regular') ? (product.price.smallBag * order.item.qty) : (product.price.largeBag * order.item.qty);
+              //- Add the price to the total
+              - basketTotal += generatedPrice;
+              //- Display price
               p #{ generatedPrice.toLocaleString('en-GB', { style: 'currency', currency: 'GBP' }) }
-              
-            td.table__item X
+            
+            td.table__item 
+              form(action=`/basket/delete/${order._id}` method="post")
+                button(type="submit") Remove from basket
 
   .container
     .basket__options.u-marbo-lg
       .basket__total
         p.basket__basket-total Basket Total:
-        p.basket__price £31.80
+        p.basket__price #{basketTotal.toLocaleString('en-GB', { style: 'currency', currency: 'GBP' })}
       .basket__checkout
         a.btn.btn--inverted(href="#") Check out now

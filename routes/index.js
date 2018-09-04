@@ -59,21 +59,27 @@ router.get('/basket',
   authController.isLoggedIn,
   catchErrors(shopController.showBasket));
 
+// Add coffee to the basket
 router.post('/basket',
   authController.isLoggedIn,
   catchErrors(shopController.addToBasket));
 
-// Individual coffee info page
-router.post('/menu/:slug',
+// Delete coffee from basket
+router.post('/basket/delete/:orderID',
   authController.isLoggedIn,
-  shopController.addToBasket
-);
+  catchErrors(shopController.removeFromBasket));
 
-// Individual coffee info page
-router.get('/addtestorder',
-  authController.isLoggedIn,
-  catchErrors(shopController.addToBasket)
-);
+// // Individual coffee info page
+// router.post('/menu/:slug',
+//   authController.isLoggedIn,
+//   shopController.addToBasket
+// );
+
+// // Individual coffee info page
+// router.get('/addtestorder',
+//   authController.isLoggedIn,
+//   catchErrors(shopController.addToBasket)
+// );
 
 // Export Router
 module.exports = router;

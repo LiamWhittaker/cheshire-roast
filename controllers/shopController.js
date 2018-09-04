@@ -39,3 +39,11 @@ exports.addToBasket = async (req, res) => {
   })).save();
   res.redirect('/basket');
 };
+
+// Remove a coffee from the basket
+exports.removeFromBasket = async (req, res) => {
+  const orderToDelete = Order.findByIdAndRemove(req.params.orderID);
+  await orderToDelete;
+
+  res.redirect('/basket');
+};
