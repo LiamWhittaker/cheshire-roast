@@ -13,11 +13,11 @@ exports.showBasket = async (req, res) => {
   const orders = await ordersPromise;
 
   // Extract the item ids so that we can grab the product information (link, price, in stock) from the database
-  const result = orders.map(a => a.item.itemID);
+  const itemIDs = orders.map(a => a.item.itemID);
 
   // Get the product info from the database
   const productInfoPromise = Product.find({
-    '_id' : { $in: result }
+    '_id' : { $in: itemIDs }
   });
   const productInfo = await productInfoPromise;
 

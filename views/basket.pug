@@ -17,12 +17,22 @@ block content
           th.table__heading Remove
       tbody
         each order in orders
+          //- Get the product info for each order
+          - let id = order.item.itemID
+          - let product = productInfo.filter(item => item._id == id.toString())[0]
+          - let slug = product.slug
+
           tr.table__row
-            td.table__item #{order.item.itemName}
+            td.table__item
+              a(href=`/menu/${slug}`) #{order.item.itemName}
             td.table__item #{order.item.grindType}
             td.table__item #{order.item.bagSize}
             td.table__item #{order.item.qty}
-            td.table__item TBA
+            td.table__item 
+              //- Generate the item price
+              - let generatedPrice = (order.item.bagSize == 'regular') ? (product.price.smallBag * order.item.qty) : (product.price.largeBag * order.item.qty)
+              p #{ generatedPrice.toLocaleString('en-GB', { style: 'currency', currency: 'GBP' }) }
+              
             td.table__item X
 
   .container
@@ -32,6 +42,3 @@ block content
         p.basket__price £31.80
       .basket__checkout
         a.btn.btn--inverted(href="#") Check out now
-
-  .container
-    #{productInfo}
