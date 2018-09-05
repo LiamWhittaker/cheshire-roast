@@ -1,52 +1,58 @@
 extends layout
 
 block content
+  - let basketTotal = 0;
+  - let numOrders = orders.length
 
-  h1.heading-section-title #{user.firstName}'s Basket
+  h1.heading-section-title.u-marbo-md #{user.firstName}'s Basket
 
-  //- coffee name, grind type, bag size, quantity, price, remove
-  .container
-    table.table.u-marbo-sm
-      thead
-        tr.table__row
-          th.table__heading Item
-          th.table__heading Grind
-          th.table__heading Size
-          th.table__heading Quantity
-          th.table__heading Price
-          th.table__heading Remove
-      tbody
-        //- Initialize the basket total variable
-        - let basketTotal = 0;
-
-        each order in orders
-          //- Get the product info for each order
-          - let id = order.item.itemID
-          - let product = productInfo.filter(item => item._id == id.toString())[0]
-          - let slug = product.slug
-
+  //- If there are no items in the basket, show a message instead of the (empty) table
+  if (numOrders == 0)
+    .container-col
+      h2.heading-section--subtitle.u-marbo-sm You haven't added anything to your basket yet!
+      .basket__shoplink
+        a(href="/menu" class="btn btn--inverted u-marbo-lg") Shop now!
+  else
+    //- If there ARE items in the basket, show them
+    .container
+      table.table.u-marbo-sm
+        thead
           tr.table__row
-            td.table__item
-              a(href=`/menu/${slug}`) #{order.item.itemName}
-            td.table__item #{order.item.grindType}
-            td.table__item #{order.item.bagSize}
-            td.table__item #{order.item.qty}
-            td.table__item 
-              //- Generate the item price
-              - let generatedPrice = (order.item.bagSize == 'regular') ? (product.price.smallBag * order.item.qty) : (product.price.largeBag * order.item.qty);
-              //- Add the price to the total
-              - basketTotal += generatedPrice;
-              //- Display price
-              p #{ generatedPrice.toLocaleString('en-GB', { style: 'currency', currency: 'GBP' }) }
-            
-            td.table__item 
-              form(action=`/basket/delete/${order._id}` method="post")
-                button(type="submit") Remove from basket
+            th.table__heading Item
+            th.table__heading Grind
+            th.table__heading Size
+            th.table__heading Quantity
+            th.table__heading Price
+            th.table__heading Remove
+        tbody            
+          each order in orders
+            //- Get the product info for each order
+            - let id = order.item.itemID
+            - let product = productInfo.filter(item => item._id == id.toString())[0]
+            - let slug = product.slug
 
-  .container
-    .basket__options.u-marbo-lg
-      .basket__total
-        p.basket__basket-total Basket Total:
-        p.basket__price #{basketTotal.toLocaleString('en-GB', { style: 'currency', currency: 'GBP' })}
-      .basket__checkout
-        a.btn.btn--inverted(href="#") Check out now
+            tr.table__row
+              td.table__item
+                a(href=`/menu/${slug}` class="basket__product-link") #{order.item.itemName}
+              td.table__item #{order.item.grindType}
+              td.table__item #{order.item.bagSize}
+              td.table__item #{order.item.qty}
+              td.table__item 
+                //- Generate the item price
+                - let generatedPrice = (order.item.bagSize == 'regular') ? (product.price.smallBag * order.item.qty) : (product.price.largeBag * order.item.qty);
+                //- Add the price to the total
+                - basketTotal += generatedPrice;
+                //- Display price
+                p #{ generatedPrice.toLocaleString('en-GB', { style: 'currency', currency: 'GBP' }) }
+              
+              td.table__item 
+                form(action=`/basket/delete/${order._id}` method="post")
+                  button(type="submit" class="basket__remove") X
+
+    .container
+      .basket__options.u-marbo-lg
+        .basket__total
+          p.basket__basket-total Basket Total:
+          p.basket__price #{basketTotal.toLocaleString('en-GB', { style: 'currency', currency: 'GBP' })}
+        .basket__checkout
+          a.btn.btn--inverted(href="#") Check out now

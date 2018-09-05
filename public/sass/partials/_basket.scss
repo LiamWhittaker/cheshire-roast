@@ -1,4 +1,24 @@
 .basket {
+
+  &__product-link {
+    text-decoration: none;
+    color: $color-blue-dark;
+    border-bottom: 1px solid transparent;
+    transition: all .3s;
+    
+    &:visited {
+      color: $color-blue-dark;
+    }
+    
+    &:hover {
+      border-bottom: 1px solid $color-blue-dark;
+    }
+  }
+
+  &__shoplink {
+    align-self: center;
+  }
+
   &__options {
     display: flex;
     width: 70%;
@@ -17,5 +37,18 @@
 
   &__price {
     font-size: 2rem;
+  }
+
+  &__remove {
+    font-family: inherit; 
+    font-size: 100%; 
+    line-height: 1.15; 
+    margin: 0; 
+    overflow: visible;
+    text-transform: none;
+    border: 0;
+    padding: .3rem;
+    background-color: transparent;
+    cursor: pointer;
   }
 }

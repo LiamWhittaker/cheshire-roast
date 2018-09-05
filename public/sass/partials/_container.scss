@@ -12,6 +12,13 @@
   }
 }
 
+.container-col {
+  display: flex;
+  flex-direction: column;
+  max-width: 120rem;
+  margin: 0 auto;
+}
+
 .inner {
   margin: 1rem;
 }
