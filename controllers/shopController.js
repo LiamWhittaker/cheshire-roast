@@ -36,7 +36,7 @@ exports.addToBasket = async (req, res) => {
   if (orders.length != 0) {
     // If so, loop through and check if any match the coffee id && grind type we are trying to add...
     for(var i = 0; i < orders.length; i++) {
-      if (orders[i].item.itemID == req.body.coffeeId && orders[i].item.grindType == req.body.grind) {
+      if (orders[i].item.itemID == req.body.coffeeId && orders[i].item.grindType == req.body.grind && orders[i].item.bagSize == req.body.size) {
         // 2. If they do, we have to increment the quantity rather than add it as a duplicate entry in the basket.
         let newQuantity = orders[i].item.qty + parseInt(req.body.quantity);
 
@@ -45,12 +45,6 @@ exports.addToBasket = async (req, res) => {
           { $set: { "item.qty": newQuantity } }
         );
         const orderToUpdate = await orderToUpdatePromise;
-
-
-
-        // console.log('orderToUpdate: ' + orderToUpdate);
-        // console.log('orders[i].item.qty: ' + orders[i].item.qty);
-        // console.log('req.body.quantity: ' + req.body.quantity);
 
         return res.redirect('/basket');
       }
