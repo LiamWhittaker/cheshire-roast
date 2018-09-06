@@ -26,6 +26,38 @@ exports.showBasket = async (req, res) => {
 
 // Add coffee to the basket
 exports.addToBasket = async (req, res) => { 
+  // 1. We have to check to see if the user already has this item + grind type combo in their basket.
+
+  // Get all the items user's basket
+  const ordersPromise = Order.find({ userID: req.user._id, orderFinalized: false });
+  const orders = await ordersPromise;
+
+  // Are there any orders?
+  if (orders.length != 0) {
+    // If so, loop through and check if any match the coffee id && grind type we are trying to add...
+    for(var i = 0; i < orders.length; i++) {
+      if (orders[i].item.itemID == req.body.coffeeId && orders[i].item.grindType == req.body.grind) {
+        // 2. If they do, we have to increment the quantity rather than add it as a duplicate entry in the basket.
+        let newQuantity = orders[i].item.qty + parseInt(req.body.quantity);
+
+        const orderToUpdatePromise = Order.findByIdAndUpdate(
+          { _id: orders[i]._id },
+          { $set: { "item.qty": newQuantity } }
+        );
+        const orderToUpdate = await orderToUpdatePromise;
+
+
+
+        // console.log('orderToUpdate: ' + orderToUpdate);
+        // console.log('orders[i].item.qty: ' + orders[i].item.qty);
+        // console.log('req.body.quantity: ' + req.body.quantity);
+
+        return res.redirect('/basket');
+      }
+    }
+  }
+
+  // 3. If we get here, they don't have anything in the basket, so we can add the new item. 
   const order = await (new Order({
     userID: req.body.userId,
     item: {
