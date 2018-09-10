@@ -34,9 +34,13 @@ exports.addToBasket = async (req, res) => {
 
   // Are there any orders?
   if (orders.length != 0) {
-    // If so, loop through and check if any match the coffee id && grind type we are trying to add...
+    // If so, loop through and check if any match the coffee id && grind type && bag size we are trying to add...
     for(var i = 0; i < orders.length; i++) {
-      if (orders[i].item.itemID == req.body.coffeeId && orders[i].item.grindType == req.body.grind && orders[i].item.bagSize == req.body.size) {
+      if (
+        orders[i].item.itemID == req.body.coffeeId 
+        && orders[i].item.grindType == req.body.grind 
+        && orders[i].item.bagSize == req.body.size
+        ) {
         // 2. If they do, we have to increment the quantity rather than add it as a duplicate entry in the basket.
         let newQuantity = orders[i].item.qty + parseInt(req.body.quantity);
 
@@ -72,4 +76,28 @@ exports.removeFromBasket = async (req, res) => {
   await orderToDelete;
 
   res.redirect('/basket');
+};
+
+// Finalize order
+exports.finalizeOrder = async (req, res) => {
+  // 1. Get all items in user's basket
+  const ordersPromise = Order.find({ userID: req.user._id, orderFinalized: false });
+  const orders = await ordersPromise;
+
+  // 2. Go through them, updating orderFinalized to true, adding orderDate, setting roasted/posted flags
+  for(var i = 0; i < orders.length; i++) {
+    const orderToUpdatePromise = Order.findByIdAndUpdate(
+      { _id: orders[i]._id },
+      { $set: { 
+        "orderFinalized": true,
+        "orderDate": Date.now(),
+        "orderRoasted": false,
+        "orderShipped": false
+      } }
+    );
+    const orderToUpdate = await orderToUpdatePromise;
+  }
+
+  // 3. Render order completed page
+  res.render('orderComplete', {title: 'Order Completed!'});
 };

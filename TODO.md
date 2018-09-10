@@ -1,3 +1,4 @@
 # Fix
 
-- Fix case sensitive login
+- Fix case sensitive login.
+- Allow inc/dec of items in basket.

@@ -69,17 +69,11 @@ router.post('/basket/delete/:orderID',
   authController.isLoggedIn,
   catchErrors(shopController.removeFromBasket));
 
-// // Individual coffee info page
-// router.post('/menu/:slug',
-//   authController.isLoggedIn,
-//   shopController.addToBasket
-// );
+// Finalize order
+router.post('/basket/buy',
+  authController.isLoggedIn,
+  catchErrors(shopController.finalizeOrder));
 
-// // Individual coffee info page
-// router.get('/addtestorder',
-//   authController.isLoggedIn,
-//   catchErrors(shopController.addToBasket)
-// );
 
 // Export Router
 module.exports = router;

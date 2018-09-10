@@ -55,4 +55,6 @@ block content
           p.basket__basket-total Basket Total:
           p.basket__price #{basketTotal.toLocaleString('en-GB', { style: 'currency', currency: 'GBP' })}
         .basket__checkout
-          a.btn.btn--inverted(href="#") Check out now
+          form(action="/basket/buy", method="post")
+            button(type="submit" class="btn btn__submit") Check out
+            //- a.btn.btn--inverted(href="#") Check out now

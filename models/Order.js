@@ -18,7 +18,10 @@ const orderSchema = new mongoose.Schema({
     bagSize: String,
     qty: Number
   },
-  orderFinalized: Boolean
+  orderFinalized: Boolean,
+  orderDate: Date,
+  orderRoasted: Boolean,
+  orderShipped: Boolean
 });
 
 module.exports = mongoose.model('Order', orderSchema);
