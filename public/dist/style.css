@@ -385,6 +385,9 @@ a {
   -ms-flex-direction: column;
       flex-direction: column;
   max-width: 110rem; }
+  .form--inline {
+    -ms-flex-direction: row;
+        flex-direction: row; }
   .form__label {
     margin-top: 2rem; }
   .form__input, .form__textarea, .form__dropdown {
@@ -399,6 +402,15 @@ a {
       border: 1px solid #0e1e33;
       width: 10rem;
       margin: 0 1rem; }
+  .form__input--small {
+    background-color: #f2e3cf;
+    border: 1px solid #0e1e33;
+    padding: .3rem .6rem;
+    border-radius: 5px;
+    transition: all 0.3s;
+    width: 30%; }
+    .form__input--small:focus {
+      border: 1px solid #b38e57; }
   .form__fieldset {
     display: block;
     margin: 0 0.5rem 1rem 0.5rem;
@@ -463,6 +475,9 @@ input[type="number"]::-webkit-inner-spin-button,
 input[type="number"]::-webkit-outer-spin-button {
   -webkit-appearance: none;
   margin: 0; }
+
+input[type="number"] {
+  -moz-appearance: textfield; }
 
 .fa-5x {
   fill: #b38e57;
@@ -845,6 +860,19 @@ input[type="number"]::-webkit-outer-spin-button {
   .btn__submit:active {
     -ms-transform: translate(1px, 1px);
         transform: translate(1px, 1px); }
+
+.btn--stock {
+  font-family: inherit;
+  font-size: 100%;
+  line-height: 1.15;
+  margin: 0;
+  overflow: visible;
+  text-transform: none;
+  border: 0;
+  padding: .3rem;
+  background-color: transparent;
+  cursor: pointer;
+  display: inline; }
 
 .main-img {
   padding: 0 3rem 0 3rem; }

@@ -3,6 +3,10 @@
   flex-direction: column;
   max-width: 110rem;
 
+  &--inline {
+    flex-direction: row;
+  }
+
   &__label {
     margin-top: 2rem;
   }
@@ -24,6 +28,19 @@
       border: 1px solid $color-blue-dark;
       width: 10rem;
       margin: 0 1rem;
+    }
+  }
+
+  &__input--small {
+    background-color: $color-bg;
+    border: 1px solid $color-blue-dark;
+    padding: .3rem .6rem;
+    border-radius: 5px;
+    transition: all 0.3s;
+    width: 30%;
+
+    &:focus {
+      border: 1px solid $color-gold;
     }
   }
 
@@ -115,4 +132,8 @@ input[type="number"]::-webkit-inner-spin-button,
 input[type="number"]::-webkit-outer-spin-button {
   -webkit-appearance: none;
   margin: 0;
+}
+
+input[type="number"] {
+  -moz-appearance: textfield;
 }

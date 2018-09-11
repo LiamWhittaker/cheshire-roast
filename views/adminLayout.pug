@@ -1,0 +1,32 @@
+doctype html
+html(lang="en")
+  head
+    title= `${title} | ${h.siteName}`
+    script(src="https://use.fontawesome.com/releases/v5.0.6/js/all.js")
+    link(rel="stylesheet" href="https://fonts.googleapis.com/css?family=Dancing+Script|Roboto|Roboto+Condensed|Rokkitt")
+    link(rel="stylesheet" href="/dist/style.css")
+    meta(name="viewport" content="width=device-width, initial-scale=1")
+  body
+    .maincontent
+
+      .sidebar
+        include adminSidebar
+
+      .content
+
+        block messages
+          if locals.flashes
+            .flash-messages
+              - const categories = Object.keys(locals.flashes)
+              each category in categories
+                each message in flashes[category]
+                  .flash(class=`flash--${category}`)
+                    p.flash__text!= message
+                    button.flash__remove(onClick="this.parentElement.remove()") &times;
+
+        block content
+          p content from the layout file
+
+      block scripts
+        //- script(src=`https://maps.googleapis.com/maps/api/js?key=${process.env.MAP_KEY}&libraries=places`)
+        script(src="/dist/App.bundle.js")

@@ -1,0 +1,33 @@
+.sidebar__top
+  .sidebar__logobox
+    a(href="/")
+      img(src="/images/logo-no-bg.png", alt="Logo" class="sidebar__logo")
+
+nav.sidebar__mid
+  ul.sidebar__list
+    li.sidebar__list-item
+      a(href="/" class="sidebar__link sidebar__link") Home
+    li.sidebar__list-item
+      a(href="/admin" class="sidebar__link sidebar__link") Admin Panel
+    li.sidebar__list-item
+      a(href="#" class="sidebar__link") Analytics
+    li.sidebar__list-item
+      a(href="/openOrders" class="sidebar__link") Open Orders
+    li.sidebar__list-item
+      a(href="/stockCheck" class="sidebar__link") Stock Checker
+    li.sidebar__list-item
+      a(href="/menu/add" class="sidebar__link") Edit Products
+    li.sidebar__list-item
+      a(href="/logout" class="sidebar__link sidebar__link--inverted") Log Out
+
+.sidebar__bottom
+  .sidebar__info
+    p
+      span.sidebar__brand #{h.siteName}
+    p.sidebar-paragraph Knutsford, Cheshire 
+    p.sidebar-paragraph info@cheshireroast.co.uk
+
+  .madeby
+    p.sidebar-paragraph Site created by
+    p
+      a.liam(href="http://liamwhittaker.co.uk") Liam Whittaker

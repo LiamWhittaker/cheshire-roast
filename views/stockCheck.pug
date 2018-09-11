@@ -1,0 +1,27 @@
+extends adminLayout
+
+block content
+
+  h1.heading-section-title Stock Checker
+  .container
+    table.table
+      thead
+        tr.table__row
+          th.table__heading Product ID
+          th.table__heading Product Name
+          th.table__heading Stock Level
+          th.table__heading Restock (Grams)
+      tbody
+        each product in products
+          tr.table__row
+            td.table__item=product._id
+            td.table__item 
+              a(href=`/menu/${product.slug}` class="table__link") #{product.name}
+            td.table__item #{ product.stockInGrams / 1000 } kgs
+            td.table__item 
+              form.form.form--inline(action="/stockCheck" method="post")
+                input(type="hidden" name="productid" id="productid" value=`${product._id}`) 
+                input(type="number" name="amount" id="amount" class="form__input--small") 
+                button(type="submit" class="btn--stock") Add
+    
+

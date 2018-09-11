@@ -5,6 +5,7 @@ const productController = require('../controllers/productController');
 const userController = require('../controllers/userController');
 const authController = require('../controllers/authController');
 const shopController = require('../controllers/shopController');
+const adminController = require('../controllers/adminController');
 // const reviewController = require("../controllers/reviewController");
 const { catchErrors } = require('../handlers/errorHandlers');
 
@@ -73,6 +74,27 @@ router.post('/basket/delete/:orderID',
 router.post('/basket/buy',
   authController.isLoggedIn,
   catchErrors(shopController.finalizeOrder));
+
+
+// ==================================================
+// ADMIN
+// ==================================================
+
+// Show the admin control panel
+router.get('/admin', 
+  authController.isLoggedIn,
+  adminController.showAdminPanel);
+
+// Render the stock checker page
+router.get('/stockCheck',   
+  authController.isLoggedIn, 
+  adminController.stockCheck);
+
+// Restock product
+router.post('/stockCheck',   
+  authController.isLoggedIn, 
+  adminController.restock);
+
 
 
 // Export Router

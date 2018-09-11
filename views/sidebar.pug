@@ -15,8 +15,11 @@ nav.sidebar__mid
       a(href="#" class="sidebar__link") Help
     if !user
       li.sidebar__list-item
-        a(href="/login" class="sidebar__link sidebar__link--inverted") Log In
+        a(href="/login" class="sidebar__link sidebar__link--inverted") Log In 
     else 
+      if user.accessLevel === 20
+        li.sidebar__list-item
+          a(href="/admin" class="sidebar__link sidebar__link--inverted") Admin Panel
       li.sidebar__list-item
         a(href="#" class="sidebar__link sidebar__link--inverted") My Account
       li.sidebar__list-item
