@@ -95,9 +95,15 @@ router.post('/stockCheck',
   authController.isLoggedIn, 
   catchErrors(adminController.restock));
 
+// Show orders needing an action (roast / grind / post)
 router.get('/openOrders',
   authController.isLoggedIn, 
   catchErrors(adminController.openOrders));
+
+// Mark orders as roasted
+router.post('/openOrders/roast',
+  authController.isLoggedIn, 
+  catchErrors(adminController.roast));
 
 // Export Router
 module.exports = router;

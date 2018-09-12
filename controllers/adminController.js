@@ -50,23 +50,50 @@ exports.openOrders = async (req, res) => {
   const productInfo = await productInfoPromise;
 
   // Find the coffees that need to be roasted
-  let orderArray = await itemsToRoast();
+  const orderArray = await itemsToRoast();
 
+  // res.json(orderArray)
   res.render('openOrders', { title: 'Open Orders', orders, orderArray, productInfo });
-}
+};
+
+// Mark orders as roasted
+exports.roast = async (req, res) => {
+  const orderToUpdatePromise = Order.updateMany(
+    { 'item.itemID': req.body.coffeeID },
+    { $set: { "orderRoasted": true } }
+  );
+  const orderToUpdate = await orderToUpdatePromise;
+
+  res.redirect('/openOrders');
+};
+
+
+
+
+// ===================
+// Helper functions
+// ===================
 
 // Find the coffees that need to be roasted
 async function itemsToRoast() {
-  const itemsToRoastPromise = Order.find().distinct('item.itemID');
+  const itemsToRoastPromise = Order.distinct('item.itemID',
+  { 
+    orderFinalized: true, 
+    orderRoasted: false, 
+    orderShipped: false 
+  });
   const itemsToRoast = await itemsToRoastPromise;
   let orderArray = [];
 
   // Group all the coffees that need to be roasted
   for (var i = 0; i < itemsToRoast.length; i++) {
-    const orderPromise = Order.find({ 'item.itemID': itemsToRoast[i] });
+    const orderPromise = Order.find({ 
+      'item.itemID': itemsToRoast[i],
+      orderRoasted: false 
+    });
     const order = await orderPromise;
     orderArray.push(order);
   };
-
+  
   return orderArray;
 }

@@ -39,7 +39,7 @@ block content
               td.table__item #{order.item.qty}
               td.table__item 
                 //- Generate the item price
-                - let generatedPrice = (order.item.bagSize == 'regular') ? (product.price.smallBag * order.item.qty) : (product.price.largeBag * order.item.qty);
+                - let generatedPrice = (order.item.bagSize == 'Regular') ? (product.price.smallBag * order.item.qty) : (product.price.largeBag * order.item.qty);
                 //- Add the price to the total
                 - basketTotal += generatedPrice;
                 //- Display price
