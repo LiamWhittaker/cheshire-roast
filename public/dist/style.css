@@ -816,6 +816,45 @@ input[type="number"] {
   width: 30%;
   margin-right: 1rem; }
 
+.roast {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-direction: column;
+      flex-direction: column;
+  border: 1px solid #0e1e33;
+  border-radius: 7px;
+  width: 75%;
+  margin-bottom: 2rem;
+  overflow: hidden; }
+  .roast__heading {
+    background-color: #0e1e33;
+    color: #f2e3cf;
+    padding: 1rem; }
+  .roast__body {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-pack: justify;
+        justify-content: space-between;
+    padding: 1rem; }
+    .roast__body > * {
+      width: 33%; }
+  .roast__photo {
+    overflow: hidden; }
+  .roast__img {
+    height: 15rem;
+    width: 15rem; }
+  .roast__info {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-direction: column;
+        flex-direction: column;
+    -ms-flex-align: center;
+        align-items: center; }
+  .roast__total-orders {
+    font-size: 3rem;
+    font-weight: 800;
+    color: #0e1e33; }
+
 .btn {
   font-family: "Roboto Condensed", sans-serif;
   font-size: 1.6rem;

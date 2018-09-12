@@ -1,0 +1,48 @@
+extends adminlayout
+
+block content
+  - let numOrders = orders.length
+
+  h1.heading-section-title.u-marbo-md.u-mart-md Products to Roast
+
+  if (numOrders == 0)
+    .container-col
+      h2.heading-section--subtitle.u-marbo-sm You haven't added anything to your basket yet!
+      .basket__shoplink
+        a(href="/menu" class="btn btn--inverted u-marbo-lg") Shop now!
+  else
+    //- For every coffee that needs to be roasted, display the name and total amount that needs
+    //- to be roasted
+    each order in orderArray
+      //- Get the product info for each order
+      - let id = order[0].item.itemID
+      - let product = productInfo.filter(item => item._id == id.toString())[0]
+
+      //- Because I am an idiot that stored bagsize as a string rather than a number we have to 
+      //- convert regular=250 and large=1000 so we can reduce the arrays down to get the total 
+      //- amount of each product that needs to be roasted. Oops.
+
+      //- Extract the bagsizes, convert them to weight and extract quantity
+      - let bagSizes = order.map(a => (a.item.bagSize === 'Regular') ? 250 : 1000 );
+      - let qty = order.map(a => a.item.qty);
+
+      //- Generate total weight to be roasted.
+      - let bagSizeValues = 0;
+      - for(var i = 0; i < bagSizes.length; i++) { bagSizeValues += (bagSizes[i] * qty[i]); }
+
+      .container
+        .roast
+          .roast__heading
+            h2.paragraph #{order[0].item.itemName}  -  #{product.roastLevel} 
+          .roast__body
+            .roast__photo
+              img(src=`${product.photos[0]}` alt=`${order[0].item.itemName}` class="roast__img")
+            .roast__info
+              h3.paragraph.paragraph--inverted.paragraph--large.u-marbo-md Total Orders to Roast
+              span.roast__total-orders #{order.length}
+            .roast__info
+              h3.paragraph.paragraph--inverted.paragraph--large.u-marbo-md Total Weight to Roast
+              span.roast__total-orders #{bagSizeValues.toLocaleString()}g
+          .roast__complete
+            form(action="", method="post")
+              button(type="submit" class="btn btn__submit") Roast Completed

@@ -33,6 +33,7 @@
     "faker": "4.1.0",
     "forever": "0.15.3",
     "glob": "7.1.1",
+    "group-array": "^0.3.3",
     "html-to-text": "3.2.0",
     "jimp": "^0.3.7",
     "juice": "^4.3.2",

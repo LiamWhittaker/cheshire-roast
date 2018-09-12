@@ -93,9 +93,11 @@ router.get('/stockCheck',
 // Restock product
 router.post('/stockCheck',   
   authController.isLoggedIn, 
-  adminController.restock);
+  catchErrors(adminController.restock));
 
-
+router.get('/openOrders',
+  authController.isLoggedIn, 
+  catchErrors(adminController.openOrders));
 
 // Export Router
 module.exports = router;

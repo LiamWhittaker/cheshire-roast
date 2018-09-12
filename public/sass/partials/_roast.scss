@@ -1,0 +1,49 @@
+.roast {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid $color-blue-dark;
+  border-radius: 7px;
+  width: 75%;
+  margin-bottom: 2rem;
+  overflow: hidden;
+  
+  &__heading {
+    background-color: $color-blue-dark;
+    color: $color-bg;
+    padding: 1rem;
+
+  }
+
+  &__body {
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem;
+
+    & > * {
+      width: 33%;
+    }
+  }
+
+  &__photo {
+    overflow: hidden;
+  }
+  
+  &__img {
+    height: 15rem;
+    width: 15rem;
+  }
+
+  &__info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  &__total-orders {
+    font-size: 3rem;
+    font-weight: 800;
+    color: $color-blue-dark;
+  }
+
+
+}
