@@ -505,6 +505,35 @@ input[type="number"] {
     color: #0e1e33;
     padding: .6rem 0; }
 
+.label {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: justify;
+      justify-content: space-between;
+  width: 450px;
+  height: 200px;
+  border: 1px solid black;
+  border-radius: 5px;
+  padding: 2rem; }
+  .label__section {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-direction: column;
+        flex-direction: column;
+    -ms-flex-align: center;
+        align-items: center;
+    width: 45%; }
+  .label__divider {
+    width: 1px;
+    border: 1px solid black; }
+  .label__name {
+    font-size: 1.6rem;
+    font-weight: 800;
+    padding-bottom: .5rem; }
+  .label__address {
+    font-size: 1.4rem;
+    line-height: 2rem; }
+
 .section-hero {
   display: -ms-flexbox;
   display: flex;

@@ -67,8 +67,37 @@ exports.roast = async (req, res) => {
   res.redirect('/openOrders');
 };
 
+exports.ordersToGrindAndPost = async (req, res) => {
+  // 1. Find all orders that are roasted and ready for grinding and posting
+  // 2. We also need the user's name and address so we know where to send the package
+  const ordersToPostPromise = Order.find({
+    orderFinalized: true, 
+    orderRoasted: true, 
+    orderShipped: false 
+  }).populate('userID');
+  const ordersToPost = await ordersToPostPromise;
 
+  res.render('ordersToPost', { title: 'Orders to Post', ordersToPost });
+};
 
+exports.generateShippingLabel = async (req, res) => {
+  const labelPromise = Order.findById({ _id: req.body.orderID }).populate('userID');
+  const label = await labelPromise;
+
+  res.render('shippingLabel', { title: 'Shipping Label', label } );
+}
+
+exports.orderShipped = async (req, res) => {
+  const orderToUpdatePromise = Order.findByIdAndUpdate(
+    { _id:  req.body.orderID },
+    { $set: { 
+      "orderShipped": true
+    } }
+  );
+  const orderToUpdate = await orderToUpdatePromise;
+
+  res.redirect('/grindAndPost');
+}
 
 // ===================
 // Helper functions

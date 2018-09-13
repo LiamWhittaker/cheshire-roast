@@ -1,0 +1,18 @@
+extends shippingLabelLayout
+
+block content
+
+  .label
+    .label__section
+      span.label__name #{label.userID.firstName} #{label.userID.secondName}
+      span.label__address #{label.userID.address.lineOne}
+      span.label__address #{label.userID.address.townCity}
+      span.label__address #{label.userID.address.county}
+      span.label__address #{label.userID.address.postcode.toUpperCase()}
+    .label__divider
+    .label__section
+      span.label__name #{label.item.itemName}
+      span.label__address Roasted: #{new Date().toDateString()}
+      span.label__address Grind: #{label.item.grindType}
+      span.label__address Weight: #{(label.item.bagSize === 'Regular') ? '250g' : '1kg' }
+      span.label__address Quantity: #{label.item.qty}

@@ -105,5 +105,21 @@ router.post('/openOrders/roast',
   authController.isLoggedIn, 
   catchErrors(adminController.roast));
 
+
+// Show orders ready for grinding and posting
+router.get('/grindAndPost',
+  authController.isLoggedIn,
+  catchErrors(adminController.ordersToGrindAndPost));
+
+// Show generated shipping label
+router.post('/shippingLabel',
+  authController.isLoggedIn,
+  catchErrors(adminController.generateShippingLabel));
+
+// Mark order as posted
+router.post('/orderShipped',
+  authController.isLoggedIn,
+  catchErrors(adminController.orderShipped));
+
 // Export Router
 module.exports = router;

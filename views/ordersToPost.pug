@@ -1,0 +1,39 @@
+extends adminlayout
+
+block content
+
+  - let numOrders = ordersToPost.length
+
+  h1.heading-section-title.u-marbo-md.u-mart-md Orders to Grind and Post (#{numOrders})
+
+  if (numOrders == 0)
+    .container-col
+      h2.heading-section--subtitle.u-marbo-sm There are no items to grind and post!
+  else
+    .container
+      table.table.u-marbo-sm
+        thead
+          tr.table__row
+            th.table__heading Order Date
+            th.table__heading Item
+            th.table__heading Grind
+            th.table__heading Size
+            th.table__heading Quantity
+            th.table__heading Shipping Label
+            th.table__heading Mark Sent
+        tbody            
+          each order in ordersToPost
+            tr.table__row
+              td.table__item #{order.orderDate.toDateString()}
+              td.table__item #{order.item.itemName}
+              td.table__item #{order.item.grindType}
+              td.table__item #{order.item.bagSize}
+              td.table__item #{order.item.qty}
+              td.table__item 
+                form(action=`/shippingLabel` method="post")
+                  input(type="hidden" name="orderID" id="orderID" value=`${order._id}`)
+                  button(type="submit" class="basket__remove") Generate
+              td.table__item 
+                form(action=`/orderShipped` method="post")
+                  input(type="hidden" name="orderID" id="orderID" value=`${order._id}`)
+                  button(type="submit" class="basket__remove") Shipped

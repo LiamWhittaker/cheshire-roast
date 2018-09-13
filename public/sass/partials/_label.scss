@@ -1,0 +1,39 @@
+.label {
+  display: flex;
+  justify-content: space-between;
+  width: 450px;
+  height: 200px;
+  border: 1px solid black;
+  border-radius: 5px;
+  padding: 2rem;
+
+  &__section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 45%;
+  }
+
+  &__divider {
+    width: 1px;
+    border: 1px solid black;
+  }
+
+
+
+  &__name {
+    font-size: 1.6rem;
+    font-weight: 800;
+    padding-bottom: .5rem;
+  }
+
+  &__address {
+    font-size: 1.4rem;
+    line-height: 2rem;
+    
+  }
+
+  &__product-name {
+
+  }
+}
