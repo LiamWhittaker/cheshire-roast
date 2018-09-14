@@ -1,12 +1,24 @@
 const mongoose = require('mongoose');
-const groupArray = require('group-array');
 
 const Product = mongoose.model('Product');
 const Order = mongoose.model('Order');
 
+
+
 // Render the admin control panel
-exports.showAdminPanel = (req, res) => {
-  res.render('admin', { title: 'Admin Panel' });
+exports.showAdminPanel = async (req, res) => {
+  const completedOrders = await getCompletedOrders();
+  const ordersRequiringAction = await getOrdersRequiringAction();
+  const totalOrderValue = await getTotalValueOfOrders();
+  const totalWeightSold = await getWeightSoldPerCoffee();
+
+  res.render('admin', { 
+    title: 'Admin Panel', 
+    completedOrders, 
+    ordersRequiringAction,
+    totalOrderValue,
+    totalWeightSold
+  });
 };
 
 // Render the stock checker page
@@ -113,7 +125,7 @@ async function itemsToRoast() {
   });
   const itemsToRoast = await itemsToRoastPromise;
   let orderArray = [];
-
+  
   // Group all the coffees that need to be roasted
   for (var i = 0; i < itemsToRoast.length; i++) {
     const orderPromise = Order.find({ 
@@ -125,4 +137,113 @@ async function itemsToRoast() {
   };
   
   return orderArray;
+}
+
+// Gets all completed orders
+async function getCompletedOrders() {
+  const completedOrdersPromise = Order.find({
+    orderFinalized: true,
+    orderRoasted: true,
+    orderShipped: true
+  });
+  const completedOrders = await completedOrdersPromise;
+  
+  return completedOrders;
+}
+
+// Number of orders that require some admin action
+async function getOrdersRequiringAction() {
+  // Get orders that have not been roasted OR orders that have been roasted but not ground/posted
+  const ordersRequiringActionPromise = Order.find({ 
+    $or: [ 
+      { 
+        orderFinalized: true,
+        orderRoasted: false,
+        orderShipped: false
+      }, 
+      { 
+        orderFinalized: true,
+        orderRoasted: true,
+        orderShipped: false
+      }
+    ] 
+  });
+  const ordersRequiringAction = await ordersRequiringActionPromise;
+  
+  return ordersRequiringAction.length;
+}
+
+// Get the total value of all completed orders
+async function getTotalValueOfOrders() {
+  // Get all completed orders
+  const allOrders = await getAllOrders();
+
+  // Go through them and add up the total value
+  let totalValue = 0;
+  for (var i = 0; i < allOrders.length; i++) {  
+    if(allOrders[i].item.bagSize == 'Regular') {
+      totalValue += (allOrders[i].item.itemID.price.smallBag * allOrders[i].item.qty);
+    } else {
+      totalValue += (allOrders[i].item.itemID.price.largeBag * allOrders[i].item.qty);
+    }
+  }
+
+  return totalValue;
+}
+
+// Return all completed orders
+async function getAllOrders() {
+  const getAllOrdersPromise = Order.find({
+    orderFinalized: true,
+    orderRoasted: true,
+    orderShipped: true
+  }).populate({
+    path: 'item.itemID',
+    model: 'Product'
+  });
+  const getAllOrders = await getAllOrdersPromise;
+
+  return getAllOrders;
+}
+
+// Return total weight of each coffee sold
+async function getWeightSoldPerCoffee() {
+  const allCoffeesPromise = Product.find().select({ _id: 1 });
+  const allCoffees = await allCoffeesPromise;
+
+  // Group all the coffees that need to be roasted
+  let orderArray = [];
+  for (var i = 0; i < allCoffees.length; i++) {
+    const orderPromise = Order.find({ 
+      'item.itemID': allCoffees[i],
+      orderFinalized: true,
+      orderRoasted: true,
+      orderShipped: true
+    }).select({ item: 1, _id: 0 });
+    const order = await orderPromise;
+    orderArray.push(order);
+  };
+  
+  let grouped = []
+  let totalWeight = 0;
+  
+  for (var i = 0; i < orderArray.length; i++) {
+    for (var j = 0; j < orderArray[i].length; j++) {
+      if(orderArray[i][j].item.bagSize === 'Regular') {
+        totalWeight += 250;
+      } else {
+        totalWeight += 1000;
+      }
+    }
+    let coffeeName = orderArray[i][0].item.itemName;
+    grouped.push(new Object ({ coffeeName, totalWeight}));
+  }
+
+  const sorted = grouped.sort(function (a, b) {
+    return b.totalWeight - a.totalWeight;
+  });
+  
+  return sorted;
+
+  // Delicious spaghetti :)
 }

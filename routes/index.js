@@ -83,7 +83,7 @@ router.post('/basket/buy',
 // Show the admin control panel
 router.get('/admin', 
   authController.isLoggedIn,
-  adminController.showAdminPanel);
+  catchErrors(adminController.showAdminPanel));
 
 // Render the stock checker page
 router.get('/stockCheck',   
@@ -120,6 +120,7 @@ router.post('/shippingLabel',
 router.post('/orderShipped',
   authController.isLoggedIn,
   catchErrors(adminController.orderShipped));
+
 
 // Export Router
 module.exports = router;

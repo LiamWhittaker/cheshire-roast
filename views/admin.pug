@@ -2,4 +2,14 @@ extends adminLayout
 
 block content
 
-  h1.heading-section-title Admin Control Panel
+  h1.heading-section-title.u-mart-md Admin Control Panel
+
+  p Orders requiring action #{ordersRequiringAction}
+  p Total Orders Completed: #{completedOrders.length}
+  p Total value of sales: #{totalOrderValue.toLocaleString('en-GB', { style: 'currency', currency: 'GBP' })}
+  p Sales by month?
+  p Top seller #{totalWeightSold[0].coffeeName} - #{totalWeightSold[0].totalWeight.toLocaleString()}g
+  p Worst seller #{totalWeightSold[(totalWeightSold.length - 1)].coffeeName} - #{totalWeightSold[(totalWeightSold.length - 1)].totalWeight.toLocaleString()}g
+  p top 5 coffees
+  each coffee in totalWeightSold
+    p #{coffee.coffeeName} = #{coffee.totalWeight.toLocaleString()}g
