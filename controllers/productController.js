@@ -24,6 +24,24 @@ exports.showMenu = async (req, res) => {
   res.render('menu', { title: 'Our Menu', products, count });
 };
 
+// Show the add/edit products page
+exports.editProductsMenu = async (req, res) => {
+  // Get a list of all products
+  const productsPromise = Product.find();
+  const products = await productsPromise;
+
+  res.render('editProducts', {title: 'Add/Edit Products', products});
+}
+
+// Show the edit products page
+exports.editProduct = async (req, res) => {
+  // Get the product we want top edit
+  const productPromise = Product.findById({ _id: req.params.id });
+  const product = await productPromise;
+
+  res.render('addNewProduct', { title: 'Edit Product', product });
+};
+
 // Renders the 'Add new product form'
 exports.addNewProductForm = (req, res) => {
   res.render('addNewProduct', { title: 'Add New Product' });

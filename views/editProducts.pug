@@ -1,0 +1,26 @@
+extends adminlayout
+block content
+
+  h1.heading-section-title.u-marbo-md.u-mart-md Add or Edit Products
+
+  .container
+  
+    .edit-existing
+      table.table.table--fullwidth
+        thead
+          tr.table__row
+            th.table__heading Product ID
+            th.table__heading Product Name
+            th.table__heading Edit
+        tbody
+          each product in products
+            tr.table__row
+              td.table__item=product._id
+              td.table__item 
+                a(href=`/menu/${product.slug}` class="table__link") #{product.name}
+              td.table__item 
+                a(href=`/admin/editProducts/edit/${product._id}` class="table__link")
+                  i.far.fa-edit.fa-1x
+
+    .add-new.u-mart-md
+      a(href="/admin/editProducts/new").btn.btn--inverted Add New Product

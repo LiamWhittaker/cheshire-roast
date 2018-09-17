@@ -2,104 +2,87 @@ extends adminlayout
 
 block content
 
-  h1.heading-section-title Add a new product
+  if(product)
+    h1.heading-section-title.u-mart-md.u-marbo-md Edit Product (#{product.name})
+  else
+    h1.heading-section-title.u-mart-md.u-marbo-md Add New Product
 
   .container
-
-    form(action="/menu/add" method="POST" class="form")
-    
+    form(action="/admin/editProducts/add" method="POST" class="form")
+  
       label(for="name" class="form__label") Product Name
-      input(type="text" name="name" class="form__input" maxlength="80" required) 
+      input(type="text" name="name" class="form__input" maxlength="80" value=(product && product.name) required) 
     
       label(for="shortDescription" class="form__label") Short Description
-      input(type="text" name="shortDescription" class="form__input" maxlength="160" required)
+      input(type="text" name="shortDescription" class="form__input" maxlength="160" value=(product && product.shortDescription) required)
     
       label(for="longDescription" class="form__label") In-depth Description
       textarea(name="longDescription", cols="30", rows="5" class="form__textarea" required)
+        if(product)
+          #{product.longDescription}
 
       label(for="coffeeType" class="form__label") Coffee Type
       select(name="coffeeType" class="form__dropdown")
-        option(value="Microlot") Microlot
-        option(value="Single Origin") Single Origin
-        option(value="Blend") Blend
-        option(value="Decaffeinated") Decaffeinated
-    
-      label(for="flavourTags" class="form__label") Flavour Tags
+        each ctype in ['Microlot', 'Single Origin', 'Blend', 'Decaffeinated']
+          if (ctype == product && product.coffeeType)
+            option(value=ctype selected)=ctype
+          else
+            option(value=ctype)=ctype
+
+      label(for="flavourTags" class="form__label") Flavour Tags 
       input(type="text" name="flavourTags" class="form__input" required)
 
       label(for="roastLevel" class="form__label") Roast Level
       select(name="roastLevel" class="form__dropdown")
-        option(value="Dark") Dark
-        option(value="Medium") Medium
-        option(value="Light") Light
+        each roastlvl in ['Dark', 'Medium', 'Light']
+          if (roastlvl == product && product.roastLevel)
+            option(value=roastlvl selected)=roastlvl
+          else
+            option(value=roastlvl)=roastlvl
 
       label(for="varietal" class="form__label") Varietal
       select(name="varietal" class="form__dropdown")
-        option(value="Arabica") Arabica
-        option(value="Robusta") Robusta
-        option(value="Blend") Blend
-
+        each varietal in ['Arabica', 'Robusta', 'Blend']
+          if (varietal == product && product.roastLevel)
+            option(value=varietal selected)=varietal
+          else
+            option(value=varietal)=varietal
+      
       label(for="washingProcess" class="form__label") Washing Process
       select(name="washingProcess" class="form__dropdown")
-        option(value="Washed") Washed
-        option(value="Natural") Natural
-      
-      label(for="photos" class="form__label") Photos
-      input(type="text" name="photos" class="form__input" required)
+        each wash in ['Washed', 'Natural']
+          if (wash == product && product.roastLevel)
+            option(value=wash selected)=wash
+          else
+            option(value=wash)=wash
+
+      if (product)
+        each photo in product.photos
+          label(for="photos" class="form__label") Photos
+          input(type="text" name="photos" class="form__input" value=photo required)
+      else
+          label(for="photos" class="form__label") Photos
+          input(type="text" name="photos" class="form__input" required)
     
       label(for="price" class="form__label") Price per 250g
-      input(type="number" name="price" class="form__input" step="any" required)
+      input(type="number" name="price[smallBag]" class="form__input" step="any" value=(product && product.price.smallBag) required)
+    
+      label(for="price" class="form__label") Price per 1kg
+      input(type="number" name="price[largeBag]" class="form__input" step="any" value=(product && product.price.largeBag) required)
     
       label(for="location[coordinates][1]" class="form__label") Latitude
-      input(type="number" name="location[coordinates][1]" class="form__input" step="any" required)
+      input(type="number" name="location[coordinates][1]" class="form__input" step="any" value=(product && product.location.coordinates[1]) required)
     
       label(for="location[coordinates][0]" class="form__label") Longitude
-      input(type="number" name="location[coordinates][0]" class="form__input" step="any" required)
+      input(type="number" name="location[coordinates][0]" class="form__input" step="any" value=(product && product.location.coordinates[0]) required)
     
       label(for="location[altitude]" class="form__label") Altitude
-      input(type="number" name="location[altitude]" class="form__input" step="any" required)
+      input(type="number" name="location[altitude]" class="form__input" step="any" value=(product && product.location.altitude) required)
     
       label(for="location[country]" class="form__label") Country
-      input(type="text" name="location[country]" class="form__input" required)
+      input(type="text" name="location[country]" class="form__input" value=(product && product.location.country) required)
     
       label(for="location[region]" class="form__label") Region
-      input(type="text" name="location[region]" class="form__input" required)
+      input(type="text" name="location[region]" class="form__input" value=(product && product.location.region) required)
 
-
-    
       button(type="submit" class="btn btn__submit") Submit Product
-
-
-
-
-      //- [
-//-   {
-//-     "name": "Jamaican Blue Mountain",
-//-     "slug": "jamaican-blue-mountain",
-//-     "shortDescription": "One of the most exclusive and most sought-after coffees in the world",
-//-     "longDescription": "lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem ",
-//-     "location": {
-//-       "coordinates": [
-//-         -77.096733,
-//-         18.405682
-//-       ],
-//-       "country": "Jamaica",
-//-       "region": "Carribbean",
-//-       "altitude": 2200,
-//-       "type": "Point"
-//-     },
-//-     "coffeeType": "Microlot",
-//-     "flavourTags": [
-//-       "Smooth",
-//-       "Herbs",
-//-       "Spices"
-//-     ],
-//-     "roastLevel": "Medium",
-//-     "varietal": "Arabica",
-//-     "washingProcess": "Natural",
-//-     "photos": [
-//-       "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a8/Jamaica_Blue_Mountain_Coffee_9494.JPG/1024px-Jamaica_Blue_Mountain_Coffee_9494.JPG"
-//-     ],
-//-     "price": 21.00
-//-   }
-//- ]

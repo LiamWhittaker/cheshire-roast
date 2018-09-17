@@ -507,6 +507,9 @@ input[type="number"] {
   fill: #b38e57;
   color: #b38e57; }
 
+.fa-edit {
+  color: #0e1e33; }
+
 .table {
   width: 70%;
   margin-top: 2rem;
@@ -967,6 +970,12 @@ input[type="number"] {
     font-size: 3rem;
     font-weight: 800;
     color: #0e1e33; }
+
+.add-new {
+  width: 51%; }
+
+.edit-existing {
+  width: 51%; }
 
 .btn {
   font-family: "Roboto Condensed", sans-serif;

@@ -15,11 +15,27 @@ router.get('/', productController.homePage);
 // Menu page
 router.get('/menu', catchErrors(productController.showMenu));
 
-// Add new product page
-router.get('/menu/add', productController.addNewProductForm);
+
+// Show the add/edit products page
+router.get('/admin/editProducts', 
+  authController.isLoggedIn,
+  catchErrors(productController.editProductsMenu)
+);
+
+// Show the edit product page
+router.get('/admin/editProducts/edit/:id', 
+  authController.isLoggedIn,
+  catchErrors(productController.editProduct)
+);
+
+// Show the edit product page
+router.get('/admin/editProducts/new', 
+  authController.isLoggedIn,
+  productController.addNewProductForm
+);
 
 // Responsible for sanitizing new product data and storing it in the database
-router.post('/menu/add',
+router.post('/admin/editProducts/add',
   productController.sanitizeNewProduct,
   catchErrors(productController.addNewProduct)
 );
