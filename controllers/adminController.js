@@ -223,28 +223,33 @@ async function getWeightSoldPerCoffee() {
     const order = await orderPromise;
     orderArray.push(order);
   };
-  
   let grouped = []
-  let totalWeight = 0;
   
+  // Work out the amount of each coffee sold
   for (var i = 0; i < orderArray.length; i++) {
+    // Reset the counter
+    let totalWeight = 0;
+
     for (var j = 0; j < orderArray[i].length; j++) {
       if(orderArray[i][j].item.bagSize === 'Regular') {
-        totalWeight += 250;
+        totalWeight += 250; // Grams
       } else {
-        totalWeight += 1000;
+        totalWeight += 1000; // Grams
       }
     }
+    // If there are no orders for a coffee in the DB, break out of the loop and don't display it
+    if(!orderArray[i][0]) break;
+
+    // If there are orders, add them to an array
     let coffeeName = orderArray[i][0].item.itemName;
     grouped.push(new Object ({ coffeeName, totalWeight}));
   }
-
+  
   // Sort descending
   const sorted = grouped.sort(function (a, b) {
     return b.totalWeight - a.totalWeight;
   });
   
   return sorted;
-
   // Delicious spaghetti :)
 }
