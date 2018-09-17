@@ -239,6 +239,7 @@ async function getWeightSoldPerCoffee() {
     grouped.push(new Object ({ coffeeName, totalWeight}));
   }
 
+  // Sort descending
   const sorted = grouped.sort(function (a, b) {
     return b.totalWeight - a.totalWeight;
   });

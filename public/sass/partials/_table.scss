@@ -3,10 +3,15 @@
   margin-top: 2rem;
   border-collapse: collapse;
 
+  &--fullwidth {
+    width: 100%;
+  }
+
   &__row {
     &:nth-of-type(even) {
       background-color: darken($color-bg, 5%);
     }
+
   }
 
   &__heading {

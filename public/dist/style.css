@@ -47,6 +47,15 @@
   .paragraph--large {
     font-size: 1.6rem; }
 
+.admin-action {
+  font-family: "Roboto", sans-serif;
+  font-weight: 400;
+  font-size: 1.8rem;
+  color: #17283b; }
+  .admin-action--large {
+    font-size: 2.4rem;
+    font-weight: 800; }
+
 .testimonial__title {
   font-family: "Roboto", sans-serif;
   font-weight: 100;
@@ -252,6 +261,17 @@ a {
 
 .u-marbo-lg {
   margin-bottom: 6rem; }
+
+.u-paddl-sm {
+  padding-left: 1rem; }
+
+.u-center {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: center;
+      justify-content: center;
+  -ms-flex-align: center;
+      align-items: center; }
 
 .hidden {
   display: none !important; }
@@ -491,6 +511,8 @@ input[type="number"] {
   width: 70%;
   margin-top: 2rem;
   border-collapse: collapse; }
+  .table--fullwidth {
+    width: 100%; }
   .table__row:nth-of-type(even) {
     background-color: #edd7bb; }
   .table__heading {
@@ -533,6 +555,68 @@ input[type="number"] {
   .label__address {
     font-size: 1.4rem;
     line-height: 2rem; }
+
+.admin-panel {
+  display: -ms-grid;
+  display: grid;
+  height: 100%;
+  width: 80%;
+  -ms-grid-columns: 0.5fr 0.5fr 0.7fr;
+      grid-template-columns: 0.5fr 0.5fr 0.7fr;
+  -ms-grid-rows: 1fr 1fr 1fr;
+      grid-template-rows: 1fr 1fr 1fr;
+  grid-gap: 4rem;
+  grid-template-areas: "total-products requires-action top-5" "top-seller total-sales-val top-5" "worst-seller . ."; }
+  .admin-panel > * {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-direction: column;
+        flex-direction: column;
+    -ms-flex-align: center;
+        align-items: center;
+    box-shadow: 0 1rem 2rem rgba(14, 30, 51, 0.3);
+    border-radius: 6px; }
+  .admin-panel--header {
+    background-color: #0e1e33;
+    width: 100%;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-align: center;
+        align-items: center;
+    -ms-flex-pack: center;
+        justify-content: center;
+    padding: 1rem; }
+  .admin-panel--body {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-direction: column;
+        flex-direction: column;
+    -ms-flex-align: center;
+        align-items: center;
+    -ms-flex-pack: center;
+        justify-content: center;
+    min-height: 10rem;
+    width: 100%; }
+
+.total-products {
+  grid-area: total-products; }
+
+.requires-action {
+  grid-area: requires-action; }
+
+.worst-seller {
+  grid-area: worst-seller; }
+
+.top-seller {
+  grid-area: top-seller; }
+
+.top-5 {
+  grid-area: top-5;
+  -ms-grid-row-span: 2;
+      grid-row-end: span 2; }
+
+.total-sales-val {
+  grid-area: total-sales-val; }
 
 .section-hero {
   display: -ms-flexbox;

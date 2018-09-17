@@ -1,0 +1,63 @@
+.admin-panel {
+  display: grid;
+  height: 100%;
+  width: 80%;
+  grid-template-columns: 0.5fr 0.5fr 0.7fr;
+  grid-template-rows: 1fr 1fr 1fr;
+  grid-gap: 4rem;
+  grid-template-areas: "total-products requires-action top-5" "top-seller total-sales-val top-5" "worst-seller . .";
+
+  & > * {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-shadow: 0 1rem 2rem rgba($color-blue-dark, .3);
+    border-radius: 6px;
+  }
+
+  &--header {
+    background-color: $color-blue-dark;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem
+  }
+
+  &--body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 10rem;
+    width: 100%;
+  }
+}
+
+
+
+.total-products { 
+  grid-area: total-products; 
+}
+
+.requires-action { 
+  grid-area: requires-action; 
+
+}
+
+.worst-seller { 
+  grid-area: worst-seller; 
+}
+
+.top-seller { 
+  grid-area: top-seller; 
+}
+
+.top-5 { 
+  grid-area: top-5; 
+  grid-row-end: span 2;
+}
+
+.total-sales-val { 
+  grid-area: total-sales-val; 
+}

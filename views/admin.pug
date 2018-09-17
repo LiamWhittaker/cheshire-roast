@@ -3,13 +3,56 @@ extends adminLayout
 block content
 
   h1.heading-section-title.u-mart-md Admin Control Panel
+  .container
+    .admin-panel.u-mart-md
 
-  p Orders requiring action #{ordersRequiringAction}
-  p Total Orders Completed: #{completedOrders.length}
-  p Total value of sales: #{totalOrderValue.toLocaleString('en-GB', { style: 'currency', currency: 'GBP' })}
-  p Sales by month?
-  p Top seller #{totalWeightSold[0].coffeeName} - #{totalWeightSold[0].totalWeight.toLocaleString()}g
-  p Worst seller #{totalWeightSold[(totalWeightSold.length - 1)].coffeeName} - #{totalWeightSold[(totalWeightSold.length - 1)].totalWeight.toLocaleString()}g
-  p top 5 coffees
-  each coffee in totalWeightSold
-    p #{coffee.coffeeName} = #{coffee.totalWeight.toLocaleString()}g
+      .admin-panel--box.total-products
+        .admin-panel--header
+          span.paragraph.paragraph--large Total Orders Completed 
+        .admin-panel--body
+          span.admin-action.admin-action--large #{completedOrders.length}
+      
+      .admin-panel--box.requires-action
+        .admin-panel--header
+          span.paragraph.paragraph--large Orders Requiring Action 
+        .admin-panel--body
+          span.admin-action.admin-action--large #{ordersRequiringAction}
+      
+      .admin-panel--box.worst-seller
+        .admin-panel--header
+          span.paragraph.paragraph--large Worst Seller 
+        .admin-panel--body
+          p.admin-action.u-marbo-sm #{totalWeightSold[(totalWeightSold.length - 1)].coffeeName}
+          p.admin-action #{totalWeightSold[(totalWeightSold.length - 1)].totalWeight.toLocaleString()}g
+      
+      .admin-panel--box.top-seller
+        .admin-panel--header
+          span.paragraph.paragraph--large Top Seller 
+        .admin-panel--body
+          p.admin-action.u-marbo-sm #{totalWeightSold[0].coffeeName} 
+          p.admin-action #{totalWeightSold[0].totalWeight.toLocaleString()}g
+      
+      .admin-panel--box.top-5 
+        .admin-panel--header
+          span.paragraph.paragraph--large Top 5 Coffees
+        - let count = 1;
+        .admin-panel--body
+          table.table.table--fullwidth.u-marbo-sm
+            thead
+              tr.table__row
+                th.table__heading.u-paddl-sm Rank
+                th.table__heading Name
+                th.table__heading Amount
+            tbody 
+            each coffee in totalWeightSold
+              tr.table__row
+                td.table__item.u-center #{count}
+                td.table__item #{coffee.coffeeName}
+                td.table__item #{coffee.totalWeight.toLocaleString()}g
+              - count++;
+
+      .admin-panel--box.total-sales-val
+        .admin-panel--header
+          span.paragraph.paragraph--large Total Value of Sales
+        .admin-panel--body
+          span.admin-action.admin-action--large  #{totalOrderValue.toLocaleString('en-GB', { style: 'currency', currency: 'GBP' })}
