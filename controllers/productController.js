@@ -55,11 +55,20 @@ exports.sanitizeNewProduct = (req, res, next) => {
   next();
 };
 
-// Responsible for saving new products to the database
+// Responsible for saving new products and edits to the database
 exports.addNewProduct = async (req, res) => {
-  req.body.slug = slug(req.body.name);
-  const product = await (new Product(req.body)).save();
-  res.redirect(`/menu/${product.slug}`);
+  // If there is an ID, we know it's an update to an existing product
+  if(req.body.coffeeID) {
+    const productToUpdate = Product.findByIdAndUpdate({_id: req.body.coffeeID}, req.body, {
+      runValidators: true // Make sure data still conforms to schema
+    }).exec();
+    return res.redirect('/admin/editProducts');
+  } else {
+    // If there isn't an ID, we know it's a new product.
+    req.body.slug = slug(req.body.name);
+    const product = await (new Product(req.body)).save();    
+    return res.redirect(`/menu/${product.slug}`);
+  }
 };
 
 // Renders a specific coffee page

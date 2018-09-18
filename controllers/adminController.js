@@ -227,14 +227,14 @@ async function getWeightSoldPerCoffee() {
   
   // Work out the amount of each coffee sold
   for (var i = 0; i < orderArray.length; i++) {
-    // Reset the counter
+    // Initialize/Reset the counter
     let totalWeight = 0;
 
     for (var j = 0; j < orderArray[i].length; j++) {
       if(orderArray[i][j].item.bagSize === 'Regular') {
-        totalWeight += 250; // Grams
+        totalWeight += (250 * orderArray[i][j].item.qty); // Grams
       } else {
-        totalWeight += 1000; // Grams
+        totalWeight += (1000 * orderArray[i][j].item.qty); // Grams
       }
     }
     // If there are no orders for a coffee in the DB, break out of the loop and don't display it

@@ -9,7 +9,9 @@ block content
 
   .container
     form(action="/admin/editProducts/add" method="POST" class="form")
-  
+
+      if(product)
+        input(type="hidden" name="coffeeID" value=product._id)
       label(for="name" class="form__label") Product Name
       input(type="text" name="name" class="form__input" maxlength="80" value=(product && product.name) required) 
     
@@ -30,7 +32,8 @@ block content
             option(value=ctype)=ctype
 
       label(for="flavourTags" class="form__label") Flavour Tags 
-      input(type="text" name="flavourTags" class="form__input" required)
+      input(type="text" name="flavourTags" class="form__input" value=(product && product.flavourTags.toString()) required)
+
 
       label(for="roastLevel" class="form__label") Roast Level
       select(name="roastLevel" class="form__dropdown")
