@@ -1,0 +1,79 @@
+extends layout
+
+block content
+
+  h1.heading-section-title.u-marbo-md.u-mart-md #{user.firstName}'s Account 
+
+  .container
+    .account__details
+      h3.heading-section--subtitle Update User Info
+      form(action="/account" method="POST" class="form")
+
+        label(for="firstName" class="form__label") First Name
+        input(type="text" name="firstName" class="form__input" maxlength="80" value=user.firstName required) 
+      
+        label(for="secondName" class="form__label") Second Name
+        input(type="text" name="secondName" class="form__input" maxlength="80" value=user.secondName required) 
+      
+        label(for="email" class="form__label") Email Address
+        input(type="email" name="email" class="form__input" maxlength="80" value=user.email required) 
+
+        label(for="address[lineOne]" class="form__label") Address Line One
+        input(type="text" name="address[lineOne]" class="form__input" maxlength="80" value=user.address.lineOne required) 
+      
+        label(for="address[townCity]" class="form__label") Town / City
+        input(type="text" name="address[townCity]" class="form__input" maxlength="80" value=user.address.townCity required) 
+        
+        label(for="address[county]" class="form__label") County
+        input(type="text" name="address[county]" class="form__input" maxlength="80" value=user.address.county required) 
+        
+        label(for="address[postcode]" class="form__label") Postcode
+        input(type="text" name="address[postcode]" class="form__input" maxlength="80" value=user.address.postcode required) 
+
+        button(type="submit" class="btn btn__submit u-mart-sm") Update Details
+    
+    .account__orders
+      .account__open-orders
+        if openOrders.length == 0
+          p.paragraph.paragraph--inverted You don't have any open orders.
+        else
+          h3.heading-section--subtitle Open Orders
+          table.table.u-marbo-sm.table--fullwidth
+            thead
+              tr.table__row
+                th.table__heading Order Date
+                th.table__heading Item
+                th.table__heading Grind
+                th.table__heading Size
+                th.table__heading Quantity
+                th.table__heading Roasted
+            each order in openOrders
+              tr.table__row
+                td.table__item #{order.orderDate.toDateString()}
+                td.table__item #{order.item.itemName}
+                td.table__item #{order.item.grindType}
+                td.table__item #{order.item.bagSize}
+                td.table__item #{order.item.qty}
+                td.table__item #{order.orderRoasted}
+
+      .account__order-history.u-mart-md
+        if orderHistory.length == 0
+          p.paragraph.paragraph--inverted You don't have any completed orders.
+        else
+          h3.heading-section--subtitle Last 10 Orders
+          table.table.u-marbo-sm.table--fullwidth
+            thead
+              tr.table__row
+                th.table__heading Order Date
+                th.table__heading Item
+                th.table__heading Grind
+                th.table__heading Size
+                th.table__heading Quantity
+            each order in orderHistory
+              tr.table__row
+                td.table__item #{order.orderDate.toDateString()}
+                td.table__item #{order.item.itemName}
+                td.table__item #{order.item.grindType}
+                td.table__item #{order.item.bagSize}
+                td.table__item #{order.item.qty}
+

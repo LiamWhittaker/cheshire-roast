@@ -273,6 +273,9 @@ a {
   -ms-flex-align: center;
       align-items: center; }
 
+.u-bold {
+  font-weight: 700; }
+
 .hidden {
   display: none !important; }
 
@@ -620,6 +623,13 @@ input[type="number"] {
 
 .total-sales-val {
   grid-area: total-sales-val; }
+
+.account__details {
+  width: 30%; }
+
+.account__orders {
+  margin-left: 4rem;
+  width: 60%; }
 
 .section-hero {
   display: -ms-flexbox;

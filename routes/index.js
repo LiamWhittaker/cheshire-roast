@@ -66,6 +66,16 @@ router.post('/login', authController.login);
 // Log the user out
 router.get('/logout', authController.logout);
 
+// Show the user's account page
+router.get('/account', 
+  authController.isLoggedIn, 
+  userController.userAccount);
+
+// Update account details
+router.post('/account', 
+  authController.isLoggedIn, 
+  catchErrors(userController.updateUserAccount));
+
 
 // ==================================================
 // Checkout and basket stuff
