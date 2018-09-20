@@ -10,7 +10,7 @@ const adminController = require('../controllers/adminController');
 const { catchErrors } = require('../handlers/errorHandlers');
 
 // Home page
-router.get('/', productController.homePage);
+router.get('/', catchErrors(productController.homePage));
 
 // Menu page
 router.get('/menu', catchErrors(productController.showMenu));

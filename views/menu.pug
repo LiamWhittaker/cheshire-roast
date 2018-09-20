@@ -8,6 +8,7 @@ block content
       .product
         .inner
           .product__photo
+            img(src=product.photos[0], alt=product.name class="product__photo")
           .product__info
             h3.product__title #{product.name}
             h4.product__description--short #{product.shortDescription}

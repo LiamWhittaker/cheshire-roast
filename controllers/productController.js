@@ -1,3 +1,4 @@
+const globalFunc = require('./globalController');
 const mongoose = require('mongoose');
 const slug = require('slugs');
 
@@ -9,8 +10,19 @@ const Product = mongoose.model('Product');
 
 
 // Renders the home page
-exports.homePage = (req, res) => {
-  res.render('index', { title: 'Home' });
+exports.homePage = async (req, res) => {
+  const coffee = await globalFunc.getWeightSoldPerCoffee();
+  const topSix = coffee.slice(0, 5);
+
+  // Extract the item ids to get product info
+  const itemIDs = topSix.map(a => a.coffeeID);
+
+  const productInfoPromise = Product.find({
+    '_id' : { $in: itemIDs }
+  });
+  const productInfo = await productInfoPromise;
+
+  res.render('index', { title: 'Home', productInfo });
 };
 
 // Renders the menu page
