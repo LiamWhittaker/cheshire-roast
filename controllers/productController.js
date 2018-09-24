@@ -134,6 +134,38 @@ exports.addNewProduct = async (req, res) => {
   }
 };
 
+exports.makeCoverPhoto = async (req, res) => {
+  const product = await Product.findOne({ _id: req.body.productID });
+  
+  // If the photo is already the cover photo, do nothing
+  if (req.body.itemToMakeCover == 0) {
+    req.flash('error', 'This is already the cover photo!');
+    return res.redirect(`/admin/editProducts/edit/${req.body.productID}`);
+  }
+
+  [
+    product.photos[0], 
+    product.photos[req.body.itemToMakeCover]
+  ] = 
+  [
+    product.photos[req.body.itemToMakeCover], 
+    product.photos[0]
+  ];
+
+  const productToUpdate = Product.findByIdAndUpdate({_id: product._id}, product, {
+    runValidators: true // Make sure data still conforms to schema
+  }).exec();
+
+  req.flash('success', 'Updated the cover photo!');
+
+  return res.redirect(`/admin/editProducts/edit/${product._id}`);
+
+};
+
+exports.deletePhoto = async (req, res) => {
+
+};
+
 // Renders a specific coffee page
 exports.showProduct = async (req, res) => {
   const product = await Product.findOne({ slug: req.params.slug });

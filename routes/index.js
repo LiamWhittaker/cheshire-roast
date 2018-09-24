@@ -38,9 +38,15 @@ router.get('/admin/editProducts/new',
 router.post('/admin/editProducts/add',
   productController.upload,
   catchErrors(productController.resize), 
-  // productController.sanitizeNewProduct,
+  productController.sanitizeNewProduct,
   catchErrors(productController.addNewProduct)
 );
+
+router.post('/admin/editProducts/makeCoverPhoto',
+  catchErrors(productController.makeCoverPhoto));
+
+router.post('/admin/editProducts/deletePhoto',
+  catchErrors(productController.deletePhoto));
 
 // Individual coffee info page
 router.get('/menu/:slug', catchErrors(productController.showProduct));

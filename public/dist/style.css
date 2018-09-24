@@ -513,6 +513,24 @@ input[type="number"] {
 .fa-edit {
   color: #0e1e33; }
 
+.fa-camera {
+  color: #b38e57;
+  transition: all .3s;
+  outline: none;
+  background: transparent; }
+  .fa-camera:hover {
+    -ms-transform: scale(1.2);
+        transform: scale(1.2); }
+
+.fa-trash-alt {
+  color: red;
+  transition: all .3s;
+  outline: none;
+  background: transparent; }
+  .fa-trash-alt:hover {
+    -ms-transform: scale(1.2);
+        transform: scale(1.2); }
+
 .table {
   width: 70%;
   margin-top: 2rem;
@@ -986,6 +1004,48 @@ input[type="number"] {
 
 .edit-existing {
   width: 51%; }
+
+.rm-photos {
+  display: -ms-flexbox;
+  display: flex;
+  width: 100%; }
+  .rm-photos__box {
+    position: relative;
+    height: 10rem;
+    width: 10rem;
+    margin-right: 1rem;
+    border-radius: 4px;
+    overflow: hidden; }
+  .rm-photos-btn {
+    outline: none;
+    background: transparent;
+    border: none; }
+  .rm-photos--photo {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 10rem;
+    width: 10rem; }
+  .rm-photos__overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 10rem;
+    width: 10rem;
+    background-color: black;
+    z-index: 420;
+    opacity: 0;
+    transition: all .5s; }
+    .rm-photos__overlay:hover {
+      opacity: 0.9; }
+  .rm-photos__options {
+    display: -ms-flexbox;
+    display: flex;
+    height: 100%;
+    -ms-flex-pack: space-evenly;
+        justify-content: space-evenly;
+    -ms-flex-align: center;
+        align-items: center; }
 
 .btn {
   font-family: "Roboto Condensed", sans-serif;

@@ -14,3 +14,23 @@
 .fa-edit {
   color: $color-blue-dark;
 }
+
+.fa-camera {
+  color: $color-gold;
+  transition: all .3s;
+  outline: none;
+  background: transparent;
+  &:hover {
+    transform: scale(1.2);
+  }
+}
+.fa-trash-alt {
+  color: red;
+  transition: all .3s;
+  outline: none;
+  background: transparent;
+
+  &:hover {
+    transform: scale(1.2);
+  }
+}

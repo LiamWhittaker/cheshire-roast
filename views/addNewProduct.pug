@@ -59,14 +59,6 @@ block content
           else
             option(value=wash)=wash
 
-      if (product)
-        each photo in product.photos
-          label(for="photos" class="form__label") Photos
-          input(type="text" name="photos" class="form__input" value=photo required)
-      else
-          label(for="photos" class="form__label") Photos
-          input(type="file" name="photos" id="photos" class="form__input" accept="image/gif, image/png, image/jpeg" multiple required)
-    
       label(for="price" class="form__label") Price per 250g
       input(type="number" name="price[smallBag]" class="form__input" step="any" value=(product && product.price.smallBag) required)
     
@@ -89,3 +81,32 @@ block content
       input(type="text" name="location[region]" class="form__input" value=(product && product.location.region) required)
 
       button(type="submit" class="btn btn__submit") Submit Product
+
+
+  .container
+    if (product)
+      p.form__label Photos
+      .rm-photos
+        - let i = 0;
+          each photo in product.photos
+            .rm-photos__box
+              img(src=`/uploads/${product.photos[i]}`, class="rm-photos--photo" alt="Image of coffee")
+              .rm-photos__overlay
+                .rm-photos__options
+                  form(action="/admin/editProducts/makeCoverPhoto" method="post")
+                    input(type="hidden", name="productID", value=product._id)
+                    input(type="hidden", name="itemToMakeCover", value=i)
+                    button(type="submit" class="rm-photos-btn")
+                      i(class="fas fa-camera fa-3x")
+
+                  form(action="/admin/editProducts/deletePhoto" method="post")
+                    input(type="hidden", name="productID", value=product._id)
+                    input(type="hidden", name="itemToDelete", value=product.photos[i])
+                    button(type="submit" class="rm-photos-btn")
+                      i(class="fas fa-trash-alt fa-3x")
+                - i++;
+
+    else
+      label(for="photos" class="form__label") Photos
+      input(type="file" name="photos" id="photos" class="form__input" accept="image/gif, image/png, image/jpeg" multiple required)
+  
