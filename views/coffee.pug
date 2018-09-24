@@ -12,13 +12,14 @@ block content
   .container
     .coffee__photos
       .main-img
-        img#current(src="/images/img1.jpg", alt="Images of coffee")
+        img#current(src=`/uploads/${product.photos[0]}`, alt="Images of coffee")
 
       .imgs
-        img(src="/images/img1.jpg", alt="Image of coffee")
-        img(src="/images/img2.jpeg", alt="Image of coffee")
-        img(src="/images/img3.jpeg", alt="Image of coffee")
-        img(src="/images/img4.jpeg", alt="Image of coffee")
+        - let i = 0;
+        each photo in product.photos
+          img(src=`/uploads/${product.photos[i]}`, alt="Image of coffee")
+          - i++;
+        
 
     .coffee__options
       form.form(action="/basket" method="post" id="buyform")

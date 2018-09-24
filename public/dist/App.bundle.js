@@ -144,7 +144,7 @@ function updatePrice(event) {
   var largePrice = document.getElementsByClassName('coffee__price--large')[0];
   var bagsize = event.target.value;
 
-  if (bagsize === 'regular') {
+  if (bagsize === 'Regular') {
     regularPrice.classList.remove('hidden');
     largePrice.classList.add('hidden');
   } else {

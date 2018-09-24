@@ -36,7 +36,9 @@ router.get('/admin/editProducts/new',
 
 // Responsible for sanitizing new product data and storing it in the database
 router.post('/admin/editProducts/add',
-  productController.sanitizeNewProduct,
+  productController.upload,
+  catchErrors(productController.resize), 
+  // productController.sanitizeNewProduct,
   catchErrors(productController.addNewProduct)
 );
 

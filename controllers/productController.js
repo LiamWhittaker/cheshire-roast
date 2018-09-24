@@ -1,12 +1,55 @@
 const globalFunc = require('./globalController');
 const mongoose = require('mongoose');
 const slug = require('slugs');
+const multer = require('multer');
+const jimp = require('jimp');
+const uuid = require('uuid');
 
 const Product = mongoose.model('Product');
-// const User = mongoose.model("User");
-// const multer = require("multer");
-// const jimp = require("jimp");
-// const uuid = require("uuid");
+
+
+// ======================================================================
+// PHOTO STUFF
+// ======================================================================
+
+// Set options for multer 
+const multerOptions = {
+  storage: multer.memoryStorage(),
+  fileFilter(req, file, next) {
+    const isPhoto = file.mimetype.startsWith('image/');
+    if(isPhoto) {
+      next(null, true);
+    } else {
+      next({ message: 'That filetype is not allowed '}, false);
+    }
+  }
+};
+
+exports.upload = multer(multerOptions).array('photos'); // Allow a max of 4 files to be uploaded per coffee
+
+exports.resize = async (req, res, next) => {
+  // Check if there is no new file to resize
+  if( !req.files ) {
+    next(); //Skip
+    return;
+  }
+  const filenames = [];
+  for (var i = 0; i < req.files.length; i++) {
+
+    const ext = req.files[i].mimetype.split('/')[1]; // Get filetype
+    // filenames[i] = `${uuid.v4()}.${ext}`; // Generate a filename
+    req.files[i].filename = `${uuid.v4()}.${ext}`; // Generate a filename 
+    const photo = await jimp.read(req.files[i].buffer); // Load photo from buffer
+    await photo.resize(800, jimp.AUTO); // Resize to 800px width
+    await photo.write(`./public/uploads/${req.files[i].filename}`); // Save to filesytem
+
+  }
+
+  // Now it's resized, continue...
+  next();
+};
+
+// ==================== END PHOTO STUFF ==========================
 
 
 // Renders the home page
@@ -59,6 +102,7 @@ exports.addNewProductForm = (req, res) => {
   res.render('addNewProduct', { title: 'Add New Product' });
 };
 
+
 // Middleware for sanitizing form input before we try and save it to the database
 exports.sanitizeNewProduct = (req, res, next) => {
   // Split the 'tags' input into individual strings
@@ -77,7 +121,14 @@ exports.addNewProduct = async (req, res) => {
     return res.redirect('/admin/editProducts');
   } else {
     // If there isn't an ID, we know it's a new product.
+    // Generate Slug
     req.body.slug = slug(req.body.name);
+    
+    // Add the uploaded photos 
+    let photos = req.files.map(a => a.filename);
+    req.body.photos = photos;
+
+
     const product = await (new Product(req.body)).save();    
     return res.redirect(`/menu/${product.slug}`);
   }

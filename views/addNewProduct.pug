@@ -8,7 +8,7 @@ block content
     h1.heading-section-title.u-mart-md.u-marbo-md Add New Product
 
   .container
-    form(action="/admin/editProducts/add" method="POST" class="form")
+    form(action="/admin/editProducts/add" method="POST" class="form" enctype="multipart/form-data")
 
       if(product)
         input(type="hidden" name="coffeeID" value=product._id)
@@ -65,7 +65,7 @@ block content
           input(type="text" name="photos" class="form__input" value=photo required)
       else
           label(for="photos" class="form__label") Photos
-          input(type="text" name="photos" class="form__input" required)
+          input(type="file" name="photos" id="photos" class="form__input" accept="image/gif, image/png, image/jpeg" multiple required)
     
       label(for="price" class="form__label") Price per 250g
       input(type="number" name="price[smallBag]" class="form__input" step="any" value=(product && product.price.smallBag) required)
