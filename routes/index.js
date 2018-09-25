@@ -42,9 +42,18 @@ router.post('/admin/editProducts/add',
   catchErrors(productController.addNewProduct)
 );
 
+// Changes the main product photo
 router.post('/admin/editProducts/makeCoverPhoto',
   catchErrors(productController.makeCoverPhoto));
 
+// Adds new photos to an existing product
+router.post('/admin/editProducts/addNewPhotos',
+  productController.upload,
+  catchErrors(productController.resize), 
+  catchErrors(productController.addNewProductPhotos)
+);
+
+// Deletes a photo
 router.post('/admin/editProducts/deletePhoto',
   catchErrors(productController.deletePhoto));
 

@@ -25,7 +25,7 @@ const multerOptions = {
   }
 };
 
-exports.upload = multer(multerOptions).array('photos'); // Allow a max of 4 files to be uploaded per coffee
+exports.upload = multer(multerOptions).array('photos', 4); // Allow a max of 4 files to be uploaded per coffee
 
 exports.resize = async (req, res, next) => {
   // Check if there is no new file to resize
@@ -37,7 +37,6 @@ exports.resize = async (req, res, next) => {
   for (var i = 0; i < req.files.length; i++) {
 
     const ext = req.files[i].mimetype.split('/')[1]; // Get filetype
-    // filenames[i] = `${uuid.v4()}.${ext}`; // Generate a filename
     req.files[i].filename = `${uuid.v4()}.${ext}`; // Generate a filename 
     const photo = await jimp.read(req.files[i].buffer); // Load photo from buffer
     await photo.resize(800, jimp.AUTO); // Resize to 800px width
@@ -121,6 +120,7 @@ exports.addNewProduct = async (req, res) => {
     return res.redirect('/admin/editProducts');
   } else {
     // If there isn't an ID, we know it's a new product.
+
     // Generate Slug
     req.body.slug = slug(req.body.name);
     
@@ -160,6 +160,37 @@ exports.makeCoverPhoto = async (req, res) => {
 
   return res.redirect(`/admin/editProducts/edit/${product._id}`);
 
+};
+
+exports.addNewProductPhotos = async (req, res) => {
+  // 1. Get product from db
+  const product = await Product.findOne({ _id: req.body.productID });
+
+  // 2. Can we add more photos? (max 4)
+  if(product.photos.length === 4) {
+    req.flash('error', 'This product already has the maximum amount of photos.');
+    return res.redirect(`/admin/editProducts/edit/${product._id}`);
+  }
+
+  const freeSlots = (4 - product.photos.length);
+  if(req.files.length > freeSlots) {
+    req.flash('error', `You are trying to add ${req.files.length} photos, but there are only ${freeSlots} slots available.`);
+    return res.redirect(`/admin/editProducts/edit/${product._id}`);
+  }
+
+  // 3. Add photos
+  let photos = req.files.map(a => a.filename);
+  photos.forEach(photo => {
+    product.photos.push(photo);
+  });
+
+  const productToUpdate = Product.findByIdAndUpdate({_id: product._id}, product, {
+    runValidators: true // Make sure data still conforms to schema
+  }).exec();
+
+  req.flash('success', 'Successfully uploaded new photos!');
+
+  return res.redirect(`/admin/editProducts/edit/${product._id}`);
 };
 
 exports.deletePhoto = async (req, res) => {
