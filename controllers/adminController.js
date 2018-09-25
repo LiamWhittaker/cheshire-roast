@@ -11,13 +11,15 @@ exports.showAdminPanel = async (req, res) => {
   const ordersRequiringAction = await getOrdersRequiringAction();
   const totalOrderValue = await getTotalValueOfOrders();
   const totalWeightSold = await getWeightSoldPerCoffee();
+  const topFive = totalWeightSold.slice(0, 5);
 
   res.render('admin', { 
     title: 'Admin Panel', 
     completedOrders, 
     ordersRequiringAction,
     totalOrderValue,
-    totalWeightSold
+    totalWeightSold,
+    topFive
   });
 };
 
@@ -208,40 +210,44 @@ async function getAllOrders() {
 
 // Return total weight of each coffee sold
 async function getWeightSoldPerCoffee() {
-  const allCoffeesPromise = Product.find().select({ _id: 1 });
+  const allCoffeesPromise = Product.find().select({ _id: 1, name: 1 });
   const allCoffees = await allCoffeesPromise;
 
-  // Group all the coffees that need to be roasted
+  // Group all the coffees
   let orderArray = [];
   for (var i = 0; i < allCoffees.length; i++) {
     const orderPromise = Order.find({ 
-      'item.itemID': allCoffees[i],
+      'item.itemID': allCoffees[i]._id,
       orderFinalized: true,
       orderRoasted: true,
       orderShipped: true
     }).select({ item: 1, _id: 0 });
     const order = await orderPromise;
+
     orderArray.push(order);
   };
+
+  // Filter out the items that have no orders
+  const filteredArray = orderArray.filter(val => {
+    return val.length >= 1;
+  });
+    
   let grouped = []
   
   // Work out the amount of each coffee sold
-  for (var i = 0; i < orderArray.length; i++) {
+  for (var i = 0; i < filteredArray.length; i++) {
     // Initialize/Reset the counter
     let totalWeight = 0;
-
-    for (var j = 0; j < orderArray[i].length; j++) {
-      if(orderArray[i][j].item.bagSize === 'Regular') {
-        totalWeight += (250 * orderArray[i][j].item.qty); // Grams
+    for (var j = 0; j < filteredArray[i].length; j++) {
+      if(filteredArray[i][j].item.bagSize === 'Regular') {
+        totalWeight += (250 * filteredArray[i][j].item.qty); // Grams
       } else {
-        totalWeight += (1000 * orderArray[i][j].item.qty); // Grams
-      }
+        totalWeight += (1000 * filteredArray[i][j].item.qty); // Grams
+      } 
     }
-    // If there are no orders for a coffee in the DB, break out of the loop and don't display it
-    if(!orderArray[i][0]) break;
 
     // If there are orders, add them to an array
-    let coffeeName = orderArray[i][0].item.itemName;
+    let coffeeName = filteredArray[i][0].item.itemName;
     grouped.push(new Object ({ coffeeName, totalWeight}));
   }
   

@@ -1019,7 +1019,11 @@ input[type="number"] {
   .rm-photos-btn {
     outline: none;
     background: transparent;
-    border: none; }
+    border: none;
+    transition: all .4s; }
+    .rm-photos-btn:hover {
+      -ms-transform: scale(1.2);
+          transform: scale(1.2); }
   .rm-photos--photo {
     position: absolute;
     top: 0;

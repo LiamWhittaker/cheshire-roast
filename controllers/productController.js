@@ -54,7 +54,7 @@ exports.resize = async (req, res, next) => {
 // Renders the home page
 exports.homePage = async (req, res) => {
   const coffee = await globalFunc.getWeightSoldPerCoffee();
-  const topSix = coffee.slice(0, 5);
+  const topSix = coffee.slice(0, 6);
 
   // Extract the item ids to get product info
   const itemIDs = topSix.map(a => a.coffeeID);
