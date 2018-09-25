@@ -163,7 +163,17 @@ exports.makeCoverPhoto = async (req, res) => {
 };
 
 exports.deletePhoto = async (req, res) => {
+  const product = await Product.findOne({ _id: req.body.productID });
+  
+  product.photos.splice(req.body.itemToDelete, 1);
 
+  const productToUpdate = Product.findByIdAndUpdate({_id: product._id}, product, {
+    runValidators: true // Make sure data still conforms to schema
+  }).exec();
+
+  req.flash('success', 'Photo deleted.');
+
+  return res.redirect(`/admin/editProducts/edit/${product._id}`);
 };
 
 // Renders a specific coffee page
