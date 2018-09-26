@@ -24,6 +24,20 @@ exports.showBasket = async (req, res) => {
   res.render('basket', { title: 'Basket', orders, productInfo });
 };
 
+// Middleware for checking if the product is in stock
+exports.inStock = async (req, res, next) => {
+  let orderWeight = (req.body.size === 'Regular') ? req.body.quantity * 250 : req.body.quantity * 1000;
+
+  const productToCheck = await Product.findById(req.body.coffeeId);
+
+  if(orderWeight > productToCheck.stockInGrams) {
+    req.flash('error', `Sorry, we only have ${(productToCheck.stockInGrams / 1000).toLocaleString()}kg of stock remaining!`);
+    return res.redirect(`/menu/${productToCheck.slug}`);
+  }
+
+  next();
+};
+
 // Add coffee to the basket
 exports.addToBasket = async (req, res) => { 
   // 1. We have to check to see if the user already has this item + grind type combo in their basket.
@@ -84,7 +98,31 @@ exports.finalizeOrder = async (req, res) => {
   const ordersPromise = Order.find({ userID: req.user._id, orderFinalized: false });
   const orders = await ordersPromise;
 
-  // 2. Go through them, updating orderFinalized to true, adding orderDate, setting roasted/posted flags
+  // 1.5: Go through each item, checking if it is still in stock
+  for(var i = 0; i < orders.length; i++) {
+    const productToCheck = await Product.findById(orders[i].item.itemID);
+    const orderWeight = (orders[i].item.bagSize === 'Regular') ? orders[i].item.qty * 250 : orders[i].item.qty * 1000;
+    
+    if(orderWeight > productToCheck.stockInGrams) {
+      req.flash('error', `Sorry, we only have ${(productToCheck.stockInGrams / 1000).toLocaleString()}kg of ${productToCheck.name} remaining! Please modify your order before continuing.`);
+      return res.redirect(`/basket`);
+    }
+  }
+
+  // 1.75: If everything is in stock, decrease the products stock levels
+  for(var i = 0; i < orders.length; i++) {
+    const orderWeight = (orders[i].item.bagSize === 'Regular') ? orders[i].item.qty * 250 : orders[i].item.qty * 1000;
+    let makeNegative = -Math.abs(orderWeight);
+
+    const productToModify = await Product.findByIdAndUpdate(
+      { _id: orders[i].item.itemID },
+      { $inc: {
+        stockInGrams: makeNegative
+      }}
+    );
+  }
+
+  // 2. Finally, update orderFinalized to true, adding orderDate, setting roasted/posted flags
   for(var i = 0; i < orders.length; i++) {
     const orderToUpdatePromise = Order.findByIdAndUpdate(
       { _id: orders[i]._id },

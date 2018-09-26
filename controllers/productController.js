@@ -5,6 +5,12 @@ const multer = require('multer');
 const jimp = require('jimp');
 const uuid = require('uuid');
 
+const createDOMPurify = require('dompurify');
+const { JSDOM } = require('jsdom');
+
+const window = (new JSDOM('')).window;
+const DOMPurify = createDOMPurify(window);
+
 const Product = mongoose.model('Product');
 
 
@@ -104,6 +110,14 @@ exports.addNewProductForm = (req, res) => {
 
 // Middleware for sanitizing form input before we try and save it to the database
 exports.sanitizeNewProduct = (req, res, next) => {
+  
+  req.body.name = DOMPurify.sanitize(req.body.name);
+  req.body.shortDescription = DOMPurify.sanitize(req.body.shortDescription);
+  req.body.longDescription = DOMPurify.sanitize(req.body.longDescription);
+  req.body.flavourTags = DOMPurify.sanitize(req.body.flavourTags);
+  req.body.location.country = DOMPurify.sanitize(req.body.location.country);
+  req.body.location.region = DOMPurify.sanitize(req.body.location.region);
+  
   // Split the 'tags' input into individual strings
   req.body.flavourTags = req.body.flavourTags.split(' ');
 

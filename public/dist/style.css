@@ -942,6 +942,7 @@ input[type="number"] {
 .coffee__long-description {
   -ms-flex-preferred-size: 60%;
       flex-basis: 60%;
+  max-width: 800px;
   margin-right: auto; }
 
 .coffee__bulletpoints {

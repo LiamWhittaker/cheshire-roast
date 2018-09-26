@@ -22,13 +22,13 @@ router.get('/admin/editProducts',
   catchErrors(productController.editProductsMenu)
 );
 
-// Show the edit product page
+// Edit specific product page
 router.get('/admin/editProducts/edit/:id', 
   authController.isLoggedIn,
   catchErrors(productController.editProduct)
 );
 
-// Show the edit product page
+// Add new product
 router.get('/admin/editProducts/new', 
   authController.isLoggedIn,
   productController.addNewProductForm
@@ -106,6 +106,7 @@ router.get('/basket',
 // Add coffee to the basket
 router.post('/basket',
   authController.isLoggedIn,
+  catchErrors(shopController.inStock),
   catchErrors(shopController.addToBasket));
 
 // Delete coffee from basket

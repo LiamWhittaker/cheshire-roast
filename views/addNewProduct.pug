@@ -19,9 +19,7 @@ block content
       input(type="text" name="shortDescription" class="form__input" maxlength="160" value=(product && product.shortDescription) required)
     
       label(for="longDescription" class="form__label") In-depth Description
-      textarea(name="longDescription", cols="30", rows="5" class="form__textarea" required)
-        if(product)
-          #{product.longDescription}
+      textarea(name="longDescription", cols="30", rows="5" class="form__textarea" required) #{(product && product.longDescription)}
 
       label(for="coffeeType" class="form__label") Coffee Type
       select(name="coffeeType" class="form__dropdown")
@@ -68,6 +66,9 @@ block content
     
       label(for="price" class="form__label") Price per 1kg
       input(type="number" name="price[largeBag]" class="form__input" step="any" value=(product && product.price.largeBag) required)
+    
+      label(for="stockInGrams" class="form__label") Initial Stock Amount (g)
+      input(type="number" name="stockInGrams" class="form__input" step="any" value=(product && product.stockInGrams) required)
     
       label(for="location[coordinates][1]" class="form__label") Latitude
       input(type="number" name="location[coordinates][1]" class="form__input" step="any" value=(product && product.location.coordinates[1]) required)
