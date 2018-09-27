@@ -1,0 +1,38 @@
+extends layout
+
+block content
+
+  h1.heading-section-title.u-marbo-md.u-mart-md New Review - #{product.name}
+
+  .container
+    form(action=`/menu/${product.slug}/review`, method="post" class="")
+      if(product)
+        input(type="hidden" name="itemID" value=product._id)
+
+      .review__header
+        .review__title
+          label(for="review[reviewTitle]" class="form__label") Give your review a title
+          input(type="text" name="review[reviewTitle]" class="form__input" maxlength="80" value=(review && review.review.title) required) 
+        
+        .review__stars 
+
+          input(type="radio", class="review__star-label" name="review[reviewScore]" id="star-5" value="5")
+          label(for="star-5" class="review__star") 5
+
+          input(type="radio", class="review__star-label" name="review[reviewScore]" id="star-4" value="4")
+          label(for="star-4" class="review__star") 4
+
+          input(type="radio", class="review__star-label" name="review[reviewScore]" id="star-3" value="3")
+          label(for="star-3" class="review__star") 3
+
+          input(type="radio", class="review__star-label" name="review[reviewScore]" id="star-2" value="2")
+          label(for="star-2" class="review__star") 2
+
+          input(type="radio", class="review__star-label" name="review[reviewScore]" id="star-1" value="1")
+          label(for="star-1" class="review__star") 1
+      .review__body
+        label(for="review[reviewBody]" class="form__label") Write your review here
+        textarea(name="review[reviewBody]", cols="30", rows="10" class="form__textarea" required) #{(review && review.review.reviewBody)}
+
+      .review__footer
+        button(type="submit" class="btn btn__submit u-mart-sm") Submit Your Review!

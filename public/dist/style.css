@@ -649,6 +649,64 @@ input[type="number"] {
   margin-left: 4rem;
   width: 60%; }
 
+.review__header {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-align: end;
+      align-items: flex-end; }
+
+.review__title {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-direction: column;
+      flex-direction: column;
+  -ms-flex-preferred-size: 60%;
+      flex-basis: 60%; }
+
+.review__star:checked {
+  border: none; }
+
+.review__stars {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-direction: row-reverse;
+      flex-direction: row-reverse;
+  -ms-flex-pack: center;
+      justify-content: center;
+  overflow: hidden;
+  height: 2em; }
+  .review__stars > input {
+    opacity: 0; }
+    .review__stars > input:checked ~ label {
+      border: none; }
+  .review__stars > label {
+    display: block;
+    background: url("/images/star-off.png");
+    background-size: contain; }
+  .review__stars > label:before {
+    content: '';
+    display: block;
+    width: 2em;
+    height: 2em;
+    background: url("/images/star-on.png");
+    background-size: contain;
+    opacity: 0;
+    transition: opacity 0.2s linear; }
+
+.review__stars > label:hover:before,
+.review__stars > label:hover ~ label:before,
+.review__stars:not(:hover) > :checked ~ label:before {
+  opacity: 1; }
+
+.review__body {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-direction: column;
+      flex-direction: column; }
+
+.review__star-label {
+  border: none !important; }
+
 .section-hero {
   display: -ms-flexbox;
   display: flex;

@@ -112,6 +112,8 @@ exports.finalizeOrder = async (req, res) => {
   // 1.75: If everything is in stock, decrease the products stock levels
   for(var i = 0; i < orders.length; i++) {
     const orderWeight = (orders[i].item.bagSize === 'Regular') ? orders[i].item.qty * 250 : orders[i].item.qty * 1000;
+    // Make the amount negative so we can use Mongo's $inc operator to 'increment' the stock level by
+    // a negative amount
     let makeNegative = -Math.abs(orderWeight);
 
     const productToModify = await Product.findByIdAndUpdate(

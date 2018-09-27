@@ -6,7 +6,7 @@ const userController = require('../controllers/userController');
 const authController = require('../controllers/authController');
 const shopController = require('../controllers/shopController');
 const adminController = require('../controllers/adminController');
-// const reviewController = require("../controllers/reviewController");
+const reviewController = require('../controllers/reviewController');
 const { catchErrors } = require('../handlers/errorHandlers');
 
 // Home page
@@ -118,6 +118,23 @@ router.post('/basket/delete/:orderID',
 router.post('/basket/buy',
   authController.isLoggedIn,
   catchErrors(shopController.finalizeOrder));
+
+// ==================================================
+// Reviews
+// ==================================================
+
+// Add a new review
+router.get('/menu/:slug/review',
+  authController.isLoggedIn,
+  catchErrors(reviewController.verifyPurchase),
+  reviewController.showReviewForm
+  );
+
+router.post('/menu/:slug/review',
+  authController.isLoggedIn,
+  catchErrors(reviewController.verifyPurchase),
+  catchErrors(reviewController.postNewReview)
+  );
 
 
 // ==================================================
