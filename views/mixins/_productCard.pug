@@ -1,0 +1,24 @@
+mixin productCard(product = {})
+  .product
+    .inner
+      .product__photo
+        img(src=`/uploads/${product.product.photos[0]}`, alt=product.product.name class="product__photo")
+      .product__info
+        h3.product__title #{product.product.name}
+        h4.product__description--short #{product.product.shortDescription}
+        .product__reviews
+          - let stars = product.reviewsInfo.reviewScore || 0;
+          - let starsOff = (5 - stars);
+
+          while stars > 0
+            span.product__reviews__stars &#9733;
+            - stars--;
+
+          while starsOff > 0
+            span.product__reviews__stars--off.product__reviews__stars &#9733;
+            - starsOff--;
+            
+          span.product__reviews__number (#{product.reviewsInfo.reviewCount} #{(product.reviewsInfo.reviewCount === 1) ? 'review' : 'reviews'})
+        h3.product__price #{product.product.price.smallBag.toLocaleString('en-GB', { style: 'currency', currency: 'GBP' })}
+        a.btn.btn__storecard.btn__storecard--info(href=`/menu/${product.product.slug}`) Learn More
+        a.btn.btn__storecard.btn__storecard--buy(href=`/menu/${product.product.slug}`) Buy Now

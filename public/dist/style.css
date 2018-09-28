@@ -799,6 +799,8 @@ input[type="number"] {
       letter-spacing: -2px;
       color: #b38e57;
       margin-right: 0.5rem; }
+      .product__reviews__stars--off {
+        color: gray; }
     .product__reviews__number {
       font-size: 1rem;
       color: gray; }

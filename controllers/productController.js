@@ -12,6 +12,7 @@ const window = (new JSDOM('')).window;
 const DOMPurify = createDOMPurify(window);
 
 const Product = mongoose.model('Product');
+const Review = mongoose.model('Review');
 
 
 // ======================================================================
@@ -70,18 +71,37 @@ exports.homePage = async (req, res) => {
   });
   const productInfo = await productInfoPromise;
 
-  res.render('index', { title: 'Home', productInfo });
+  let productsAndReviews = [];
+
+  for(var i = 0; i < productInfo.length; i++) {
+    const reviews = await Review.find({ itemID: productInfo[i]._id});
+
+    const reviewCount = reviews.length;
+    const reviewScore = Math.round(reviews.reduce((acc, val) => acc + val.review.reviewScore, 0) / (reviewCount || 1));
+    const reviewsInfo = {reviewCount, reviewScore}
+    productsAndReviews.push(new Object({product: productInfo[i], reviewsInfo}));
+  }
+
+  res.render('index', { title: 'Home', productsAndReviews });
 };
 
 // Renders the menu page
 exports.showMenu = async (req, res) => {
   // Get a list of all products and total number of products in DB.
-  const productsPromise = Product.find();
-  const countPromise = Product.count();
+  const productInfo = await Product.find();
+  let productsAndReviews = [];
 
-  const [products, count] = await Promise.all([productsPromise, countPromise]);
+  for(var i = 0; i < productInfo.length; i++) {
+    const reviews = await Review.find({ itemID: productInfo[i]._id});
 
-  res.render('menu', { title: 'Our Menu', products, count });
+    const reviewCount = reviews.length;
+    const reviewScore = Math.round(reviews.reduce((acc, val) => acc + val.review.reviewScore, 0) / reviewCount);
+    
+    const reviewsInfo = {reviewCount, reviewScore}
+    productsAndReviews.push(new Object({product: productInfo[i], reviewsInfo}));
+  }
+
+  res.render('menu', { title: 'Our Menu', productsAndReviews });
 };
 
 // Show the add/edit products page

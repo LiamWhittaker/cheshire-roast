@@ -1,5 +1,7 @@
 extends layout
 
+include mixins/_productCard
+
 block content
 
   section.section-hero
@@ -17,21 +19,10 @@ block content
     h3.heading-section--subtitle Take a look at some of our best selling coffees!
 
     .container
-      each product in productInfo
-        .product
-          .inner
-            .product__photo
-              img(src=`/uploads/${product.photos[0]}`, alt=product.name class="product__photo")
-            .product__info
-              h3.product__title #{product.name}
-              h4.product__description--short #{product.shortDescription}
-              .product__reviews 
-                span.product__reviews__stars &#9733; &#9733; &#9733; &#9733; &#9733;
-                span.product__reviews__number (17 reviews)
-              h3.product__price #{product.price.smallBag.toLocaleString('en-GB', { style: 'currency', currency: 'GBP' })}
-              a.btn.btn__storecard.btn__storecard--info(href=`/menu/${product.slug}`) Learn More
-              a.btn.btn__storecard.btn__storecard--buy(href=`/menu/${product.slug}`) Buy Now
-      
+
+      each product in productsAndReviews
+        +productCard(product)
+        
     p.paragraph--inverted.u-mart-md 
       a.btn.btn--inverted(href="/menu") See our full menu
 

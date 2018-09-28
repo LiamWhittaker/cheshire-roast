@@ -30,6 +30,10 @@
       letter-spacing: -2px;
       color: $color-gold;
       margin-right: 0.5rem;
+
+      &--off {
+        color: gray;
+      }
     }
 
     &__number {
