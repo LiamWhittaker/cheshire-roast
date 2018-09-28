@@ -244,6 +244,9 @@ body {
 a {
   outline: none; }
 
+pre {
+  white-space: pre-wrap; }
+
 .u-mart-sm {
   margin-top: 2rem; }
 
@@ -801,6 +804,8 @@ input[type="number"] {
       margin-right: 0.5rem; }
       .product__reviews__stars--off {
         color: gray; }
+      .product__reviews__stars--large {
+        font-size: 2.5rem; }
     .product__reviews__number {
       font-size: 1rem;
       color: gray; }
@@ -982,6 +987,14 @@ input[type="number"] {
 .coffee__header {
   height: 15rem; }
 
+.coffee__stars {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: center;
+      justify-content: center;
+  -ms-flex-align: center;
+      align-items: center; }
+
 .coffee__photos {
   -ms-flex: 50%;
       flex: 50%;
@@ -1003,7 +1016,8 @@ input[type="number"] {
   -ms-flex-preferred-size: 60%;
       flex-basis: 60%;
   max-width: 800px;
-  margin-right: auto; }
+  margin-right: auto;
+  overflow: wrap; }
 
 .coffee__bulletpoints {
   -ms-flex-preferred-size: 28%;
@@ -1151,6 +1165,8 @@ input[type="number"] {
   width: 100%;
   text-decoration: none;
   transition: all 0.2s; }
+  .btn__submit--auto {
+    width: auto; }
   .btn__submit:hover {
     background-color: #0e1e33; }
   .btn__submit:active {

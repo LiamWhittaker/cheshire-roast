@@ -3,6 +3,12 @@
     height: 15rem;
   }
 
+  &__stars {
+    display: flex;
+    justify-content: center;  
+    align-items: center;
+  }
+
   &__photos {
     flex: 50%;
     margin-top: 1rem;
@@ -27,6 +33,7 @@
     flex-basis: 60%;
     max-width: 800px;
     margin-right: auto;
+    overflow: wrap;
   }
 
   &__bulletpoints {

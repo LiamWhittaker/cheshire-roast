@@ -28,7 +28,18 @@ exports.verifyPurchase = async (req, res, next) => {
     return res.redirect(`/menu/${req.params.slug}`);
   };
 
-  // If they have, pass the product along to the review form
+  // Also, we need to check if the user has already reviewed the product
+  const alreadyReviewed = await Review.find({
+    itemID: product._id,
+    userID: req.user._id
+  });
+
+  if(alreadyReviewed.length > 0) {
+    req.flash('error', `You have already reviewed this product!`);
+    return res.redirect(`/menu/${req.params.slug}`);
+  }
+
+  // If all is ok, pass the product along to the review form
   res.locals.product = product;
   next()
 };

@@ -4,7 +4,18 @@ block content
 
   .coffee__header.u-mart-lg
     h1.heading-section-title=product.name
-    h3.heading-section--subtitle.u-marbo-lg #{product.location.country}, #{product.location.region}
+    h3.heading-section--subtitle #{product.location.country}, #{product.location.region}
+    .coffee__stars
+      - let stars = reviewsInfo.reviewScore || 0;
+      - let starsOff = (5 - stars);
+
+      while stars > 0
+        span.product__reviews__stars.product__reviews__stars--large &#9733;
+        - stars--;
+
+      while starsOff > 0
+        span.product__reviews__stars--off.product__reviews__stars--large.product__reviews__stars &#9733;
+        - starsOff--;
 
     each tag in product.flavourTags
       span.coffee__flavour-tag #{tag}
@@ -181,7 +192,8 @@ block content
 
     .container.container--columns
       .coffee__long-description
-        pre.paragraph.paragraph--inverted.paragraph--large #{product.longDescription}
+        pre
+          p.paragraph.paragraph--inverted.paragraph--large #{product.longDescription}
 
       .coffee__bulletpoints
 
@@ -216,4 +228,39 @@ block content
             td.coffee__key Altitude
             td.coffee__value #{product.location.altitude}
 
-  //- pre=h.dump(product)
+  section.coffee__reviews
+    h3.heading-section-title.u-mart-md.u-marbo-md Reviews
+    .container
+      if reviews.length == 0
+        p.paragraph.paragraph--inverted.paragraph--large This product doesn't currently have any reviews.
+
+      each review in reviews
+        .testimonial
+          .testimonial__head
+            h3.testimonial__title #{review.review.reviewTitle}
+            .testimonial__rating 
+              - let stars = review.review.reviewScore || 0;
+              - let starsOff = (5 - stars);
+
+              while stars > 0
+                span.product__reviews__stars.product__reviews__stars--large &#9733;
+                - stars--;
+
+              while starsOff > 0
+                span.product__reviews__stars--off.product__reviews__stars--large.product__reviews__stars &#9733;
+                - starsOff--;
+
+          .testimonial__body
+            .testimonial_review
+              p.paragraph.paragraph--inverted #{review.review.reviewBody}
+
+          .testimonial__foot
+            .testimonial__photo
+              img(src="/images/me.jpg", alt="Liam Whittaker" class="testimonial__photo--user")
+            h4.testimonial__name #{review.userID.firstName} #{review.userID.secondName}, 
+            h5.testimonial__date #{review.review.reviewDate.toDateString()}
+    
+    if !userHasReviewed
+      .container
+        a.btn.btn__submit.btn__submit--auto.u-mart-sm(href=`/menu/${product.slug}/review`) Review this coffee
+        

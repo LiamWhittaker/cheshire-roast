@@ -71,7 +71,7 @@ exports.homePage = async (req, res) => {
   });
   const productInfo = await productInfoPromise;
 
-  let productsAndReviews = [];
+  const productsAndReviews = [];
 
   for(var i = 0; i < productInfo.length; i++) {
     const reviews = await Review.find({ itemID: productInfo[i]._id});
@@ -244,5 +244,15 @@ exports.deletePhoto = async (req, res) => {
 // Renders a specific coffee page
 exports.showProduct = async (req, res) => {
   const product = await Product.findOne({ slug: req.params.slug });
-  res.render('coffee', { product, title: product.name });
+  const reviews = await Review.find({ itemID: product._id }).populate('userID');
+  const currentUserReview = await Review.find({
+    itemID: product._id,
+    userID: req.user._id
+  });
+  const userHasReviewed = (currentUserReview.length >= 1);
+  const reviewCount = reviews.length;
+  const reviewScore = Math.round(reviews.reduce((acc, val) => acc + val.review.reviewScore, 0) / reviewCount);
+  const reviewsInfo = {reviewCount, reviewScore}
+
+  res.render('coffee', { product, reviews, reviewsInfo, userHasReviewed, title: product.name });
 };

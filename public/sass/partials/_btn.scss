@@ -44,6 +44,10 @@
   text-decoration: none;
   transition: all 0.2s;
 
+  &--auto {
+    width: auto;
+  }
+
   &:hover {
     background-color: rgba($color-blue-dark, 1);
   }
