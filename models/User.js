@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 const validator = require('validator');
 const mongodbErrorHandler = require('mongoose-mongodb-errors');
 const passportLocalMongoose = require('passport-local-mongoose');
+mongoose.set('useCreateIndex', true);
 
 mongoose.Promise = global.Promise;
 

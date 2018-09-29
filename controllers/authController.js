@@ -1,5 +1,6 @@
 const passport = require('passport');
 const mongoose = require('mongoose');
+
 const promisify = require('es6-promisify');
 
 const User = mongoose.model('User');

@@ -1,5 +1,6 @@
 const globalFunc = require('./globalController');
 const mongoose = require('mongoose');
+
 const slug = require('slugs');
 const multer = require('multer');
 const jimp = require('jimp');
