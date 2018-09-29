@@ -13,6 +13,11 @@
 
 .fa-edit {
   color: $color-blue-dark;
+  transition: all .3s;
+  margin-right: .2rem;
+  &:hover {
+    transform: scale(1.1);
+  }
 }
 
 .fa-camera {
@@ -24,6 +29,7 @@
     transform: scale(1.2);
   }
 }
+
 .fa-trash-alt {
   color: red;
   transition: all .3s;
@@ -31,6 +37,6 @@
   background: transparent;
 
   &:hover {
-    transform: scale(1.2);
+    transform: scale(1.1);
   }
 }

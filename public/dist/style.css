@@ -514,7 +514,12 @@ input[type="number"] {
   color: #b38e57; }
 
 .fa-edit {
-  color: #0e1e33; }
+  color: #0e1e33;
+  transition: all .3s;
+  margin-right: .2rem; }
+  .fa-edit:hover {
+    -ms-transform: scale(1.1);
+        transform: scale(1.1); }
 
 .fa-camera {
   color: #b38e57;
@@ -531,8 +536,8 @@ input[type="number"] {
   outline: none;
   background: transparent; }
   .fa-trash-alt:hover {
-    -ms-transform: scale(1.2);
-        transform: scale(1.2); }
+    -ms-transform: scale(1.1);
+        transform: scale(1.1); }
 
 .table {
   width: 70%;

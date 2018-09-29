@@ -27,3 +27,11 @@ exports.isLoggedIn = (req, res, next) => {
   req.flash('error', 'You have to be logged in to do that!');
   res.redirect('/login');
 };
+
+// Middleware to check if the user is an admin
+exports.isAdmin = (req, res, next) => {
+  if (req.user.accessLevel === 20) return next();
+
+  req.flash('error', 'You must be an admin to perform this action');
+  res.redirect(`/`);
+};

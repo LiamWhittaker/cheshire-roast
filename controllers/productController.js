@@ -122,6 +122,13 @@ exports.editProduct = async (req, res) => {
   res.render('addNewProduct', { title: 'Edit Product', product });
 };
 
+// Delete a product
+exports.deleteProduct = async (req, res) => {
+  const productToDelete = await Product.findByIdAndRemove({ _id: req.params.id });
+  
+  res.redirect('/admin/editProducts');
+};
+
 // Renders the 'Add new product form'
 exports.addNewProductForm = (req, res) => {
   res.render('addNewProduct', { title: 'Add New Product' });
@@ -245,14 +252,21 @@ exports.deletePhoto = async (req, res) => {
 exports.showProduct = async (req, res) => {
   const product = await Product.findOne({ slug: req.params.slug });
   const reviews = await Review.find({ itemID: product._id }).populate('userID');
-  const currentUserReview = await Review.find({
-    itemID: product._id,
-    userID: req.user._id
-  });
-  const userHasReviewed = (currentUserReview.length >= 1);
+  let userHasReviewed = Boolean;
+
+  if(!req.user) {
+    userHasReviewed = false;
+  } else {
+    const currentUserReview = await Review.find({
+      itemID: product._id,
+      userID: req.user._id
+    });
+    userHasReviewed = (currentUserReview.length >= 1);
+  }
   const reviewCount = reviews.length;
   const reviewScore = Math.round(reviews.reduce((acc, val) => acc + val.review.reviewScore, 0) / reviewCount);
   const reviewsInfo = {reviewCount, reviewScore}
+  const latestReviews = reviews.slice(0, 3);
 
-  res.render('coffee', { product, reviews, reviewsInfo, userHasReviewed, title: product.name });
+  res.render('coffee', { product, latestReviews, reviewsInfo, userHasReviewed, title: product.name });
 };

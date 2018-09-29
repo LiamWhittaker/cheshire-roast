@@ -184,9 +184,11 @@ async function getTotalValueOfOrders() {
   let totalValue = 0;
   for (var i = 0; i < allOrders.length; i++) {  
     if(allOrders[i].item.bagSize == 'Regular') {
-      totalValue += (allOrders[i].item.itemID.price.smallBag * allOrders[i].item.qty);
+      // If an item that has been ordered has been deleted from the database, 
+      // price information will return null, which breaks stuff. 
+      totalValue += ((allOrders[i].item.itemID.price.smallBag || 0) * allOrders[i].item.qty);
     } else {
-      totalValue += (allOrders[i].item.itemID.price.largeBag * allOrders[i].item.qty);
+      totalValue += ((allOrders[i].item.itemID.price.largeBag || 0) * allOrders[i].item.qty);
     }
   }
 

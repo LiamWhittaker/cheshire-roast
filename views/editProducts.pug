@@ -17,10 +17,12 @@ block content
             tr.table__row
               td.table__item=product._id
               td.table__item 
-                a(href=`/menu/${product.slug}` class="table__link") #{product.name}
+                a(href=`/menu/${product.slug}` class="table__link basket__product-link") #{product.name}
               td.table__item 
                 a(href=`/admin/editProducts/edit/${product._id}` class="table__link")
                   i.far.fa-edit.fa-1x
+                a(href=`/admin/editProducts/delete/${product._id}` class="table__link")
+                  i.far.fa-trash-alt.fa-1x
 
     .add-new.u-mart-md
       a(href="/admin/editProducts/new").btn.btn--inverted Add New Product

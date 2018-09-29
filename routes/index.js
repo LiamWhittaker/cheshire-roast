@@ -19,23 +19,35 @@ router.get('/menu', catchErrors(productController.showMenu));
 // Show the add/edit products page
 router.get('/admin/editProducts', 
   authController.isLoggedIn,
+  authController.isAdmin,
   catchErrors(productController.editProductsMenu)
 );
 
 // Edit specific product page
 router.get('/admin/editProducts/edit/:id', 
   authController.isLoggedIn,
+  authController.isAdmin,
   catchErrors(productController.editProduct)
+);
+
+// Delete a product
+router.get('/admin/editProducts/delete/:id', 
+  authController.isLoggedIn,
+  authController.isAdmin,
+  catchErrors(productController.deleteProduct)
 );
 
 // Add new product
 router.get('/admin/editProducts/new', 
   authController.isLoggedIn,
+  authController.isAdmin,
   productController.addNewProductForm
 );
 
 // Responsible for sanitizing new product data and storing it in the database
 router.post('/admin/editProducts/add',
+  authController.isLoggedIn,
+  authController.isAdmin,
   productController.upload,
   catchErrors(productController.resize), 
   productController.sanitizeNewProduct,
@@ -44,10 +56,14 @@ router.post('/admin/editProducts/add',
 
 // Changes the main product photo
 router.post('/admin/editProducts/makeCoverPhoto',
+  authController.isLoggedIn,
+  authController.isAdmin,
   catchErrors(productController.makeCoverPhoto));
 
 // Adds new photos to an existing product
 router.post('/admin/editProducts/addNewPhotos',
+  authController.isLoggedIn,
+  authController.isAdmin,
   productController.upload,
   catchErrors(productController.resize), 
   catchErrors(productController.addNewProductPhotos)
@@ -55,6 +71,8 @@ router.post('/admin/editProducts/addNewPhotos',
 
 // Deletes a photo
 router.post('/admin/editProducts/deletePhoto',
+  authController.isLoggedIn,
+  authController.isAdmin,
   catchErrors(productController.deletePhoto));
 
 // Individual coffee info page
@@ -123,13 +141,14 @@ router.post('/basket/buy',
 // Reviews
 // ==================================================
 
-// Add a new review
+// Render 'add a new review' page
 router.get('/menu/:slug/review',
   authController.isLoggedIn,
   catchErrors(reviewController.verifyPurchase),
   reviewController.showReviewForm
   );
 
+// Add new review to database
 router.post('/menu/:slug/review',
   authController.isLoggedIn,
   catchErrors(reviewController.verifyPurchase),
@@ -144,42 +163,50 @@ router.post('/menu/:slug/review',
 // Show the admin control panel
 router.get('/admin', 
   authController.isLoggedIn,
+  authController.isAdmin,
   catchErrors(adminController.showAdminPanel));
 
 // Render the stock checker page
 router.get('/stockCheck',   
   authController.isLoggedIn, 
+  authController.isAdmin,
   adminController.stockCheck);
 
 // Restock product
 router.post('/stockCheck',   
   authController.isLoggedIn, 
+  authController.isAdmin,
   catchErrors(adminController.restock));
 
 // Show orders needing an action (roast / grind / post)
 router.get('/openOrders',
   authController.isLoggedIn, 
+  authController.isAdmin,
   catchErrors(adminController.openOrders));
 
 // Mark orders as roasted
 router.post('/openOrders/roast',
   authController.isLoggedIn, 
+  authController.isAdmin,
   catchErrors(adminController.roast));
 
 
 // Show orders ready for grinding and posting
 router.get('/grindAndPost',
   authController.isLoggedIn,
+  authController.isAdmin,
   catchErrors(adminController.ordersToGrindAndPost));
 
 // Show generated shipping label
 router.post('/shippingLabel',
   authController.isLoggedIn,
+  authController.isAdmin,
   catchErrors(adminController.generateShippingLabel));
 
 // Mark order as posted
 router.post('/orderShipped',
   authController.isLoggedIn,
+  authController.isAdmin,
   catchErrors(adminController.orderShipped));
 
 

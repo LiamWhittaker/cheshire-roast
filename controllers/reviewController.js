@@ -53,6 +53,8 @@ exports.showReviewForm = (req, res) => {
 exports.postNewReview = async (req, res) => {
   req.body.userID = req.user._id;
   req.body.review.reviewDate = new Date;
+  req.body.review.reviewTitle = DOMPurify.sanitize(req.body.review.reviewTitle)
+  req.body.review.reviewBody = DOMPurify.sanitize(req.body.review.reviewBody)
 
   const newReview = await (new Review(req.body)).save();
 

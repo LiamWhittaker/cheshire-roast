@@ -231,10 +231,10 @@ block content
   section.coffee__reviews
     h3.heading-section-title.u-mart-md.u-marbo-md Reviews
     .container
-      if reviews.length == 0
+      if latestReviews.length == 0
         p.paragraph.paragraph--inverted.paragraph--large This product doesn't currently have any reviews.
 
-      each review in reviews
+      each review in latestReviews
         .testimonial
           .testimonial__head
             h3.testimonial__title #{review.review.reviewTitle}
@@ -260,7 +260,7 @@ block content
             h4.testimonial__name #{review.userID.firstName} #{review.userID.secondName}, 
             h5.testimonial__date #{review.review.reviewDate.toDateString()}
     
-    if !userHasReviewed
+    if userHasReviewed === false
       .container
         a.btn.btn__submit.btn__submit--auto.u-mart-sm(href=`/menu/${product.slug}/review`) Review this coffee
         
