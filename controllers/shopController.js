@@ -63,7 +63,8 @@ exports.addToBasket = async (req, res) => {
           { $set: { "item.qty": newQuantity } }
         );
         const orderToUpdate = await orderToUpdatePromise;
-
+        
+        req.flash('success', 'Item successfully added to basket.');
         return res.redirect('/basket');
       }
     }
@@ -81,6 +82,8 @@ exports.addToBasket = async (req, res) => {
     },
     orderFinalized: false,
   })).save();
+
+  req.flash('success', 'Item successfully added to basket.');
   res.redirect('/basket');
 };
 
@@ -89,6 +92,7 @@ exports.removeFromBasket = async (req, res) => {
   const orderToDelete = Order.findByIdAndRemove(req.params.orderID);
   await orderToDelete;
 
+  req.flash('success', 'Item successfully removed from basket.');
   res.redirect('/basket');
 };
 

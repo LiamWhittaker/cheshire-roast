@@ -1,6 +1,4 @@
 const mongoose = require('mongoose');
-
-
 const Product = mongoose.model('Product');
 const Order = mongoose.model('Order');
 
@@ -36,12 +34,18 @@ exports.stockCheck = async (req, res) => {
 // Restock an item
 exports.restock = async (req, res) => {
   const amountToAdd = parseInt(req.body.amount);
+  if(amountToAdd < 1) {
+    req.flash('error', 'You cannot restock by a negative amount');
+    return res.redirect('/stockCheck');
+  }
+
   const productToRestockPromise = Product.findByIdAndUpdate(
     { _id: req.body.productid },
     { $inc: { "stockInGrams": amountToAdd } }
   );
   const productToRestock = await productToRestockPromise;
-
+  
+  req.flash('success', 'Item successfully restocked');
   res.redirect('/stockCheck');
 };
 
@@ -79,6 +83,7 @@ exports.roast = async (req, res) => {
   );
   const orderToUpdate = await orderToUpdatePromise;
 
+  req.flash('success', 'Item successfully marked as roasted');
   res.redirect('/openOrders');
 };
 
@@ -111,6 +116,7 @@ exports.orderShipped = async (req, res) => {
   );
   const orderToUpdate = await orderToUpdatePromise;
 
+  req.flash('success', 'Item successfully marked as shipped');  
   res.redirect('/grindAndPost');
 }
 

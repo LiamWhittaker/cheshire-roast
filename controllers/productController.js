@@ -114,7 +114,7 @@ exports.editProductsMenu = async (req, res) => {
   res.render('editProducts', {title: 'Add/Edit Products', products});
 }
 
-// Show the edit products page
+// Show the edit product page
 exports.editProduct = async (req, res) => {
   // Get the product we want top edit
   const productPromise = Product.findById({ _id: req.params.id });
@@ -127,6 +127,7 @@ exports.editProduct = async (req, res) => {
 exports.deleteProduct = async (req, res) => {
   const productToDelete = await Product.findByIdAndRemove({ _id: req.params.id });
   
+  req.flash('success', 'Item successfully deleted');
   res.redirect('/admin/editProducts');
 };
 
@@ -159,6 +160,8 @@ exports.addNewProduct = async (req, res) => {
     const productToUpdate = Product.findByIdAndUpdate({_id: req.body.coffeeID}, req.body, {
       runValidators: true // Make sure data still conforms to schema
     }).exec();
+  
+    req.flash('success', 'Item successfully updated');
     return res.redirect('/admin/editProducts');
   } else {
     // If there isn't an ID, we know it's a new product.
@@ -169,9 +172,9 @@ exports.addNewProduct = async (req, res) => {
     // Add the uploaded photos 
     let photos = req.files.map(a => a.filename);
     req.body.photos = photos;
+    const product = await (new Product(req.body)).save();  
 
-
-    const product = await (new Product(req.body)).save();    
+    req.flash('success', 'Item successfully added to database');
     return res.redirect(`/menu/${product.slug}`);
   }
 };
@@ -199,7 +202,6 @@ exports.makeCoverPhoto = async (req, res) => {
   }).exec();
 
   req.flash('success', 'Updated the cover photo!');
-
   return res.redirect(`/admin/editProducts/edit/${product._id}`);
 
 };
@@ -231,7 +233,6 @@ exports.addNewProductPhotos = async (req, res) => {
   }).exec();
 
   req.flash('success', 'Successfully uploaded new photos!');
-
   return res.redirect(`/admin/editProducts/edit/${product._id}`);
 };
 
@@ -245,7 +246,6 @@ exports.deletePhoto = async (req, res) => {
   }).exec();
 
   req.flash('success', 'Photo deleted.');
-
   return res.redirect(`/admin/editProducts/edit/${product._id}`);
 };
 

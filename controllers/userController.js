@@ -94,7 +94,9 @@ exports.register = async (req, res) => {
 
   const register = promisify(User.register, User);
   await register(user, req.body.password);
-  res.redirect('/');
+
+  req.flash('success', 'Account successfully created! You may now log in.');
+  res.redirect('/login');
 };
 
 // ==========================================
@@ -138,6 +140,7 @@ exports.updateUserAccount = (req, res) => {
   const accountToUpdate = User.findByIdAndUpdate({_id: req.user._id}, req.body, {
     runValidators: true // Make sure data still conforms to schema
   }).exec();
-
-  res.redirect('/account');
+  
+  req.flash('success', 'Account details successfully updated');
+  return res.redirect('/account');
 };

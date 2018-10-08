@@ -109,7 +109,7 @@ router.get('/account',
 // Update account details
 router.post('/account', 
   authController.isLoggedIn, 
-  catchErrors(userController.updateUserAccount));
+  userController.updateUserAccount);
 
 
 // ==================================================

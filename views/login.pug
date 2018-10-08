@@ -2,7 +2,7 @@ extends layout
 
 block content
 
-  h1.heading-section-title Log In
+  h1.heading-section-title.u-mart-md Log In
 
   .container
     form.form(action="/login", method="POST")
@@ -12,4 +12,8 @@ block content
       label.form__label(for="password") Password
       input.form__input(type="password" name="password")
 
-      button.btn.btn__submit(type="submit") Log in
+      button.btn.btn__submit.u-mart-sm(type="submit") Log in
+
+  .container
+    p.paragraph.paragraph--inverted.u-mart-sm Don't have an account yet?  
+      a(href="/register" class="link") Register here!
