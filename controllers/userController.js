@@ -1,5 +1,7 @@
 const mongoose = require('mongoose');
 const promisify = require('es6-promisify');
+const mail = require('../handlers/email');
+
 
 const User = mongoose.model('User');
 const Order = mongoose.model('Order');
@@ -94,6 +96,12 @@ exports.register = async (req, res) => {
 
   const register = promisify(User.register, User);
   await register(user, req.body.password);
+
+  await mail.send({
+    user,
+    filename: 'registrationComplete',
+    subject: 'Welcome to Cheshire Roast',
+  });
 
   req.flash('success', 'Account successfully created! You may now log in.');
   res.redirect('/login');

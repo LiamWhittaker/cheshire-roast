@@ -1,3 +1,4 @@
+const prod = require('./productController');
 const mongoose = require('mongoose');
 const Product = mongoose.model('Product');
 const Order = mongoose.model('Order');
@@ -9,7 +10,7 @@ exports.showAdminPanel = async (req, res) => {
   const completedOrders = await getCompletedOrders();
   const ordersRequiringAction = await getOrdersRequiringAction();
   const totalOrderValue = await getTotalValueOfOrders();
-  const totalWeightSold = await getWeightSoldPerCoffee();
+  const totalWeightSold = await prod.getWeightSoldPerCoffee();
   const topFive = totalWeightSold.slice(0, 5);
 
   res.render('admin', { 

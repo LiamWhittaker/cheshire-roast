@@ -7,6 +7,7 @@ const authController = require('../controllers/authController');
 const shopController = require('../controllers/shopController');
 const adminController = require('../controllers/adminController');
 const reviewController = require('../controllers/reviewController');
+const globalController = require('../controllers/globalController');
 const { catchErrors } = require('../handlers/errorHandlers');
 
 // Home page
@@ -14,6 +15,12 @@ router.get('/', catchErrors(productController.homePage));
 
 // Menu page
 router.get('/menu', catchErrors(productController.showMenu));
+
+// About us page
+router.get('/about', globalController.aboutUs);
+
+// Contact page
+router.get('/contact', globalController.contact);
 
 
 // Show the add/edit products page

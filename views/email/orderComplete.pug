@@ -1,0 +1,18 @@
+extends emailLayout
+
+block content
+  h2 Thanks for ordering!
+  p Again, this is just a test so you're not getting any coffee, but here's the order you made.
+
+  h3 Postage Details
+  p #{user.address.lineOne}
+  p #{user.address.townCity}
+  p #{user.address.county}
+  p #{user.address.postcode}
+
+  h3 Order Details
+  ul
+    each item in orders
+      li #{item.item.itemName} - Grind: #{item.item.grindType} - Size: #{item.item.bagSize} - Qty: #{item.item.qty}
+  
+  a(href="http://liamwhittaker.co.uk") Check out my portfolio here

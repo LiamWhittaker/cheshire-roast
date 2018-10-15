@@ -4,6 +4,7 @@ const Order = mongoose.model('Order');
 const User = mongoose.model("User");
 const Product = mongoose.model("Product");
 const promisify = require('es6-promisify');
+const mail = require('../handlers/email');
 
 
 // Render the basket page
@@ -141,6 +142,13 @@ exports.finalizeOrder = async (req, res) => {
     );
     const orderToUpdate = await orderToUpdatePromise;
   }
+
+  await mail.send({
+    user: req.user,
+    filename: 'orderComplete',
+    subject: 'Order Complete!',
+    orders
+  });
 
   // 3. Render order completed page
   res.render('orderComplete', {title: 'Order Completed!'});
