@@ -1,0 +1,13 @@
+extends layout
+
+block content
+
+  h1.heading-section-title.u-mart-md.u-marbo-md Confirm Subscription Details
+
+  .container
+    p=details.type
+    p=details.grind
+    p=details.size
+    p=details.interval
+    p=today.toDateString()
+    p=nextDelivery.toDateString()

@@ -145,6 +145,17 @@ router.post('/basket/buy',
   catchErrors(shopController.finalizeOrder));
 
 // ==================================================
+// SUBSCRIPTIONS
+// ==================================================
+router.get('/subscription',
+  shopController.subscription);
+
+router.post('/subscription',
+  authController.isLoggedIn,
+  shopController.confirmSubscription
+)
+
+// ==================================================
 // Reviews
 // ==================================================
 

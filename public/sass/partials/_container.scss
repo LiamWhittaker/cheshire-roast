@@ -10,6 +10,11 @@
     flex: auto;
     flex-wrap: nowrap;
   }
+
+  &--small {
+    min-width: 80rem;
+    justify-content: space-between;
+  }
 }
 
 .container-col {

@@ -62,6 +62,7 @@
     display: inline-block;
     box-sizing: border-box;
     width: 15%;
+    min-width: 10rem;
     margin: -20px 1rem 1rem 0;
     text-align: center;
   }
@@ -72,6 +73,7 @@
     box-sizing: border-box;
     display: block;
     width: 100%;
+    min-width: 10rem;
     padding: 1rem 0;
     cursor: pointer;
     opacity: 0.5;
