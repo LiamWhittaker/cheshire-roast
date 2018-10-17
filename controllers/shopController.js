@@ -82,6 +82,7 @@ exports.addToBasket = async (req, res) => {
       qty: req.body.quantity
     },
     orderFinalized: false,
+    orderType: 'Single'
   })).save();
 
   req.flash('success', 'Item successfully added to basket.');
@@ -153,22 +154,3 @@ exports.finalizeOrder = async (req, res) => {
   // 3. Render order completed page
   res.render('orderComplete', {title: 'Order Completed!'});
 };
-
-// ============================
-// SUBSCRIPTIONS
-// ============================
-
-exports.subscription = (req, res) => {
-  res.render('subscribe', {title: 'Subscribe'});
-}
-
-exports.confirmSubscription = (req, res) => {
-  console.log(req.body)
-
-  let today = new Date();
-  let interval = parseInt(req.body.interval);
-  let nextDelivery = new Date()
-  nextDelivery.setDate(today.getDate() + interval);
-
-  res.render('confirmSubscription', { title: 'Confirm Subscription', details: req.body, today, nextDelivery } )
-}

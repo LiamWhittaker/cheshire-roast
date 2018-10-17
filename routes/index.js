@@ -7,6 +7,7 @@ const authController = require('../controllers/authController');
 const shopController = require('../controllers/shopController');
 const adminController = require('../controllers/adminController');
 const reviewController = require('../controllers/reviewController');
+const subscriptionController = require('../controllers/subscriptionController');
 const globalController = require('../controllers/globalController');
 const { catchErrors } = require('../handlers/errorHandlers');
 
@@ -148,13 +149,16 @@ router.post('/basket/buy',
 // SUBSCRIPTIONS
 // ==================================================
 router.get('/subscription',
-  shopController.subscription);
+  subscriptionController.subscription);
 
 router.post('/subscription',
   authController.isLoggedIn,
-  shopController.confirmSubscription
-)
+  subscriptionController.confirmSubscription);
 
+router.post('/confirmSubscription',
+  authController.isLoggedIn,
+  catchErrors(subscriptionController.saveSubscription));
+  
 // ==================================================
 // Reviews
 // ==================================================

@@ -304,3 +304,15 @@
   font-size: 1.4rem;
   color: $color-blue-lighter;
 }
+
+
+// ==========================
+// Subscription
+// ==========================
+.subscription__key {
+  font-family: "Roboto", sans-serif;
+  font-weight: 600;
+  font-size: 1.4rem;
+  text-transform: uppercase;
+  color: $color-blue-dark;
+}

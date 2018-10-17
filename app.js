@@ -14,6 +14,7 @@ const helpers = require('./helpers');
 const errorHandlers = require('./handlers/errorHandlers');
 const multer = require("multer");
 require('./handlers/passport');
+require('./handlers/subscription');
 // create our Express app
 const app = express();
 

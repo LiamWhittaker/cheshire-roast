@@ -5,9 +5,40 @@ block content
   h1.heading-section-title.u-mart-md.u-marbo-md Confirm Subscription Details
 
   .container
-    p=details.type
-    p=details.grind
-    p=details.size
-    p=details.interval
-    p=today.toDateString()
-    p=nextDelivery.toDateString()
+
+    .subscription__details
+
+      p
+        span.subscription__key Subscription Type: 
+        span.paragraph.paragraph--inverted=details.type
+
+      p        
+        span.subscription__key Grind Type: 
+        span.paragraph.paragraph--inverted=details.grind
+
+      p        
+        span.subscription__key Bag Size:   
+        span.paragraph.paragraph--inverted=details.size
+
+      p        
+        span.subscription__key Delivery Interval:   
+        span.paragraph.paragraph--inverted #{details.interval} days
+
+      p        
+        span.subscription__key First Order:  
+        span.paragraph.paragraph--inverted=today.toDateString()
+
+      p        
+        span.subscription__key Next Order:  
+        span.paragraph.paragraph--inverted=nextDelivery.toDateString()
+
+    
+      form(action="/confirmSubscription", method="post")
+        input(type="hidden", name="userID" value=user._id)
+        input(type="hidden", name="coffeeType" value=details.type)
+        input(type="hidden", name="grindType" value=details.grind)
+        input(type="hidden", name="bagSize" value=details.size)
+        input(type="hidden", name="deliveryInterval" value=details.interval)
+        input(type="hidden", name="startDate" value=today)
+        input(type="hidden", name="nextDelivery" value=nextDelivery)
+        button(type="submit" class="btn btn__submit") Start your subscription!

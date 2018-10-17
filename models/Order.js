@@ -19,6 +19,7 @@ const orderSchema = new mongoose.Schema({
     bagSize: String,
     qty: Number
   },
+  orderType: String,
   orderFinalized: Boolean,
   orderDate: Date,
   orderRoasted: Boolean,

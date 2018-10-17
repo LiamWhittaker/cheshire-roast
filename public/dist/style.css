@@ -230,6 +230,13 @@
   font-size: 1.4rem;
   color: #293849; }
 
+.subscription__key {
+  font-family: "Roboto", sans-serif;
+  font-weight: 600;
+  font-size: 1.4rem;
+  text-transform: uppercase;
+  color: #0e1e33; }
+
 *,
 *::after,
 *::before {
