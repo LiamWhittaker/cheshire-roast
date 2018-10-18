@@ -114,16 +114,21 @@ exports.processSubscriptions = async (subs) => {
     // 3. Update the subscription history
     const nextDelivery = new Date();
     nextDelivery.setDate(nextDelivery.getDate() + subs[i].deliveryInterval);
-    const history = { 'coffeeID': selected._id, 'deliveryDate': new Date() };
 
     const updateSubscription = await Subscription.findByIdAndUpdate(
       { _id: subs[i]._id },
-      { $set: {
-        nextDelivery
-      }},
-      { $push: { history: history } }
+      { 
+        $set: { nextDelivery },
+        $push: {
+          history: { 
+            coffeeID: selected._id, 
+            deliveryDate: new Date() 
+          }
+        }
+      }
     );
   }
+  console.log(`${subs.length} subscriptions successfully processed.`);
 }
 
   // [ { _id: 5bc7418fcaceac1c1840e637,
