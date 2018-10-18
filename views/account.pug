@@ -4,6 +4,11 @@ block content
 
   h1.heading-section-title.u-marbo-md.u-mart-md #{user.firstName}'s Account 
 
+  if subscription
+    .container
+      p.paragraph.paragraph--inverted.u-marbo-md To manage your subscription, please click 
+        a(href="/manageSubscription") here
+
   .container
     .account__details
       h3.heading-section--subtitle Update User Info

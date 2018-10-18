@@ -29,8 +29,7 @@ exports.confirmSubscription = (req, res) => {
 
 exports.saveSubscription = async (req, res) => {
   // 1. Decide which coffee to send them based on their chosen subscription type
-  const coffeeChoice = await Product.find({coffeeType: req.body.coffeeType});
-  const firstCoffee = coffeeChoice[Math.floor(Math.random() * coffeeChoice.length)];
+  const firstCoffee = await chooseACoffee(req.body.coffeeType);
 
   // 2. Save Subscription
   const subscription = await (new Subscription({
@@ -93,8 +92,7 @@ exports.getTodaysSubscriptions = async () => {
 exports.processSubscriptions = async (subs) => {
   for (var i = 0; i < subs.length; i++) {
     // 1. Get a random coffee that matches the subscription type
-    const coffeeChoice = await Product.find({coffeeType: subs[i].coffeeType});
-    const selected = coffeeChoice[Math.floor(Math.random() * coffeeChoice.length)];
+    const selected = await chooseACoffee(subs[i].coffeeType);
   
     // 2. Add the new order to the database
     const addSubOrder = await (new Order({
@@ -131,13 +129,14 @@ exports.processSubscriptions = async (subs) => {
   console.log(`${subs.length} subscriptions successfully processed.`);
 }
 
-  // [ { _id: 5bc7418fcaceac1c1840e637,
-  // [💻]     userID: 5bc495df86e1c7292427a8b2,
-  // [💻]     coffeeType: 'Microlot',
-  // [💻]     grindType: 'Wholebean',
-  // [💻]     bagSize: 'Regular',
-  // [💻]     deliveryInterval: 7,
-  // [💻]     startDate: 2018-10-17T14:04:22.396Z,
-  // [💻]     nextDelivery: 2018-10-17T14:04:22.396Z,
-  // [💻]     history: [ [Object] ],
-  // [💻]     __v: 0 } ]
+chooseACoffee = async (subType) => {
+  if (subType === 'Any') {
+    const coffeeChoice = await Product.find();
+  } else {
+    const coffeeChoice = await Product.find({coffeeType: subType});
+  }
+
+  const selected = coffeeChoice[Math.floor(Math.random() * coffeeChoice.length)];
+
+  return selected;
+}

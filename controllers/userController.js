@@ -5,6 +5,7 @@ const mail = require('../handlers/email');
 
 const User = mongoose.model('User');
 const Order = mongoose.model('Order');
+const Subscription = mongoose.model('Subscription');
 
 // ==========================================
 // Registration stuff
@@ -126,7 +127,8 @@ exports.userAccount = async (req, res) => {
   .find({
     userID: req.user._id,
     orderFinalized: true,
-    orderShipped: false
+    orderShipped: false,
+    orderType: { $ne: 'Subscription' }
   })
   .sort({orderDate: 'descending'});
 
@@ -134,14 +136,17 @@ exports.userAccount = async (req, res) => {
   .find({
     userID: req.user._id,
     orderFinalized: true,
-    orderShipped: true
+    orderShipped: true,
+    orderType: { $ne: 'Subscription' }
   })
   .sort({orderDate: 'descending'})
   .limit(10);
 
-  const [openOrders, orderHistory] = await Promise.all([openOrdersPromise, orderHistoryPromise]);
+  const subscriptionPromise = Subscription.find({userID: req.user._id})
 
-  res.render('account', {title: 'User Account', openOrders, orderHistory});
+  const [openOrders, orderHistory, subscription] = await Promise.all([openOrdersPromise, orderHistoryPromise, subscriptionPromise]);
+
+  res.render('account', {title: 'User Account', openOrders, orderHistory, subscription});
 };
 
 exports.updateUserAccount = (req, res) => {
