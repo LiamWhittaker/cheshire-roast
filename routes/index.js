@@ -148,13 +148,25 @@ router.post('/basket/buy',
 // ==================================================
 // SUBSCRIPTIONS
 // ==================================================
-router.get('/subscription',
-  subscriptionController.subscription);
 
+// Show the subscription page
+router.get('/subscription',
+  catchErrors(subscriptionController.subscription));
+
+// Allow users to manage their subscription
+router.get('/manageSubscription',
+  catchErrors(subscriptionController.manageSubscription));
+
+// Edit an active subscription
+router.post('/manageSubscription',
+  catchErrors(subscriptionController.editSubscription));
+
+// Creating a new subscription
 router.post('/subscription',
   authController.isLoggedIn,
   subscriptionController.confirmSubscription);
 
+// Finalizing a new subscription
 router.post('/confirmSubscription',
   authController.isLoggedIn,
   catchErrors(subscriptionController.saveSubscription));

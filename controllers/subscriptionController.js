@@ -12,13 +12,73 @@ const mail = require('../handlers/email');
 // SUBSCRIPTIONS
 // ============================
 
-exports.subscription = (req, res) => {
+exports.subscription = async (req, res) => {
+  const alreadySubbed = await Subscription.count({ userID: req.user._id });
+  if (alreadySubbed) {
+    req.flash('error', 'You already have an active subscription!');
+    return res.redirect('/manageSubscription');
+  }
+
   res.render('subscribe', {title: 'Subscribe'});
 }
 
-exports.confirmSubscription = (req, res) => {
-  console.log(req.body)
+exports.manageSubscription = async (req, res) => {
+  const subInfo = await Subscription.findOne({userID: req.user._id}).populate('history.coffeeID');
+  res.render('manageSubscription', { title: 'Manage Subscription', subInfo });
+}
 
+exports.editSubscription = async (req, res) => {
+  const currentSub = await Subscription.findOne({userID: req.user._id});
+
+  // If there's no change, redirect the user back to the subscription page
+  if (currentSub.coffeeType === req.body.coffeeType &&
+      currentSub.grindType === req.body.grindType &&
+      currentSub.bagSize === req.body.bagSize &&
+      currentSub.deliveryInterval === parseInt(req.body.deliveryInterval)) {
+        req.flash('info', 'There was nothing to update');
+        return res.redirect('/manageSubscription');
+      }
+
+  // If the delivery interval has changed we need to generate a new value for 'next delivery'
+  if (currentSub.deliveryInterval !== req.body.deliveryInterval) {
+    // If the sub is currently paused, we need to reset it!
+    // We are doing today + 1 day because subs get processed at 00:01 so if we just set it to today it will never
+    // be processed.
+    if(currentSub.deliveryInterval === 999999999) {
+      const newDate = new Date();
+      newDate.setDate(newDate.getDate() + 1);
+      req.body.nextDelivery = newDate;
+    } else {
+      // If the user wants to pause their subscription, set the next delivery to the year 3000
+      if(req.body.deliveryInterval === 'Pause Subscription') {
+        req.body.deliveryInterval = 999999999;
+        req.body.nextDelivery = new Date(3000, 1, 1);
+      } else {
+        // If the user just wants to change the interval, we can work out the difference instead of 
+        // simply resetting the date.
+        const intervalChange = req.body.deliveryInterval - currentSub.deliveryInterval;
+        const newDate = new Date(currentSub.nextDelivery);
+        newDate.setDate(newDate.getDate() + intervalChange);
+        req.body.nextDelivery = newDate;
+      }
+    }
+  }
+
+  const updateSub = await Subscription.findOneAndUpdate(
+    { userID: req.user._id }, 
+    {
+      coffeeType: req.body.coffeeType,
+      grindType: req.body.grindType,
+      bagSize: req.body.bagSize,
+      deliveryInterval: req.body.deliveryInterval,
+      nextDelivery: req.body.nextDelivery
+    });
+
+  req.flash('success', 'Updated your subscription!');
+  res.redirect('/manageSubscription');
+}
+
+exports.confirmSubscription = (req, res) => {
   let today = new Date();
   let interval = parseInt(req.body.interval);
   let nextDelivery = new Date()
@@ -28,6 +88,13 @@ exports.confirmSubscription = (req, res) => {
 }
 
 exports.saveSubscription = async (req, res) => {
+  // 0. Check if already subbed
+  const alreadySubbed = await Subscription.count({ userID: req.user._id });
+  if (alreadySubbed) {
+    req.flash('error', 'You already have an active subscription!');
+    return res.redirect('/manageSubscription');
+  }
+
   // 1. Decide which coffee to send them based on their chosen subscription type
   const firstCoffee = await chooseACoffee(req.body.coffeeType);
 
@@ -130,13 +197,6 @@ exports.processSubscriptions = async (subs) => {
 }
 
 chooseACoffee = async (subType) => {
-  if (subType === 'Any') {
-    const coffeeChoice = await Product.find();
-  } else {
-    const coffeeChoice = await Product.find({coffeeType: subType});
-  }
-
-  const selected = coffeeChoice[Math.floor(Math.random() * coffeeChoice.length)];
-
-  return selected;
+  const coffeeChoice = await Product.find({coffeeType: subType});
+  return coffeeChoice[Math.floor(Math.random() * coffeeChoice.length)];
 }

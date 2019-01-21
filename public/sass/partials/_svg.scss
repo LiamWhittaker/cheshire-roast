@@ -3,6 +3,22 @@
     height: 4rem;
     width: 4rem;
     fill: $color-blue-dark;
+
+    &--blend {
+      fill: brown;
+    }
+
+    &--single-origin {
+      fill: $color-gold;
+    }
+
+    &--microlot {
+      fill: goldenrod;
+    }
+
+    &--decaf {
+      fill: black;
+    }
   }
 
   &__bag--blue {

@@ -1239,6 +1239,14 @@ input[type="number"] {
   height: 4rem;
   width: 4rem;
   fill: #0e1e33; }
+  .svg--grind--blend {
+    fill: brown; }
+  .svg--grind--single-origin {
+    fill: #b38e57; }
+  .svg--grind--microlot {
+    fill: goldenrod; }
+  .svg--grind--decaf {
+    fill: black; }
 
 .svg__bag--blue {
   fill: #17283b; }

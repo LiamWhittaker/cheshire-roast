@@ -1,0 +1,67 @@
+extends layout
+
+block content
+
+  h1.heading-section-title.u-marbo-md.u-mart-md Manage Subscription
+
+
+  .container
+    .account__details
+      h3.heading-section--subtitle Subscription Details
+      form(action="/manageSubscription" method="POST" class="form")
+
+        label(for="startDate" class="form__label") Subscription Start Date
+        input(type="text" name="startDate" class="form__input" maxlength="80" value=subInfo.startDate.toDateString() disabled)  
+
+        label(for="coffeeType" class="form__label") Subscription Type
+        select(name="coffeeType" class="form__dropdown")
+          each ctype in ['Microlot', 'Single Origin', 'Blend', 'Decaffeinated']
+            if (ctype == subInfo.coffeeType)
+              option(value=ctype selected)=ctype
+            else
+              option(value=ctype)=ctype 
+        
+        label(for="grindType" class="form__label") Preferred Grind
+        select(name="grindType" class="form__dropdown")
+          each ctype in ['Wholebean', 'Espresso', 'Filter', 'Caffetiere']
+            if (ctype == subInfo.grindType)
+              option(value=ctype selected)=ctype
+            else
+              option(value=ctype)=ctype 
+        
+        label(for="bagSize" class="form__label") Bag Size
+        select(name="bagSize" class="form__dropdown")
+          each ctype in ['Regular', 'Large']
+            if (ctype == subInfo.bagSize)
+              option(value=ctype selected)=ctype
+            else
+              option(value=ctype)=ctype 
+        
+        label(for="deliveryInterval" class="form__label") Delivery Interval / Pause Subscription
+        select(name="deliveryInterval" class="form__dropdown")
+          each ctype in [7, 14, 21, 28, 'Pause Subscription']
+            if (ctype == subInfo.deliveryInterval)
+              option(value=ctype selected)=ctype
+            else
+              option(value=ctype)=ctype 
+        
+        label(for="startDate" class="form__label") Next Delivery
+        input(type="text" name="startDate" class="form__input" maxlength="80" value=subInfo.nextDelivery.toDateString() disabled)  
+
+
+        button(type="submit" class="btn btn__submit u-mart-sm") Update Details
+  
+    .account__orders
+      .account__order-history
+        h3.heading-section--subtitle Subscription History
+      
+        table.table.u-marbo-sm.table--fullwidth
+          thead
+            tr.table__row
+              th.table__heading Order Date
+              th.table__heading Item
+
+          each sub in subInfo.history
+            tr.table__row
+              td.table__item #{sub.deliveryDate.toDateString()}
+              td.table__item #{sub.coffeeID.name}
