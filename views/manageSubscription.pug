@@ -39,14 +39,18 @@ block content
         
         label(for="deliveryInterval" class="form__label") Delivery Interval / Pause Subscription
         select(name="deliveryInterval" class="form__dropdown")
-          each ctype in [7, 14, 21, 28, 'Pause Subscription']
+          each ctype in [7, 14, 21, 28, 999999999]
             if (ctype == subInfo.deliveryInterval)
-              option(value=ctype selected)=ctype
+              option(value=ctype selected)=((ctype === 999999999) ? 'Pause Subscription' : ctype)
             else
-              option(value=ctype)=ctype 
+              option(value=ctype)=((ctype === 999999999) ? 'Pause Subscription' : ctype) 
         
         label(for="startDate" class="form__label") Next Delivery
-        input(type="text" name="startDate" class="form__input" maxlength="80" value=subInfo.nextDelivery.toDateString() disabled)  
+        //- If the sub is paused, display text instead of database value of 1st Jan 3000
+        - let display = subInfo.nextDelivery.toDateString();
+        - const pauseDate = new Date(3000, 1, 1).toDateString();
+        - if (display === pauseDate) {display = 'Subscription Paused'}
+        input(type="text" name="startDate" class="form__input" maxlength="80" value=display disabled)  
 
 
         button(type="submit" class="btn btn__submit u-mart-sm") Update Details

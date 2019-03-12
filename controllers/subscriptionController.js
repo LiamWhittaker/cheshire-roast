@@ -50,15 +50,13 @@ exports.editSubscription = async (req, res) => {
       req.body.nextDelivery = newDate;
     } else {
       // If the user wants to pause their subscription, set the next delivery to the year 3000
-      if(req.body.deliveryInterval === 'Pause Subscription') {
-        req.body.deliveryInterval = 999999999;
+      if(parseInt(req.body.deliveryInterval) === 999999999) {
+        // req.body.deliveryInterval = 999999999;
         req.body.nextDelivery = new Date(3000, 1, 1);
       } else {
-        // If the user just wants to change the interval, we can work out the difference instead of 
-        // simply resetting the date.
-        const intervalChange = req.body.deliveryInterval - currentSub.deliveryInterval;
-        const newDate = new Date(currentSub.nextDelivery);
-        newDate.setDate(newDate.getDate() + intervalChange);
+        // If the user is changing delivery interval, set the next delivery date to tomorrow.
+        const newDate = new Date();
+        newDate.setDate(newDate.getDate() + 1);
         req.body.nextDelivery = newDate;
       }
     }
