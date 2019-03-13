@@ -21,6 +21,10 @@ block content
         span.paragraph.paragraph--inverted=details.size
 
       p        
+        span.subscription__key Price:   
+        span.paragraph.paragraph--inverted=price.toLocaleString('en-GB', { style: 'currency', currency: 'GBP' })
+
+      p        
         span.subscription__key Delivery Interval:   
         span.paragraph.paragraph--inverted #{details.interval} days
 
@@ -33,7 +37,7 @@ block content
         span.paragraph.paragraph--inverted=nextDelivery.toDateString()
 
     
-      form(action="/confirmSubscription", method="post")
+      form(class="u-mart-sm" action="/confirmSubscription", method="post")
         input(type="hidden", name="userID" value=user._id)
         input(type="hidden", name="coffeeType" value=details.type)
         input(type="hidden", name="grindType" value=details.grind)

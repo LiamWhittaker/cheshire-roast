@@ -79,10 +79,17 @@ exports.editSubscription = async (req, res) => {
 exports.confirmSubscription = (req, res) => {
   let today = new Date();
   let interval = parseInt(req.body.interval);
-  let nextDelivery = new Date()
+  let nextDelivery = new Date();
   nextDelivery.setDate(today.getDate() + interval);
 
-  res.render('confirmSubscription', { title: 'Confirm Subscription', details: req.body, today, nextDelivery } )
+  let price = 0;
+  if(req.body.type === 'Blend') price += 5;
+  if(req.body.type === 'Single Origin') price += 6;
+  if(req.body.type === 'Microlot') price += 8;
+  if(req.body.type === 'Decaffienated') price += 6;
+  if(req.body.size === 'Large') price *= 3.5;
+
+  res.render('confirmSubscription', { title: 'Confirm Subscription', details: req.body, today, nextDelivery, price } )
 }
 
 exports.saveSubscription = async (req, res) => {

@@ -151,6 +151,7 @@ router.post('/basket/buy',
 
 // Show the subscription page
 router.get('/subscription',
+  authController.isLoggedIn,
   catchErrors(subscriptionController.subscription));
 
 // Allow users to manage their subscription
